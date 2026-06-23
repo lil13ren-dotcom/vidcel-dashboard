@@ -1,0 +1,38 @@
+name: Daily Brief Update
+
+on:
+  schedule:
+    # 7am JST = 22:00 UTC
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-daily-brief:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic requests
+
+      - name: Update daily news brief
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/update_news.py
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "vidcel-bot"
+          git config user.email "bot@vidcel.io"
+          git add data/news.json
+          git diff --staged --quiet || git commit -m "chore: daily brief update $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push

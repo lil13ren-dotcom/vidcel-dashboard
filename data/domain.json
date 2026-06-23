@@ -1,0 +1,60 @@
+{
+  "last_updated": "2026-06-23T07:00:00+09:00",
+  "domains": [
+    {
+      "domain": "outreach.vidcel.io",
+      "age_days": 45,
+      "warmup_day": 32,
+      "warmup_target": 50,
+      "daily_send_limit": 35,
+      "current_volume": 28,
+      "bounce_rate": 1.2,
+      "spam_rate": 0.08,
+      "open_rate": 42.5,
+      "reply_rate": 8.3,
+      "status": "go",
+      "spf": true,
+      "dkim": true,
+      "dmarc": true,
+      "provider": "Google Workspace"
+    },
+    {
+      "domain": "connect.vidcel.io",
+      "age_days": 28,
+      "warmup_day": 15,
+      "warmup_target": 50,
+      "daily_send_limit": 20,
+      "current_volume": 18,
+      "bounce_rate": 2.1,
+      "spam_rate": 0.15,
+      "open_rate": 38.2,
+      "reply_rate": 6.1,
+      "status": "caution",
+      "spf": true,
+      "dkim": true,
+      "dmarc": false,
+      "provider": "Google Workspace"
+    },
+    {
+      "domain": "hello.vidcel.io",
+      "age_days": 12,
+      "warmup_day": 5,
+      "warmup_target": 50,
+      "daily_send_limit": 10,
+      "current_volume": 8,
+      "bounce_rate": 0.5,
+      "spam_rate": 0.03,
+      "open_rate": 51.0,
+      "reply_rate": 12.0,
+      "status": "go",
+      "spf": true,
+      "dkim": true,
+      "dmarc": true,
+      "provider": "Instantly"
+    }
+  ],
+  "thresholds": {
+    "bounce_rate": {"go": 2.0, "caution": 4.0},
+    "spam_rate": {"go": 0.1, "caution": 0.3}
+  }
+}

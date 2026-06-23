@@ -1,0 +1,2119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vidcel Ops Dashboard</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0ABFB8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg: #0D0F12;
+  --bg2: #141720;
+  --bg3: #1C2030;
+  --border: #252A3A;
+  --teal: #0ABFB8;
+  --teal-dim: rgba(10,191,184,0.12);
+  --teal-glow: rgba(10,191,184,0.35);
+  --text: #E8EAF0;
+  --text-dim: #8892A4;
+  --text-muted: #4A5468;
+  --green: #22C55E;
+  --yellow: #F59E0B;
+  --red: #EF4444;
+  --blue: #3B82F6;
+  --purple: #A855F7;
+  --orange: #F97316;
+  --sidebar-w: 220px;
+  --nav-h: 56px;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── LAYOUT ─── */
+.app { display:flex; min-height:100vh; }
+
+/* ─── SIDEBAR ─── */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top:0; left:0; bottom:0;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sidebar-logo {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-logo h1 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--teal);
+  letter-spacing: -0.5px;
+}
+.sidebar-logo span { color: var(--text-dim); font-size: 11px; display:block; margin-top:2px; }
+.sidebar-nav { flex:1; padding: 12px 8px; }
+.nav-section { margin-bottom: 4px; }
+.nav-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 8px 4px;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+  text-decoration: none;
+  margin-bottom: 1px;
+}
+.nav-item:hover { background: var(--bg3); color: var(--text); }
+.nav-item.active { background: var(--teal-dim); color: var(--teal); }
+.nav-item .icon { font-size: 16px; width: 20px; text-align:center; }
+.sidebar-footer {
+  padding: 12px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.status-dot { width:6px; height:6px; border-radius:50%; background: var(--green); display:inline-block; margin-right:6px; }
+
+/* ─── MAIN CONTENT ─── */
+.main {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  min-width: 0;
+}
+.topbar {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top:0;
+  z-index: 50;
+}
+.topbar-title { font-size: 16px; font-weight: 600; }
+.topbar-meta { font-size: 12px; color: var(--text-dim); }
+.topbar-actions { display: flex; gap: 8px; align-items:center; }
+.btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+.btn-primary { background: var(--teal); color: #000; }
+.btn-primary:hover { background: #0DD4CC; }
+.btn-ghost { background: var(--bg3); color: var(--text-dim); border: 1px solid var(--border); }
+.btn-ghost:hover { color: var(--text); border-color: var(--text-muted); }
+.btn-sm { padding: 4px 10px; font-size: 11px; }
+
+/* ─── SECTIONS ─── */
+.section { display:none; padding: 24px; }
+.section.active { display:block; }
+
+/* ─── CARDS ─── */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.card-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.grid { display: grid; gap: 16px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* ─── STAT CARDS ─── */
+.stat-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+}
+.stat-label { font-size: 11px; color: var(--text-dim); font-weight: 500; margin-bottom: 6px; }
+.stat-value { font-size: 28px; font-weight: 700; letter-spacing: -1px; line-height:1; }
+.stat-change { font-size: 11px; margin-top: 6px; }
+.stat-change.up { color: var(--green); }
+.stat-change.down { color: var(--red); }
+
+/* ─── BADGES ─── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.badge-green { background: rgba(34,197,94,0.15); color: var(--green); }
+.badge-yellow { background: rgba(245,158,11,0.15); color: var(--yellow); }
+.badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+.badge-blue { background: rgba(59,130,246,0.15); color: var(--blue); }
+.badge-teal { background: var(--teal-dim); color: var(--teal); }
+.badge-purple { background: rgba(168,85,247,0.15); color: var(--purple); }
+
+/* ─── NEWS CARDS ─── */
+.news-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.news-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.news-header {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 13px;
+}
+.news-body { padding: 4px 0; }
+.news-item {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.news-item:last-child { border-bottom: none; }
+.news-item:hover { background: var(--bg3); }
+.news-item-title { font-size: 12px; font-weight: 500; line-height: 1.4; margin-bottom: 4px; }
+.news-item-meta { display: flex; justify-content: space-between; align-items: center; }
+.news-item-source { font-size: 10px; color: var(--text-muted); }
+.news-item-time { font-size: 10px; color: var(--text-muted); }
+.hot-badge { font-size: 9px; background: rgba(239,68,68,0.2); color: var(--red); padding: 1px 5px; border-radius: 3px; font-weight: 700; }
+
+/* ─── TABLE ─── */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th {
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  border-bottom: 1px solid var(--border);
+}
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(37,42,58,0.5);
+  font-size: 13px;
+}
+tr:hover td { background: var(--bg3); }
+tr:last-child td { border-bottom: none; }
+
+/* ─── KANBAN ─── */
+.kanban { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; }
+.kanban-col {
+  min-width: 200px;
+  flex: 1;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.kanban-header {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+}
+.kanban-count {
+  background: var(--bg3);
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.kanban-body { padding: 10px; display: flex; flex-direction: column; gap: 8px; min-height: 100px; }
+.kanban-card {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+}
+.kanban-card-title { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+.kanban-card-client { font-size: 11px; color: var(--text-dim); margin-bottom: 6px; }
+.kanban-timer {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--yellow);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.kanban-timer.urgent { color: var(--red); }
+.kanban-timer.ok { color: var(--green); }
+
+/* ─── PROGRESS BAR ─── */
+.progress-bar {
+  height: 6px;
+  background: var(--bg3);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 6px 0;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--teal);
+  transition: width 0.5s ease;
+}
+.progress-fill.yellow { background: var(--yellow); }
+.progress-fill.red { background: var(--red); }
+.progress-fill.green { background: var(--green); }
+
+/* ─── COST CALCULATOR ─── */
+.calc-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.calc-label { width: 120px; font-size: 13px; color: var(--text-dim); }
+.calc-input {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  padding: 6px 10px;
+  font-size: 13px;
+  font-family: inherit;
+  width: 100px;
+}
+.calc-input:focus { outline: none; border-color: var(--teal); }
+.calc-result {
+  background: var(--bg3);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-top: 16px;
+}
+.calc-result-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); }
+.calc-result-row:last-child { border-bottom: none; }
+.margin-warning {
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.3);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  color: var(--red);
+  font-size: 12px;
+  margin-top: 10px;
+  display: none;
+}
+.margin-warning.show { display: block; }
+
+/* ─── QUOTE ─── */
+.quote-table { width: 100%; border-collapse: collapse; }
+.quote-table td { padding: 8px 12px; }
+.quote-total { font-size: 20px; font-weight: 700; color: var(--teal); }
+
+/* ─── COPY GENERATOR ─── */
+.copy-tabs { display: flex; gap: 4px; margin-bottom: 16px; }
+.copy-tab {
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--bg3);
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+}
+.copy-tab.active { background: var(--teal-dim); color: var(--teal); border-color: var(--teal); }
+.copy-form { display: flex; flex-direction: column; gap: 10px; }
+.copy-form input, .copy-form textarea, .copy-form select {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: inherit;
+  resize: vertical;
+}
+.copy-form input:focus, .copy-form textarea:focus, .copy-form select:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+.copy-form label { font-size: 11px; color: var(--text-dim); font-weight: 600; margin-bottom: 2px; }
+.copy-output {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  min-height: 160px;
+  white-space: pre-wrap;
+  color: var(--text);
+}
+.copy-output.loading { color: var(--text-muted); font-style: italic; }
+
+/* ─── DOMAIN HEALTH ─── */
+.domain-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+.domain-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.domain-name { font-weight: 700; font-size: 14px; font-family: monospace; }
+.signal {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.signal-go { background: rgba(34,197,94,0.15); color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+.signal-caution { background: rgba(245,158,11,0.15); color: var(--yellow); border: 1px solid rgba(245,158,11,0.3); }
+.signal-stop { background: rgba(239,68,68,0.15); color: var(--red); border: 1px solid rgba(239,68,68,0.3); }
+.domain-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.domain-metric { text-align: center; }
+.domain-metric-value { font-size: 18px; font-weight: 700; margin-bottom: 2px; }
+.domain-metric-label { font-size: 10px; color: var(--text-muted); }
+
+/* ─── LEADS KANBAN ─── */
+.leads-phases { display: flex; flex-direction: column; gap: 24px; }
+.phase-label {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ─── SETTINGS ─── */
+.settings-section { margin-bottom: 24px; }
+.settings-section h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; color: var(--teal); }
+.settings-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.settings-row label { width: 180px; font-size: 12px; color: var(--text-dim); }
+.settings-input {
+  flex:1;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  padding: 8px 12px;
+  font-size: 13px;
+  font-family: monospace;
+}
+.settings-input:focus { outline:none; border-color: var(--teal); }
+
+/* ─── CHART CONTAINERS ─── */
+.chart-wrap { position: relative; height: 220px; }
+.chart-wrap-sm { position: relative; height: 180px; }
+
+/* ─── MOBILE BOTTOM NAV ─── */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  bottom:0; left:0; right:0;
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 8px 0;
+  z-index: 100;
+  overflow-x: auto;
+}
+.mobile-nav-inner { display: flex; min-width: max-content; padding: 0 8px; gap: 4px; }
+.mobile-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 9px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.15s;
+}
+.mobile-nav-item.active { color: var(--teal); }
+.mobile-nav-item .icon { font-size: 18px; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; padding-bottom: var(--nav-h); }
+  .mobile-nav { display: block; }
+  .news-grid { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-2 { grid-template-columns: 1fr; }
+  .kanban { flex-direction: column; }
+  .kanban-col { min-width: unset; }
+  .domain-metrics { grid-template-columns: repeat(2, 1fr); }
+  .topbar { padding: 10px 16px; }
+  .section { padding: 16px; }
+}
+@media (min-width: 1400px) {
+  .news-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ─── MISC ─── */
+.flex { display: flex; }
+.flex-between { display: flex; justify-content: space-between; align-items: center; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+.gap-16 { gap: 16px; }
+.mt-8 { margin-top: 8px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.mb-16 { margin-bottom: 16px; }
+.text-teal { color: var(--teal); }
+.text-green { color: var(--green); }
+.text-red { color: var(--red); }
+.text-yellow { color: var(--yellow); }
+.text-dim { color: var(--text-dim); }
+.text-muted { color: var(--text-muted); }
+.font-mono { font-family: monospace; }
+.fw-700 { font-weight: 700; }
+.fs-12 { font-size: 12px; }
+.fs-11 { font-size: 11px; }
+.truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+select, option { background: var(--bg3); color: var(--text); }
+.section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.section-title { font-size: 20px; font-weight: 700; }
+.section-sub { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+textarea { resize: vertical; }
+
+/* ─── DONUT CHART ─── */
+.donut-wrap { position: relative; width: 160px; height: 160px; margin: 0 auto; }
+
+/* ─── RADAR ─── */
+.radar-wrap { max-width: 320px; margin: 0 auto; position: relative; height: 280px; }
+
+/* ─── COMPETITOR CARDS ─── */
+.comp-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.comp-card.us { border-color: var(--teal); }
+.comp-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+.comp-meta { font-size: 11px; color: var(--text-muted); margin-bottom: 12px; }
+.comp-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.comp-tag { font-size: 10px; padding: 2px 7px; border-radius: 4px; background: var(--bg3); color: var(--text-dim); }
+.comp-tag.strength { background: rgba(34,197,94,0.1); color: var(--green); }
+.comp-tag.weakness { background: rgba(239,68,68,0.1); color: var(--red); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ─── SIDEBAR ─── -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <h1>Vidcel</h1>
+    <span>Operations Dashboard</span>
+  </div>
+  <div class="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-label">Core</div>
+      <a class="nav-item active" data-section="brief" onclick="nav('brief',this)">
+        <span class="icon">📰</span> Daily Brief
+      </a>
+      <a class="nav-item" data-section="clients" onclick="nav('clients',this)">
+        <span class="icon">👥</span> Clients
+      </a>
+      <a class="nav-item" data-section="pipeline" onclick="nav('pipeline',this)">
+        <span class="icon">🎬</span> Pipeline
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Finance</div>
+      <a class="nav-item" data-section="finance" onclick="nav('finance',this)">
+        <span class="icon">💰</span> Finance
+      </a>
+      <a class="nav-item" data-section="costcalc" onclick="nav('costcalc',this)">
+        <span class="icon">🧮</span> Cost Calc
+      </a>
+      <a class="nav-item" data-section="quote" onclick="nav('quote',this)">
+        <span class="icon">📄</span> Quote
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Growth</div>
+      <a class="nav-item" data-section="copy" onclick="nav('copy',this)">
+        <span class="icon">✍️</span> Copy Gen
+      </a>
+      <a class="nav-item" data-section="leads" onclick="nav('leads',this)">
+        <span class="icon">🎯</span> Leads
+      </a>
+      <a class="nav-item" data-section="compete" onclick="nav('compete',this)">
+        <span class="icon">⚔️</span> Compete
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Email</div>
+      <a class="nav-item" data-section="domain" onclick="nav('domain',this)">
+        <span class="icon">🌐</span> Domain
+      </a>
+      <a class="nav-item" data-section="analytics" onclick="nav('analytics',this)">
+        <span class="icon">📊</span> Analytics
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">Intel</div>
+      <a class="nav-item" data-section="trends" onclick="nav('trends',this)">
+        <span class="icon">📈</span> Trends
+      </a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-label">System</div>
+      <a class="nav-item" data-section="settings" onclick="nav('settings',this)">
+        <span class="icon">⚙️</span> Settings
+      </a>
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    <span class="status-dot"></span>
+    <span id="last-updated">Loading...</span>
+  </div>
+</nav>
+
+<!-- ─── MAIN ─── -->
+<main class="main">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title" id="section-title">Daily Brief</div>
+      <div class="topbar-meta" id="today-date"></div>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn btn-ghost btn-sm" onclick="refreshData()">↻ Refresh</button>
+      <button class="btn btn-primary btn-sm" onclick="syncToGitHub()">⬆ Sync GitHub</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════ 1. DAILY BRIEF ════════════════════════ -->
+  <section class="section active" id="s-brief">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Daily Brief</div>
+        <div class="section-sub">AI & market intelligence — updated 7am JST daily</div>
+      </div>
+      <div id="brief-updated" class="text-dim fs-12"></div>
+    </div>
+    <div class="news-grid" id="news-grid">
+      <!-- Populated by JS -->
+    </div>
+  </section>
+
+  <!-- ════════════════════════ 2. CLIENTS ════════════════════════ -->
+  <section class="section" id="s-clients">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Clients</div>
+        <div class="section-sub">Active contracts & delivery tracking</div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="addClient()">+ Add Client</button>
+    </div>
+    <div class="grid grid-4 mb-16" id="client-stats">
+      <!-- Stats populated by JS -->
+    </div>
+    <div class="grid grid-2" style="gap:16px; margin-bottom:16px;">
+      <div class="card">
+        <div class="card-title">Revenue Mix</div>
+        <div class="chart-wrap"><canvas id="clientDonut"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Monthly Growth</div>
+        <div class="chart-wrap"><canvas id="clientLine"></canvas></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Client Roster</div>
+      <div class="table-wrap">
+        <table id="client-table">
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Status</th>
+              <th>Plan</th>
+              <th>Monthly Fee</th>
+              <th>Videos</th>
+              <th>Next Delivery</th>
+              <th>Satisfaction</th>
+            </tr>
+          </thead>
+          <tbody id="client-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ 3. PIPELINE ════════════════════════ -->
+  <section class="section" id="s-pipeline">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Pipeline</div>
+        <div class="section-sub">Video production kanban with 48h countdown</div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="addTask()">+ Add Task</button>
+    </div>
+    <div class="kanban" id="kanban-board">
+      <!-- Populated by JS -->
+    </div>
+  </section>
+
+  <!-- ════════════════════════ 4. FINANCE ════════════════════════ -->
+  <section class="section" id="s-finance">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Finance</div>
+        <div class="section-sub">Revenue, costs, profit & break-even</div>
+      </div>
+    </div>
+    <div class="grid grid-3 mb-16" id="finance-stats"></div>
+    <div class="grid grid-2" style="gap:16px; margin-bottom:16px;">
+      <div class="card">
+        <div class="card-title">Revenue vs Profit — 6 Month</div>
+        <div class="chart-wrap"><canvas id="financeLineChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Cost Breakdown</div>
+        <div class="chart-wrap"><canvas id="financeDonut"></canvas></div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title">Break-Even Progress</div>
+      <div id="bep-content"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Invoice Status</div>
+      <div class="table-wrap"><table id="invoice-table">
+        <thead><tr><th>Client</th><th>Amount</th><th>Status</th><th>Due Date</th></tr></thead>
+        <tbody id="invoice-tbody"></tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ 5. COST CALC ════════════════════════ -->
+  <section class="section" id="s-costcalc">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Cost Calculator</div>
+        <div class="section-sub">Per-video AI tool cost & margin analysis</div>
+      </div>
+    </div>
+    <div class="grid grid-2" style="gap:16px;">
+      <div class="card">
+        <div class="card-title">Video Production Inputs</div>
+        <div class="calc-row">
+          <span class="calc-label">AI Tool</span>
+          <select class="calc-input" id="calc-tool" onchange="calcCost()" style="width:160px;">
+            <option value="kling">Kling 2.0</option>
+            <option value="seedance">Seedance 1.0</option>
+            <option value="luma">Luma Dream Machine</option>
+          </select>
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Videos / Month</span>
+          <input type="number" class="calc-input" id="calc-videos" value="8" min="1" max="200" oninput="calcCost()">
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Editing Time (h)</span>
+          <input type="number" class="calc-input" id="calc-hours" value="1.5" step="0.5" min="0" oninput="calcCost()">
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Editor Rate ($/h)</span>
+          <input type="number" class="calc-input" id="calc-rate" value="12" min="0" oninput="calcCost()">
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Fixed Costs / Mo</span>
+          <input type="number" class="calc-input" id="calc-fixed" value="420" min="0" oninput="calcCost()">
+        </div>
+        <div class="calc-row">
+          <span class="calc-label">Client Revenue</span>
+          <input type="number" class="calc-input" id="calc-revenue" value="1800" min="0" oninput="calcCost()">
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Cost Breakdown</div>
+        <div class="calc-result" id="calc-result"></div>
+        <div class="margin-warning" id="margin-warning">
+          ⚠️ Profit margin below 40% — consider raising price or reducing video count
+        </div>
+        <div class="chart-wrap-sm mt-16"><canvas id="calcChart"></canvas></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ 6. QUOTE ════════════════════════ -->
+  <section class="section" id="s-quote">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Quote Generator</div>
+        <div class="section-sub">Build client proposals with Vidcel pricing</div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="printQuote()">🖨 Print / PDF</button>
+    </div>
+    <div class="grid grid-2" style="gap:16px;">
+      <div class="card">
+        <div class="card-title">Quote Builder</div>
+        <div class="copy-form">
+          <div><label>Client Name</label><input type="text" id="q-client" placeholder="Acme Store" oninput="buildQuote()"></div>
+          <div><label>Niche / Product</label><input type="text" id="q-niche" placeholder="Health supplements" oninput="buildQuote()"></div>
+          <div>
+            <label>Base Plan</label>
+            <select id="q-plan" onchange="buildQuote()">
+              <option value="starter">Starter — 4 videos / $900</option>
+              <option value="standard" selected>Standard — 8 videos / $1,800</option>
+              <option value="pro">Pro — 16 videos / $2,800</option>
+              <option value="custom">Custom</option>
+            </select>
+          </div>
+          <div><label>Add-ons</label>
+            <label style="display:flex;align-items:center;gap:6px;margin-top:4px;font-size:13px;font-weight:400;color:var(--text);">
+              <input type="checkbox" id="q-rush" onchange="buildQuote()"> Rush delivery (+$300)
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;margin-top:4px;font-size:13px;font-weight:400;color:var(--text);">
+              <input type="checkbox" id="q-extra" onchange="buildQuote()"> Extra revision pack (+$200)
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;margin-top:4px;font-size:13px;font-weight:400;color:var(--text);">
+              <input type="checkbox" id="q-strategy" onchange="buildQuote()"> Strategy call (+$150)
+            </label>
+          </div>
+          <div><label>Notes</label><textarea id="q-notes" rows="3" placeholder="Special requirements..." oninput="buildQuote()"></textarea></div>
+        </div>
+      </div>
+      <div class="card" id="quote-preview">
+        <div class="card-title">Quote Preview</div>
+        <div id="quote-output">
+          <p class="text-muted">Fill in the fields to generate a quote →</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ 7. COPY ════════════════════════ -->
+  <section class="section" id="s-copy">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Copy Generator</div>
+        <div class="section-sub">AI-powered DM, cold email & LP copy via Claude API</div>
+      </div>
+    </div>
+    <div class="copy-tabs">
+      <button class="copy-tab active" onclick="switchCopyTab('dm',this)">📩 DM Script</button>
+      <button class="copy-tab" onclick="switchCopyTab('cold',this)">📧 Cold Email</button>
+      <button class="copy-tab" onclick="switchCopyTab('lp',this)">🖥 Landing Page</button>
+    </div>
+    <div class="grid grid-2" style="gap:16px;">
+      <div class="card">
+        <div class="card-title">Inputs</div>
+        <div class="copy-form" id="copy-form">
+          <!-- Dynamic form per tab -->
+        </div>
+        <button class="btn btn-primary mt-16" style="width:100%;" onclick="generateCopy()">✨ Generate with Claude</button>
+      </div>
+      <div class="card">
+        <div class="card-title flex-between">
+          <span>Output</span>
+          <button class="btn btn-ghost btn-sm" onclick="copyCopyOutput()">Copy</button>
+        </div>
+        <div class="copy-output" id="copy-output">Output will appear here...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ 8. LEADS ════════════════════════ -->
+  <section class="section" id="s-leads">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Leads</div>
+        <div class="section-sub">Regional pipeline by phase</div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="addLead()">+ Add Lead</button>
+    </div>
+    <div class="grid grid-4 mb-16" id="leads-stats"></div>
+    <div class="leads-phases" id="leads-phases"></div>
+  </section>
+
+  <!-- ════════════════════════ 9. COMPETE ════════════════════════ -->
+  <section class="section" id="s-compete">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Competitive Intel</div>
+        <div class="section-sub">Market positioning & radar analysis</div>
+      </div>
+    </div>
+    <div class="grid grid-2" style="gap:16px; margin-bottom:16px;">
+      <div class="card">
+        <div class="card-title">Competitive Radar</div>
+        <div class="radar-wrap"><canvas id="radarChart"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Positioning Matrix</div>
+        <div id="positioning-matrix" style="padding:8px 0;"></div>
+      </div>
+    </div>
+    <div class="grid grid-2" style="gap:16px;" id="comp-cards"></div>
+  </section>
+
+  <!-- ════════════════════════ 10. DOMAIN ════════════════════════ -->
+  <section class="section" id="s-domain">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Domain Health</div>
+        <div class="section-sub">Warmup progress & deliverability signals</div>
+      </div>
+    </div>
+    <div id="domain-list"></div>
+  </section>
+
+  <!-- ════════════════════════ 11. ANALYTICS ════════════════════════ -->
+  <section class="section" id="s-analytics">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Email Analytics</div>
+        <div class="section-sub">Instantly.ai performance metrics</div>
+      </div>
+    </div>
+    <div class="grid grid-4 mb-16" id="analytics-stats"></div>
+    <div class="grid grid-2" style="gap:16px; margin-bottom:16px;">
+      <div class="card">
+        <div class="card-title">Weekly Send Volume</div>
+        <div class="chart-wrap"><canvas id="analyticsBar"></canvas></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Top Sequences</div>
+        <div id="top-sequences"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ 12. TRENDS ════════════════════════ -->
+  <section class="section" id="s-trends">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Market Trends</div>
+        <div class="section-sub">Shopify trending categories — updated weekly</div>
+      </div>
+    </div>
+    <div class="card mb-16">
+      <div class="card-title">Category Growth Chart</div>
+      <div class="chart-wrap"><canvas id="trendsChart"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Trending Categories</div>
+      <div class="table-wrap">
+        <table id="trends-table">
+          <thead><tr>
+            <th>Category</th><th>Trend</th><th>Growth %</th><th>Competition</th><th>Video Potential</th><th>Notes</th>
+          </tr></thead>
+          <tbody id="trends-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════ 13. SETTINGS ════════════════════════ -->
+  <section class="section" id="s-settings">
+    <div class="section-header">
+      <div>
+        <div class="section-title">Settings</div>
+        <div class="section-sub">API keys, GitHub sync, pricing config</div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="saveSettings()">💾 Save Settings</button>
+    </div>
+    <div class="grid grid-2" style="gap:16px;">
+      <div>
+        <div class="card settings-section" style="margin-bottom:16px;">
+          <div class="settings-section"><h3>🔑 API Keys</h3>
+            <div class="settings-row">
+              <label>GitHub Token</label>
+              <input type="password" class="settings-input" id="s-github-token" placeholder="ghp_...">
+            </div>
+            <div class="settings-row">
+              <label>GitHub Repo</label>
+              <input type="text" class="settings-input" id="s-github-repo" placeholder="username/vidcel-dashboard">
+            </div>
+            <div class="settings-row">
+              <label>Claude API Key</label>
+              <input type="password" class="settings-input" id="s-claude-key" placeholder="sk-ant-...">
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="settings-section"><h3>⚙️ General</h3>
+            <div class="settings-row">
+              <label>Timezone</label>
+              <select class="settings-input" id="s-timezone">
+                <option value="Asia/Tokyo">Asia/Tokyo (JST)</option>
+                <option value="America/New_York">America/New_York</option>
+                <option value="America/Los_Angeles">America/Los_Angeles</option>
+                <option value="Europe/London">Europe/London</option>
+              </select>
+            </div>
+            <div class="settings-row">
+              <label>Currency</label>
+              <select class="settings-input" id="s-currency">
+                <option value="USD">USD $</option>
+                <option value="JPY">JPY ¥</option>
+                <option value="GBP">GBP £</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card mb-16">
+          <div class="settings-section"><h3>💴 Vidcel Pricing</h3>
+            <div id="pricing-config"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="settings-section"><h3>🤖 GitHub Actions Status</h3>
+            <div id="actions-status">
+              <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);">
+                <span class="fs-12">daily.yml (7am JST)</span>
+                <span class="badge badge-green">Active</span>
+              </div>
+              <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);">
+                <span class="fs-12">weekly.yml (Mon 8am JST)</span>
+                <span class="badge badge-green">Active</span>
+              </div>
+              <div class="flex-between" style="padding:8px 0;">
+                <span class="fs-12">self_check.yml (hourly)</span>
+                <span class="badge badge-green">Active</span>
+              </div>
+            </div>
+            <div class="mt-16">
+              <button class="btn btn-ghost btn-sm" onclick="triggerWorkflow('daily')">▶ Run Daily Now</button>
+              <button class="btn btn-ghost btn-sm" style="margin-left:6px;" onclick="triggerWorkflow('weekly')">▶ Run Weekly Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ─── MOBILE BOTTOM NAV ─── -->
+<nav class="mobile-nav">
+  <div class="mobile-nav-inner">
+    <div class="mobile-nav-item active" onclick="nav('brief',this)"><span class="icon">📰</span>Brief</div>
+    <div class="mobile-nav-item" onclick="nav('clients',this)"><span class="icon">👥</span>Clients</div>
+    <div class="mobile-nav-item" onclick="nav('pipeline',this)"><span class="icon">🎬</span>Pipeline</div>
+    <div class="mobile-nav-item" onclick="nav('finance',this)"><span class="icon">💰</span>Finance</div>
+    <div class="mobile-nav-item" onclick="nav('costcalc',this)"><span class="icon">🧮</span>Calc</div>
+    <div class="mobile-nav-item" onclick="nav('quote',this)"><span class="icon">📄</span>Quote</div>
+    <div class="mobile-nav-item" onclick="nav('copy',this)"><span class="icon">✍️</span>Copy</div>
+    <div class="mobile-nav-item" onclick="nav('leads',this)"><span class="icon">🎯</span>Leads</div>
+    <div class="mobile-nav-item" onclick="nav('compete',this)"><span class="icon">⚔️</span>Compete</div>
+    <div class="mobile-nav-item" onclick="nav('domain',this)"><span class="icon">🌐</span>Domain</div>
+    <div class="mobile-nav-item" onclick="nav('analytics',this)"><span class="icon">📊</span>Stats</div>
+    <div class="mobile-nav-item" onclick="nav('trends',this)"><span class="icon">📈</span>Trends</div>
+    <div class="mobile-nav-item" onclick="nav('settings',this)"><span class="icon">⚙️</span>Settings</div>
+  </div>
+</nav>
+
+</div><!-- .app -->
+
+<script>
+// ─────────────────────────────────────────────
+// GLOBALS
+// ─────────────────────────────────────────────
+let DATA = {};
+let SETTINGS = {};
+let charts = {};
+let copyActiveTab = 'dm';
+let kanbanTimer = null;
+
+const SECTION_TITLES = {
+  brief: 'Daily Brief', clients: 'Clients', pipeline: 'Pipeline',
+  finance: 'Finance', costcalc: 'Cost Calculator', quote: 'Quote Generator',
+  copy: 'Copy Generator', leads: 'Leads', compete: 'Competitive Intel',
+  domain: 'Domain Health', analytics: 'Email Analytics', trends: 'Market Trends',
+  settings: 'Settings'
+};
+
+// ─────────────────────────────────────────────
+// NAVIGATION
+// ─────────────────────────────────────────────
+function nav(section, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item, .mobile-nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('s-' + section).classList.add('active');
+  document.querySelectorAll('[data-section="' + section + '"]').forEach(n => n.classList.add('active'));
+  if (el) {
+    el.classList.add('active');
+    // also sync mobile nav
+    document.querySelectorAll('.mobile-nav-item').forEach(m => {
+      if (m.getAttribute('onclick') === el.getAttribute('onclick')) m.classList.add('active');
+    });
+  }
+  document.getElementById('section-title').textContent = SECTION_TITLES[section] || section;
+  // render charts lazily
+  setTimeout(() => renderSection(section), 50);
+}
+
+function renderSection(section) {
+  if (section === 'clients' && DATA.clients) renderClientCharts();
+  if (section === 'finance' && DATA.finance) renderFinanceCharts();
+  if (section === 'costcalc') calcCost();
+  if (section === 'compete' && DATA.competitors) renderCompeteCharts();
+  if (section === 'analytics' && DATA.analytics) renderAnalyticsCharts();
+  if (section === 'trends' && DATA.trends) renderTrendsChart();
+  if (section === 'copy') buildCopyForm();
+  if (section === 'settings') loadSettingsForm();
+}
+
+// ─────────────────────────────────────────────
+// DATA LOADING
+// ─────────────────────────────────────────────
+async function loadJSON(path) {
+  try {
+    const r = await fetch(path + '?v=' + Date.now());
+    if (!r.ok) throw new Error(r.status);
+    return await r.json();
+  } catch (e) {
+    console.warn('Failed to load', path, e);
+    return null;
+  }
+}
+
+async function loadAll() {
+  const files = ['news','clients','pipeline','finance','leads','competitors','domain','analytics','trends','settings'];
+  const results = await Promise.all(files.map(f => loadJSON('data/' + f + '.json')));
+  files.forEach((f, i) => { if (results[i]) DATA[f] = results[i]; });
+  SETTINGS = DATA.settings || {};
+  renderAll();
+}
+
+function refreshData() {
+  loadAll();
+}
+
+function renderAll() {
+  setDate();
+  renderBrief();
+  renderClients();
+  renderPipeline();
+  renderFinance();
+  renderLeads();
+  renderDomain();
+  renderAnalytics();
+  renderTrends();
+  renderCompete();
+  buildQuote();
+  loadSettingsForm();
+  updateLastUpdated();
+}
+
+// ─────────────────────────────────────────────
+// DATE / TIME
+// ─────────────────────────────────────────────
+function setDate() {
+  const now = new Date();
+  const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric', timeZone: SETTINGS.timezone || 'Asia/Tokyo' };
+  document.getElementById('today-date').textContent = now.toLocaleDateString('en-US', opts);
+}
+
+function updateLastUpdated() {
+  const el = document.getElementById('last-updated');
+  if (DATA.news && DATA.news.last_updated) {
+    const d = new Date(DATA.news.last_updated);
+    el.textContent = 'Updated ' + d.toLocaleString('en-US', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
+  } else {
+    el.textContent = 'Local data';
+  }
+}
+
+function timeAgo(dateStr) {
+  const now = new Date();
+  const d = new Date(dateStr);
+  const diff = now - d;
+  const h = Math.floor(diff / 3600000);
+  const min = Math.floor(diff / 60000);
+  if (min < 60) return min + 'm ago';
+  if (h < 24) return h + 'h ago';
+  return Math.floor(h / 24) + 'd ago';
+}
+
+function countdown(dueStr) {
+  const now = new Date();
+  const due = new Date(dueStr);
+  const diff = due - now;
+  if (diff < 0) return { label: 'OVERDUE', cls: 'urgent' };
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  if (h < 12) return { label: h + 'h ' + m + 'm', cls: 'urgent' };
+  if (h < 48) return { label: h + 'h ' + m + 'm', cls: 'kanban-timer' };
+  return { label: Math.floor(h/24) + 'd ' + (h%24) + 'h', cls: 'ok' };
+}
+
+// ─────────────────────────────────────────────
+// 1. DAILY BRIEF
+// ─────────────────────────────────────────────
+function renderBrief() {
+  const news = DATA.news;
+  if (!news) return;
+  const grid = document.getElementById('news-grid');
+  const cats = news.categories;
+  grid.innerHTML = Object.values(cats).map(cat => `
+    <div class="news-card">
+      <div class="news-header">
+        <span>${cat.icon}</span> ${cat.label}
+      </div>
+      <div class="news-body">
+        ${cat.items.map(item => `
+          <div class="news-item" onclick="window.open('${item.url}','_blank')">
+            <div class="news-item-title">${item.title} ${item.hot ? '<span class="hot-badge">HOT</span>' : ''}</div>
+            <div class="news-item-meta">
+              <span class="news-item-source">${item.source}</span>
+              <span class="news-item-time">${item.time}</span>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+  const upd = document.getElementById('brief-updated');
+  if (news.last_updated) upd.textContent = 'Last updated: ' + new Date(news.last_updated).toLocaleString();
+}
+
+// ─────────────────────────────────────────────
+// 2. CLIENTS
+// ─────────────────────────────────────────────
+function renderClients() {
+  const d = DATA.clients;
+  if (!d) return;
+  const clients = d.clients;
+  const totalRevenue = clients.reduce((s, c) => s + c.monthly_fee, 0);
+  const active = clients.filter(c => c.status === 'active').length;
+  const atRisk = clients.filter(c => c.status === 'at_risk').length;
+  const avgSat = (clients.reduce((s, c) => s + c.satisfaction, 0) / clients.length).toFixed(1);
+  document.getElementById('client-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Total Clients</div><div class="stat-value text-teal">${clients.length}</div><div class="stat-change up">↑ 2 this month</div></div>
+    <div class="stat-card"><div class="stat-label">Monthly Revenue</div><div class="stat-value">$${totalRevenue.toLocaleString()}</div><div class="stat-change up">↑ $900 MoM</div></div>
+    <div class="stat-card"><div class="stat-label">Active</div><div class="stat-value text-green">${active}</div><div class="stat-change">of ${clients.length} total</div></div>
+    <div class="stat-card"><div class="stat-label">Avg Satisfaction</div><div class="stat-value">${avgSat}<span style="font-size:14px;color:var(--text-dim)">/10</span></div><div class="stat-change ${atRisk > 0 ? 'down' : 'up'}">${atRisk > 0 ? atRisk + ' at risk' : 'All healthy'}</div></div>
+  `;
+  const statusMap = {
+    active: '<span class="badge badge-green">Active</span>',
+    revision: '<span class="badge badge-yellow">Revision</span>',
+    at_risk: '<span class="badge badge-red">At Risk</span>',
+    paused: '<span class="badge badge-blue">Paused</span>'
+  };
+  document.getElementById('client-tbody').innerHTML = clients.map(c => `
+    <tr>
+      <td><div style="font-weight:600;">${c.name}</div><div class="fs-11 text-muted">${c.niche}</div></td>
+      <td>${statusMap[c.status] || c.status}</td>
+      <td><span class="badge badge-teal">${c.plan}</span></td>
+      <td class="fw-700">$${c.monthly_fee.toLocaleString()}</td>
+      <td>
+        <div class="fs-12">${c.videos_this_month}/${c.videos_target}</div>
+        <div class="progress-bar"><div class="progress-fill ${c.videos_this_month >= c.videos_target ? 'green' : c.videos_this_month/c.videos_target > 0.6 ? '' : 'yellow'}" style="width:${Math.min(100, c.videos_this_month/c.videos_target*100)}%"></div></div>
+      </td>
+      <td class="fs-12">${c.next_delivery}</td>
+      <td>
+        <span style="font-weight:700; color:${c.satisfaction >= 8 ? 'var(--green)' : c.satisfaction >= 6 ? 'var(--yellow)' : 'var(--red)'}">
+          ${c.satisfaction}/10
+        </span>
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderClientCharts() {
+  const d = DATA.clients;
+  if (!d) return;
+  const clients = d.clients;
+  destroyChart('clientDonut');
+  destroyChart('clientLine');
+
+  const ctx1 = document.getElementById('clientDonut').getContext('2d');
+  charts['clientDonut'] = new Chart(ctx1, {
+    type: 'doughnut',
+    data: {
+      labels: clients.map(c => c.name),
+      datasets: [{
+        data: clients.map(c => c.monthly_fee),
+        backgroundColor: ['#0ABFB8','#22C55E','#3B82F6','#A855F7','#F59E0B','#EF4444'],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position:'right', labels: { color:'#8892A4', font:{size:11} } } },
+      cutout: '65%'
+    }
+  });
+
+  const fin = DATA.finance;
+  if (!fin) return;
+  const ctx2 = document.getElementById('clientLine').getContext('2d');
+  const months = fin.monthly_history.map(m => m.month.replace('2026-',''));
+  charts['clientLine'] = new Chart(ctx2, {
+    type: 'line',
+    data: {
+      labels: months,
+      datasets: [{
+        label: 'Revenue',
+        data: fin.monthly_history.map(m => m.revenue),
+        borderColor: '#0ABFB8',
+        backgroundColor: 'rgba(10,191,184,0.1)',
+        fill: true, tension: 0.4, pointRadius: 4
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display:false } },
+      scales: {
+        x: { grid:{color:'#252A3A'}, ticks:{color:'#8892A4'} },
+        y: { grid:{color:'#252A3A'}, ticks:{color:'#8892A4', callback: v => '$'+v.toLocaleString()} }
+      }
+    }
+  });
+}
+
+// ─────────────────────────────────────────────
+// 3. PIPELINE
+// ─────────────────────────────────────────────
+const COLS = [
+  { id:'waiting', label:'Waiting', color:'var(--text-muted)' },
+  { id:'generating', label:'Generating', color:'var(--blue)' },
+  { id:'review', label:'Review', color:'var(--yellow)' },
+  { id:'revision', label:'Revision', color:'var(--orange)' },
+  { id:'delivered', label:'Delivered', color:'var(--green)' }
+];
+
+function renderPipeline() {
+  const d = DATA.pipeline;
+  if (!d) return;
+  const tasks = d.tasks;
+  const board = document.getElementById('kanban-board');
+  board.innerHTML = COLS.map(col => {
+    const colTasks = tasks.filter(t => t.status === col.id);
+    return `
+      <div class="kanban-col">
+        <div class="kanban-header">
+          <span style="color:${col.color}">${col.label}</span>
+          <span class="kanban-count">${colTasks.length}</span>
+        </div>
+        <div class="kanban-body">
+          ${colTasks.map(task => {
+            const cd = countdown(task.due);
+            const pBadge = task.priority === 'high' ? 'badge-red' : task.priority === 'medium' ? 'badge-yellow' : 'badge-blue';
+            return `
+              <div class="kanban-card">
+                <div class="kanban-card-title">${task.title}</div>
+                <div class="kanban-card-client">${task.client}</div>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <div class="kanban-timer ${cd.cls}">⏱ ${cd.label}</div>
+                  <span class="badge ${pBadge}" style="font-size:9px;">${task.priority}</span>
+                </div>
+                ${task.notes ? `<div class="fs-11 text-muted" style="margin-top:4px;">${task.notes}</div>` : ''}
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+  startKanbanTimer();
+}
+
+function startKanbanTimer() {
+  if (kanbanTimer) clearInterval(kanbanTimer);
+  kanbanTimer = setInterval(() => {
+    const section = document.getElementById('s-pipeline');
+    if (section.classList.contains('active')) renderPipeline();
+  }, 60000);
+}
+
+// ─────────────────────────────────────────────
+// 4. FINANCE
+// ─────────────────────────────────────────────
+function renderFinance() {
+  const d = DATA.finance;
+  if (!d) return;
+  const s = d.summary;
+  document.getElementById('finance-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Revenue (MTD)</div><div class="stat-value text-teal">$${s.revenue.toLocaleString()}</div><div class="stat-change up">↑ 9.2% MoM</div></div>
+    <div class="stat-card"><div class="stat-label">Cost (MTD)</div><div class="stat-value text-red">$${s.cost.toLocaleString()}</div><div class="stat-change">AI tools + ops</div></div>
+    <div class="stat-card"><div class="stat-label">Net Profit</div><div class="stat-value text-green">$${s.profit.toLocaleString()}</div><div class="stat-change up">Margin: ${s.profit_margin}%</div></div>
+  `;
+  const bep = d.bep;
+  const bepPct = Math.min(100, (bep.current_videos / bep.bep_videos) * 100);
+  document.getElementById('bep-content').innerHTML = `
+    <div class="flex-between mb-16" style="gap:24px;">
+      <div class="text-center">
+        <div class="fs-11 text-muted" style="margin-bottom:4px;">Fixed Costs / Mo</div>
+        <div style="font-size:22px;font-weight:700;">$${bep.monthly_fixed_costs.toLocaleString()}</div>
+      </div>
+      <div class="text-center">
+        <div class="fs-11 text-muted" style="margin-bottom:4px;">BEP Videos</div>
+        <div style="font-size:22px;font-weight:700;color:var(--yellow);">${bep.bep_videos}</div>
+      </div>
+      <div class="text-center">
+        <div class="fs-11 text-muted" style="margin-bottom:4px;">Current Videos</div>
+        <div style="font-size:22px;font-weight:700;color:var(--green);">${bep.current_videos}</div>
+      </div>
+      <div class="text-center">
+        <div class="fs-11 text-muted" style="margin-bottom:4px;">Coverage</div>
+        <div style="font-size:22px;font-weight:700;color:var(--teal);">${(bep.current_videos / bep.bep_videos).toFixed(1)}x</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--text-dim);margin-bottom:6px;">BEP Progress (${bep.current_videos} / ${bep.bep_videos} videos)</div>
+    <div class="progress-bar" style="height:12px;">
+      <div class="progress-fill green" style="width:${bepPct}%"></div>
+    </div>
+  `;
+  const statusMap = {
+    paid: '<span class="badge badge-green">Paid</span>',
+    pending: '<span class="badge badge-yellow">Pending</span>',
+    overdue: '<span class="badge badge-red">Overdue</span>'
+  };
+  document.getElementById('invoice-tbody').innerHTML = d.invoices.map(inv => `
+    <tr>
+      <td>${inv.client}</td>
+      <td class="fw-700">$${inv.amount.toLocaleString()}</td>
+      <td>${statusMap[inv.status] || inv.status}</td>
+      <td class="fs-12 text-dim">${inv.due}</td>
+    </tr>
+  `).join('');
+}
+
+function renderFinanceCharts() {
+  const d = DATA.finance;
+  if (!d) return;
+  destroyChart('financeLineChart');
+  destroyChart('financeDonut');
+
+  const ctx1 = document.getElementById('financeLineChart').getContext('2d');
+  const labels = d.monthly_history.map(m => m.month.replace('2026-',''));
+  charts['financeLineChart'] = new Chart(ctx1, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label:'Revenue', data: d.monthly_history.map(m=>m.revenue), borderColor:'#0ABFB8', backgroundColor:'rgba(10,191,184,0.08)', fill:true, tension:0.4, pointRadius:4 },
+        { label:'Profit', data: d.monthly_history.map(m=>m.profit), borderColor:'#22C55E', backgroundColor:'rgba(34,197,94,0.05)', fill:true, tension:0.4, pointRadius:4 }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ labels:{color:'#8892A4',font:{size:11}} } },
+      scales:{ x:{grid:{color:'#252A3A'},ticks:{color:'#8892A4'}}, y:{grid:{color:'#252A3A'},ticks:{color:'#8892A4',callback:v=>'$'+v.toLocaleString()}} }
+    }
+  });
+
+  const cb = d.cost_breakdown;
+  const ctx2 = document.getElementById('financeDonut').getContext('2d');
+  charts['financeDonut'] = new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+      labels: ['AI Tools','Freelancers','Software','Marketing','Misc'],
+      datasets: [{ data: Object.values(cb), backgroundColor:['#0ABFB8','#3B82F6','#A855F7','#F59E0B','#EF4444'], borderWidth:0 }]
+    },
+    options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'right',labels:{color:'#8892A4',font:{size:11}}} }, cutout:'65%' }
+  });
+}
+
+// ─────────────────────────────────────────────
+// 5. COST CALCULATOR
+// ─────────────────────────────────────────────
+let calcChart = null;
+function calcCost() {
+  const tool = document.getElementById('calc-tool').value;
+  const videos = parseFloat(document.getElementById('calc-videos').value) || 0;
+  const hours = parseFloat(document.getElementById('calc-hours').value) || 0;
+  const rate = parseFloat(document.getElementById('calc-rate').value) || 0;
+  const fixed = parseFloat(document.getElementById('calc-fixed').value) || 0;
+  const revenue = parseFloat(document.getElementById('calc-revenue').value) || 0;
+
+  const toolCosts = { kling: 0.8, seedance: 0.6, luma: 0.5 };
+  const aiCost = (toolCosts[tool] || 0.8) * videos;
+  const editCost = hours * rate * videos;
+  const totalCost = aiCost + editCost + fixed;
+  const profit = revenue - totalCost;
+  const margin = revenue > 0 ? (profit / revenue * 100).toFixed(1) : 0;
+
+  document.getElementById('calc-result').innerHTML = `
+    <div class="calc-result-row"><span>AI Tool Cost</span><span class="text-red">$${aiCost.toFixed(2)}</span></div>
+    <div class="calc-result-row"><span>Editing Cost</span><span class="text-red">$${editCost.toFixed(2)}</span></div>
+    <div class="calc-result-row"><span>Fixed Costs</span><span class="text-red">$${fixed.toFixed(2)}</span></div>
+    <div class="calc-result-row"><span style="font-weight:600;">Total Cost</span><span class="fw-700 text-red">$${totalCost.toFixed(2)}</span></div>
+    <div class="calc-result-row"><span style="font-weight:600;">Revenue</span><span class="fw-700 text-teal">$${revenue.toFixed(2)}</span></div>
+    <div class="calc-result-row"><span style="font-weight:700;">Net Profit</span><span class="fw-700" style="color:${profit>=0?'var(--green)':'var(--red)'}">$${profit.toFixed(2)}</span></div>
+    <div class="calc-result-row"><span style="font-weight:700;">Margin</span><span class="fw-700" style="color:${margin>=40?'var(--green)':margin>=20?'var(--yellow)':'var(--red)'}">${margin}%</span></div>
+  `;
+  const warn = document.getElementById('margin-warning');
+  warn.classList.toggle('show', parseFloat(margin) < 40 && revenue > 0);
+
+  destroyChart('calcChart');
+  const ctx = document.getElementById('calcChart').getContext('2d');
+  charts['calcChart'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['AI Tool', 'Editing', 'Fixed', 'Profit'],
+      datasets: [{
+        data: [aiCost, editCost, fixed, Math.max(0, profit)],
+        backgroundColor: ['#EF4444','#F97316','#F59E0B','#22C55E'],
+        borderRadius: 6, borderWidth: 0
+      }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false} },
+      scales:{ x:{grid:{display:false},ticks:{color:'#8892A4'}}, y:{grid:{color:'#252A3A'},ticks:{color:'#8892A4',callback:v=>'$'+v}} }
+    }
+  });
+}
+
+// ─────────────────────────────────────────────
+// 6. QUOTE
+// ─────────────────────────────────────────────
+const PLANS = {
+  starter:  { videos:4,  price:900,  revisions:1 },
+  standard: { videos:8,  price:1800, revisions:2 },
+  pro:      { videos:16, price:2800, revisions:3 },
+  custom:   { videos:'TBD', price:0, revisions:'Unlimited' }
+};
+
+function buildQuote() {
+  const client = document.getElementById('q-client').value || 'Your Company';
+  const niche  = document.getElementById('q-niche').value || '';
+  const planKey = document.getElementById('q-plan').value;
+  const rush    = document.getElementById('q-rush').checked;
+  const extra   = document.getElementById('q-extra').checked;
+  const strategy = document.getElementById('q-strategy').checked;
+  const notes   = document.getElementById('q-notes').value;
+  const plan = PLANS[planKey];
+  let total = plan.price;
+  if (rush) total += 300;
+  if (extra) total += 200;
+  if (strategy) total += 150;
+
+  document.getElementById('quote-output').innerHTML = `
+    <div style="border-bottom:2px solid var(--teal);padding-bottom:12px;margin-bottom:16px;">
+      <div style="font-size:20px;font-weight:700;color:var(--teal);">Vidcel</div>
+      <div style="font-size:11px;color:var(--text-muted);">AI-Powered Video Production</div>
+    </div>
+    <div style="margin-bottom:16px;">
+      <div class="fw-700" style="font-size:15px;">${client}</div>
+      ${niche ? `<div class="fs-12 text-dim">${niche}</div>` : ''}
+      <div class="fs-12 text-muted">Proposal date: ${new Date().toLocaleDateString()}</div>
+    </div>
+    <table class="quote-table" style="margin-bottom:16px;">
+      <tr style="border-bottom:1px solid var(--border);">
+        <td><strong>${planKey.charAt(0).toUpperCase()+planKey.slice(1)} Plan</strong><br><span class="fs-11 text-dim">${plan.videos} videos/mo · ${plan.revisions} revision${plan.revisions!==1?'s':''} · 30-day cycle</span></td>
+        <td style="text-align:right;font-weight:700;">$${plan.price.toLocaleString()}</td>
+      </tr>
+      ${rush?`<tr style="border-bottom:1px solid var(--border);"><td>Rush Delivery (48h turnaround)<br><span class="fs-11 text-dim">Priority queue + faster delivery</span></td><td style="text-align:right;font-weight:600;">$300</td></tr>`:''}
+      ${extra?`<tr style="border-bottom:1px solid var(--border);"><td>Extra Revision Pack<br><span class="fs-11 text-dim">+2 additional revision rounds</span></td><td style="text-align:right;font-weight:600;">$200</td></tr>`:''}
+      ${strategy?`<tr style="border-bottom:1px solid var(--border);"><td>Strategy Call (1h)<br><span class="fs-11 text-dim">Video content strategy session</span></td><td style="text-align:right;font-weight:600;">$150</td></tr>`:''}
+      <tr>
+        <td><strong>Monthly Total</strong></td>
+        <td style="text-align:right;" class="quote-total">$${total.toLocaleString()}</td>
+      </tr>
+    </table>
+    ${notes ? `<div class="card" style="font-size:12px;color:var(--text-dim);">${notes}</div>` : ''}
+    <div class="fs-11 text-muted mt-16">
+      All prices in USD · Monthly billing · Cancel anytime with 30-day notice
+    </div>
+  `;
+}
+
+function printQuote() {
+  window.print();
+}
+
+// ─────────────────────────────────────────────
+// 7. COPY GENERATOR
+// ─────────────────────────────────────────────
+const COPY_FORMS = {
+  dm: [
+    { id:'dm-brand', label:'Brand Name', placeholder:'TechFlow Store' },
+    { id:'dm-product', label:'Main Product', placeholder:'Wireless earbuds' },
+    { id:'dm-pain', label:'Pain Point', placeholder:'Low conversion on product page' },
+    { id:'dm-tone', label:'Tone', type:'select', options:['Conversational','Professional','Bold','Friendly'] }
+  ],
+  cold: [
+    { id:'ce-prospect', label:'Prospect Company', placeholder:'NovaBrew Coffee' },
+    { id:'ce-role', label:'Prospect Role', placeholder:'CMO / Founder' },
+    { id:'ce-niche', label:'Niche', placeholder:'DTC coffee brand' },
+    { id:'ce-angle', label:'Angle', type:'select', options:['ROI-focused','Curiosity hook','Social proof','Pain point'] }
+  ],
+  lp: [
+    { id:'lp-product', label:'Product', placeholder:'AI video production service' },
+    { id:'lp-audience', label:'Target Audience', placeholder:'Shopify store owners' },
+    { id:'lp-benefit', label:'Key Benefit', placeholder:'3x ROAS on video ads' },
+    { id:'lp-cta', label:'CTA', placeholder:'Book a free demo' }
+  ]
+};
+
+function switchCopyTab(tab, el) {
+  copyActiveTab = tab;
+  document.querySelectorAll('.copy-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  buildCopyForm();
+}
+
+function buildCopyForm() {
+  const fields = COPY_FORMS[copyActiveTab] || [];
+  document.getElementById('copy-form').innerHTML = fields.map(f => {
+    if (f.type === 'select') {
+      return `<div><label>${f.label}</label><select id="${f.id}">${f.options.map(o=>`<option>${o}</option>`).join('')}</select></div>`;
+    }
+    return `<div><label>${f.label}</label><input type="text" id="${f.id}" placeholder="${f.placeholder}"></div>`;
+  }).join('');
+}
+
+function gatherCopyInputs() {
+  const fields = COPY_FORMS[copyActiveTab] || [];
+  return fields.reduce((obj, f) => {
+    const el = document.getElementById(f.id);
+    if (el) obj[f.label] = el.value;
+    return obj;
+  }, {});
+}
+
+async function generateCopy() {
+  const out = document.getElementById('copy-output');
+  const inputs = gatherCopyInputs();
+  const apiKey = getStoredKey('claude_api_key');
+
+  if (!apiKey) {
+    out.className = 'copy-output';
+    out.textContent = '⚙️ Please add your Claude API key in Settings to use the copy generator.';
+    return;
+  }
+
+  out.className = 'copy-output loading';
+  out.textContent = '✨ Generating with Claude...';
+
+  let prompt = '';
+  if (copyActiveTab === 'dm') {
+    prompt = `Write a 3-step Instagram/LinkedIn DM script for a video production agency called Vidcel reaching out to ${inputs['Brand Name'] || 'a brand'} that sells ${inputs['Main Product'] || 'products'}. Their pain point: ${inputs['Pain Point'] || 'low video engagement'}. Tone: ${inputs['Tone'] || 'conversational'}. Be concise and direct. Include DM 1 (first touch), DM 2 (follow-up 3 days later), DM 3 (value add). Format with clear headers.`;
+  } else if (copyActiveTab === 'cold') {
+    prompt = `Write a personalized cold email from Vidcel (AI video production agency) to the ${inputs['Prospect Role'] || 'CMO'} at ${inputs['Prospect Company'] || 'a brand'} in the ${inputs['Niche'] || 'e-commerce'} space. Angle: ${inputs['Angle'] || 'ROI-focused'}. Subject line + email body. Keep it under 120 words. No fluff, clear value prop, single CTA.`;
+  } else if (copyActiveTab === 'lp') {
+    prompt = `Write landing page hero copy for: ${inputs['Product'] || 'AI video service'}. Target audience: ${inputs['Target Audience'] || 'Shopify brands'}. Key benefit: ${inputs['Key Benefit'] || 'higher ROAS'}. CTA: ${inputs['CTA'] || 'Get started'}. Include: headline, subheadline, 3 bullet benefits, CTA button text. Keep it punchy and conversion-focused.`;
+  }
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-calls': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1024,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await res.json();
+    if (data.content && data.content[0]) {
+      out.className = 'copy-output';
+      out.textContent = data.content[0].text;
+    } else {
+      out.className = 'copy-output';
+      out.textContent = 'Error: ' + (data.error?.message || JSON.stringify(data));
+    }
+  } catch (e) {
+    out.className = 'copy-output';
+    out.textContent = 'Error connecting to Claude API: ' + e.message;
+  }
+}
+
+function copyCopyOutput() {
+  const text = document.getElementById('copy-output').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = event.target;
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 1500);
+  });
+}
+
+// ─────────────────────────────────────────────
+// 8. LEADS
+// ─────────────────────────────────────────────
+function renderLeads() {
+  const d = DATA.leads;
+  if (!d) return;
+  const leads = d.leads;
+  const totalValue = leads.reduce((s, l) => s + l.value, 0);
+  const won = leads.filter(l => l.status === 'closed_won').length;
+  const pipeline = leads.filter(l => !['closed_won','closed_lost'].includes(l.status)).length;
+  document.getElementById('leads-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Total Leads</div><div class="stat-value text-teal">${leads.length}</div></div>
+    <div class="stat-card"><div class="stat-label">Pipeline Value</div><div class="stat-value">$${totalValue.toLocaleString()}</div></div>
+    <div class="stat-card"><div class="stat-label">Active Pipeline</div><div class="stat-value text-yellow">${pipeline}</div></div>
+    <div class="stat-card"><div class="stat-label">Won</div><div class="stat-value text-green">${won}</div></div>
+  `;
+
+  const phases = d.phases;
+  const phasesEl = document.getElementById('leads-phases');
+  phasesEl.innerHTML = Object.entries(phases).map(([key, phase]) => {
+    const phaseLeads = leads.filter(l => l.phase === key);
+    const cols = ['prospecting','contacted','demo_scheduled','proposal_sent','negotiating','closed_won','closed_lost'];
+    const colLabels = { prospecting:'Prospecting', contacted:'Contacted', demo_scheduled:'Demo Set', proposal_sent:'Proposal', negotiating:'Negotiating', closed_won:'Won ✓', closed_lost:'Lost' };
+    return `
+      <div>
+        <div class="phase-label">${phase.flag} ${phase.label} <span class="badge badge-teal" style="font-size:10px;">${phaseLeads.length} leads</span></div>
+        <div class="kanban" style="overflow-x:auto;">
+          ${cols.map(col => {
+            const colLeads = phaseLeads.filter(l => l.status === col);
+            return `
+              <div class="kanban-col" style="min-width:150px;">
+                <div class="kanban-header">
+                  <span style="font-size:11px;">${colLabels[col]}</span>
+                  <span class="kanban-count">${colLeads.length}</span>
+                </div>
+                <div class="kanban-body">
+                  ${colLeads.map(l => `
+                    <div class="kanban-card">
+                      <div class="kanban-card-title" style="font-size:11px;">${l.company}</div>
+                      <div class="kanban-card-client">${l.contact}</div>
+                      <div class="fw-700 fs-12 text-teal">$${l.value.toLocaleString()}</div>
+                      ${l.notes ? `<div class="fs-11 text-muted" style="margin-top:3px;">${l.notes}</div>` : ''}
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function addLead() {
+  const company = prompt('Company name:');
+  if (!company) return;
+  const contact = prompt('Contact name:');
+  const value = parseInt(prompt('Deal value (USD):') || '1800');
+  const phase = prompt('Phase (phase1/phase2/phase3):') || 'phase1';
+  if (!DATA.leads) return;
+  DATA.leads.leads.push({
+    id: 'l' + Date.now(), company, contact: contact || '', phase,
+    status: 'prospecting', value, last_touch: new Date().toISOString().split('T')[0], notes: ''
+  });
+  renderLeads();
+  saveToGitHub('leads');
+}
+
+// ─────────────────────────────────────────────
+// 9. COMPETE
+// ─────────────────────────────────────────────
+function renderCompete() {
+  const d = DATA.competitors;
+  if (!d) return;
+  const comps = d.competitors;
+
+  const matrix = document.getElementById('positioning-matrix');
+  matrix.innerHTML = comps.map(c => `
+    <div class="flex-between" style="padding:8px 0;border-bottom:1px solid var(--border);">
+      <div>
+        <div class="fw-700 fs-12">${c.name}</div>
+        <div class="fs-11 text-muted">${c.pricing}</div>
+      </div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;">
+        ${c.strengths.slice(0,2).map(s=>`<span class="comp-tag strength">${s}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+
+  const cardsEl = document.getElementById('comp-cards');
+  cardsEl.innerHTML = comps.map(c => `
+    <div class="comp-card ${c.id === 'vidcel' ? 'us' : ''}">
+      <div class="comp-name">${c.name} ${c.id === 'vidcel' ? '<span class="badge badge-teal" style="font-size:10px;">Us</span>' : ''}</div>
+      <div class="comp-meta">${c.founded} · ${c.funding} · ${c.pricing}</div>
+      <div class="comp-tags">
+        ${c.strengths.map(s=>`<span class="comp-tag strength">✓ ${s}</span>`).join('')}
+        ${c.weaknesses.map(w=>`<span class="comp-tag weakness">✗ ${w}</span>`).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderCompeteCharts() {
+  const d = DATA.competitors;
+  if (!d) return;
+  destroyChart('radarChart');
+  const labels = ['Quality','Speed','Price','Support','Innovation','Retention'];
+  const colors = ['#EF4444','#F59E0B','#3B82F6','#0ABFB8'];
+  const ctx = document.getElementById('radarChart').getContext('2d');
+  charts['radarChart'] = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels,
+      datasets: d.competitors.map((c, i) => ({
+        label: c.name,
+        data: labels.map(l => c.radar[l.toLowerCase()] || 0),
+        borderColor: colors[i % colors.length],
+        backgroundColor: (colors[i % colors.length]).replace(')',',0.1)').replace('rgb','rgba'),
+        borderWidth: 2,
+        pointRadius: 3
+      }))
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ labels:{color:'#8892A4',font:{size:11}} } },
+      scales:{ r:{ min:0, max:100, grid:{color:'#252A3A'}, ticks:{color:'#8892A4',backdropColor:'transparent',stepSize:20}, pointLabels:{color:'#8892A4',font:{size:11}} } }
+    }
+  });
+}
+
+// ─────────────────────────────────────────────
+// 10. DOMAIN
+// ─────────────────────────────────────────────
+function renderDomain() {
+  const d = DATA.domain;
+  if (!d) return;
+  const el = document.getElementById('domain-list');
+  el.innerHTML = d.domains.map(dom => {
+    const pct = (dom.warmup_day / dom.warmup_target * 100).toFixed(0);
+    const authIcons = [
+      dom.spf ? '<span class="badge badge-green" style="font-size:9px;">SPF</span>' : '<span class="badge badge-red" style="font-size:9px;">SPF</span>',
+      dom.dkim ? '<span class="badge badge-green" style="font-size:9px;">DKIM</span>' : '<span class="badge badge-red" style="font-size:9px;">DKIM</span>',
+      dom.dmarc ? '<span class="badge badge-green" style="font-size:9px;">DMARC</span>' : '<span class="badge badge-yellow" style="font-size:9px;">DMARC</span>'
+    ].join(' ');
+    return `
+      <div class="domain-card">
+        <div class="domain-header">
+          <div>
+            <div class="domain-name">${dom.domain}</div>
+            <div class="fs-11 text-muted">${dom.provider} · Age: ${dom.age_days} days · ${authIcons}</div>
+          </div>
+          <div class="signal signal-${dom.status === 'go' ? 'go' : dom.status === 'caution' ? 'caution' : 'stop'}">
+            ${dom.status === 'go' ? '✓ GO' : dom.status === 'caution' ? '⚠ CAUTION' : '✗ STOP'}
+          </div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div class="flex-between fs-11 text-dim"><span>Warmup Progress (Day ${dom.warmup_day}/${dom.warmup_target})</span><span>${pct}%</span></div>
+          <div class="progress-bar" style="height:8px;"><div class="progress-fill" style="width:${pct}%"></div></div>
+        </div>
+        <div class="domain-metrics">
+          <div class="domain-metric">
+            <div class="domain-metric-value" style="color:${dom.open_rate >= 35 ? 'var(--green)' : 'var(--yellow)'}">${dom.open_rate}%</div>
+            <div class="domain-metric-label">Open Rate</div>
+          </div>
+          <div class="domain-metric">
+            <div class="domain-metric-value" style="color:${dom.reply_rate >= 5 ? 'var(--green)' : 'var(--yellow)'}">${dom.reply_rate}%</div>
+            <div class="domain-metric-label">Reply Rate</div>
+          </div>
+          <div class="domain-metric">
+            <div class="domain-metric-value" style="color:${dom.bounce_rate <= 2 ? 'var(--green)' : dom.bounce_rate <= 4 ? 'var(--yellow)' : 'var(--red)'}">${dom.bounce_rate}%</div>
+            <div class="domain-metric-label">Bounce Rate</div>
+          </div>
+          <div class="domain-metric">
+            <div class="domain-metric-value" style="color:${dom.spam_rate <= 0.1 ? 'var(--green)' : dom.spam_rate <= 0.3 ? 'var(--yellow)' : 'var(--red)'}">${dom.spam_rate}%</div>
+            <div class="domain-metric-label">Spam Rate</div>
+          </div>
+        </div>
+        <div style="margin-top:10px;" class="flex-between">
+          <span class="fs-11 text-dim">Daily limit: <strong>${dom.daily_send_limit}</strong> · Sending: <strong>${dom.current_volume}</strong></span>
+          <div class="progress-bar" style="width:120px;height:6px;"><div class="progress-fill ${dom.current_volume/dom.daily_send_limit > 0.9 ? 'yellow' : ''}" style="width:${(dom.current_volume/dom.daily_send_limit*100).toFixed(0)}%"></div></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ─────────────────────────────────────────────
+// 11. ANALYTICS
+// ─────────────────────────────────────────────
+function renderAnalytics() {
+  const d = DATA.analytics;
+  if (!d) return;
+  const ins = d.instantly;
+  document.getElementById('analytics-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-label">Emails / Month</div><div class="stat-value text-teal">${ins.emails_sent_month.toLocaleString()}</div><div class="stat-change up">↑ vs last month</div></div>
+    <div class="stat-card"><div class="stat-label">Open Rate</div><div class="stat-value text-green">${ins.open_rate}%</div><div class="stat-change up">Target: 35%+</div></div>
+    <div class="stat-card"><div class="stat-label">Reply Rate</div><div class="stat-value">${ins.reply_rate}%</div><div class="stat-change up">Target: 5%+</div></div>
+    <div class="stat-card"><div class="stat-label">Meetings Booked</div><div class="stat-value text-purple">${ins.meetings_booked}</div><div class="stat-change">This month</div></div>
+  `;
+  const seqEl = document.getElementById('top-sequences');
+  seqEl.innerHTML = d.top_sequences.map(s => `
+    <div style="padding:12px 0; border-bottom:1px solid var(--border);">
+      <div class="flex-between mb-16" style="margin-bottom:4px;">
+        <div class="fw-700 fs-12 truncate" style="max-width:200px;">${s.name}</div>
+        <span class="badge badge-teal">${s.sent} sent</span>
+      </div>
+      <div style="display:flex;gap:16px;">
+        <div><div class="fs-11 text-muted">Open</div><div class="fw-700 text-green fs-12">${s.open_rate}%</div></div>
+        <div><div class="fs-11 text-muted">Reply</div><div class="fw-700 text-teal fs-12">${s.reply_rate}%</div></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderAnalyticsCharts() {
+  const d = DATA.analytics;
+  if (!d) return;
+  destroyChart('analyticsBar');
+  const ctx = document.getElementById('analyticsBar').getContext('2d');
+  charts['analyticsBar'] = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: d.weekly_sends.map(w => w.week),
+      datasets: [
+        { label:'Sent', data: d.weekly_sends.map(w=>w.sent), backgroundColor:'rgba(59,130,246,0.7)', borderRadius:4, borderWidth:0 },
+        { label:'Opens', data: d.weekly_sends.map(w=>w.opens), backgroundColor:'rgba(34,197,94,0.7)', borderRadius:4, borderWidth:0 },
+        { label:'Replies', data: d.weekly_sends.map(w=>w.replies), backgroundColor:'rgba(10,191,184,0.7)', borderRadius:4, borderWidth:0 }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{labels:{color:'#8892A4',font:{size:11}}} },
+      scales:{ x:{grid:{display:false},ticks:{color:'#8892A4'}}, y:{grid:{color:'#252A3A'},ticks:{color:'#8892A4'}} }
+    }
+  });
+}
+
+// ─────────────────────────────────────────────
+// 12. TRENDS
+// ─────────────────────────────────────────────
+function renderTrends() {
+  const d = DATA.trends;
+  if (!d) return;
+  const trendIcon = t => t === 'up' ? '↑' : t === 'down' ? '↓' : '→';
+  const trendColor = t => t === 'up' ? 'var(--green)' : t === 'down' ? 'var(--red)' : 'var(--yellow)';
+  const potentialBadge = p => p === 'high' ? 'badge-green' : p === 'medium' ? 'badge-yellow' : 'badge-red';
+  const compBadge = c => c === 'low' ? 'badge-green' : c === 'medium' ? 'badge-yellow' : 'badge-red';
+  document.getElementById('trends-tbody').innerHTML = d.shopify_trending.map(t => `
+    <tr>
+      <td class="fw-700">${t.category}</td>
+      <td style="color:${trendColor(t.trend)};font-weight:700;">${trendIcon(t.trend)} ${t.trend}</td>
+      <td style="color:${trendColor(t.trend)};font-weight:700;">${t.growth > 0 ? '+' : ''}${t.growth}%</td>
+      <td><span class="badge ${compBadge(t.competition)}">${t.competition}</span></td>
+      <td><span class="badge ${potentialBadge(t.video_potential)}">${t.video_potential}</span></td>
+      <td class="fs-12 text-dim">${t.notes}</td>
+    </tr>
+  `).join('');
+}
+
+function renderTrendsChart() {
+  const d = DATA.trends;
+  if (!d) return;
+  destroyChart('trendsChart');
+  const ctx = document.getElementById('trendsChart').getContext('2d');
+  charts['trendsChart'] = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: d.monthly_growth.map(m => m.month),
+      datasets: [
+        { label:'AI Gadgets', data: d.monthly_growth.map(m=>m.ai_gadgets), borderColor:'#0ABFB8', tension:0.4, pointRadius:3 },
+        { label:'Functional Bev', data: d.monthly_growth.map(m=>m.functional_bev), borderColor:'#22C55E', tension:0.4, pointRadius:3 },
+        { label:'Pet Products', data: d.monthly_growth.map(m=>m.pet), borderColor:'#A855F7', tension:0.4, pointRadius:3 },
+        { label:'Beauty Tech', data: d.monthly_growth.map(m=>m.beauty), borderColor:'#F59E0B', tension:0.4, pointRadius:3 }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{labels:{color:'#8892A4',font:{size:11}}} },
+      scales:{
+        x:{grid:{color:'#252A3A'},ticks:{color:'#8892A4'}},
+        y:{grid:{color:'#252A3A'},ticks:{color:'#8892A4',callback:v=>v+'%'}}
+      }
+    }
+  });
+}
+
+// ─────────────────────────────────────────────
+// 13. SETTINGS
+// ─────────────────────────────────────────────
+function loadSettingsForm() {
+  const githubToken = localStorage.getItem('vidcel_github_token') || '';
+  const githubRepo  = localStorage.getItem('vidcel_github_repo') || (SETTINGS.github_repo || '');
+  const claudeKey   = localStorage.getItem('vidcel_claude_key') || '';
+  const tz          = SETTINGS.timezone || 'Asia/Tokyo';
+  const cur         = SETTINGS.currency || 'USD';
+
+  const gt = document.getElementById('s-github-token');
+  const gr = document.getElementById('s-github-repo');
+  const ck = document.getElementById('s-claude-key');
+  const tz_ = document.getElementById('s-timezone');
+  const cur_ = document.getElementById('s-currency');
+
+  if (gt) gt.value = githubToken;
+  if (gr) gr.value = githubRepo;
+  if (ck) ck.value = claudeKey;
+  if (tz_) tz_.value = tz;
+  if (cur_) cur_.value = cur;
+
+  const p = SETTINGS.vidcel_pricing || {};
+  const el = document.getElementById('pricing-config');
+  if (el) el.innerHTML = Object.entries(p).map(([k,v]) => `
+    <div class="flex-between" style="padding:6px 0;border-bottom:1px solid var(--border);">
+      <span class="fs-12 fw-700">${k.charAt(0).toUpperCase()+k.slice(1)}</span>
+      <span class="fs-12 text-dim">${v.videos || 'Custom'} videos · $${v.price || 'TBD'} · ${v.revision} revision(s)</span>
+    </div>
+  `).join('');
+}
+
+function saveSettings() {
+  const gt = document.getElementById('s-github-token').value.trim();
+  const gr = document.getElementById('s-github-repo').value.trim();
+  const ck = document.getElementById('s-claude-key').value.trim();
+  if (gt) localStorage.setItem('vidcel_github_token', gt);
+  if (gr) localStorage.setItem('vidcel_github_repo', gr);
+  if (ck) localStorage.setItem('vidcel_claude_key', ck);
+  alert('Settings saved to browser storage.');
+}
+
+function getStoredKey(name) {
+  const map = { github_token: 'vidcel_github_token', github_repo: 'vidcel_github_repo', claude_api_key: 'vidcel_claude_key' };
+  return localStorage.getItem(map[name] || name);
+}
+
+// ─────────────────────────────────────────────
+// GITHUB SYNC
+// ─────────────────────────────────────────────
+async function saveToGitHub(file) {
+  const token = getStoredKey('github_token');
+  const repo  = getStoredKey('github_repo') || SETTINGS.github_repo;
+  if (!token || !repo) return console.warn('GitHub token/repo not configured');
+  const path = `data/${file}.json`;
+  const content = JSON.stringify(DATA[file], null, 2);
+  const b64 = btoa(unescape(encodeURIComponent(content)));
+  try {
+    const meta = await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+    }).then(r => r.json());
+    await fetch(`https://api.github.com/repos/${repo}/contents/${path}`, {
+      method: 'PUT',
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: `Update ${file}.json`, content: b64, sha: meta.sha })
+    });
+    console.log(`Synced ${file}.json to GitHub`);
+  } catch (e) {
+    console.error('GitHub sync failed:', e);
+  }
+}
+
+async function syncToGitHub() {
+  const token = getStoredKey('github_token');
+  const repo  = getStoredKey('github_repo') || SETTINGS.github_repo;
+  if (!token || !repo) {
+    alert('Please configure GitHub token and repo in Settings first.');
+    nav('settings', document.querySelector('[data-section="settings"]'));
+    return;
+  }
+  const files = ['clients','pipeline','finance','leads'];
+  for (const f of files) {
+    if (DATA[f]) await saveToGitHub(f);
+  }
+  alert('Data synced to GitHub!');
+}
+
+async function triggerWorkflow(name) {
+  const token = getStoredKey('github_token');
+  const repo  = getStoredKey('github_repo') || SETTINGS.github_repo;
+  if (!token || !repo) { alert('Configure GitHub settings first.'); return; }
+  try {
+    await fetch(`https://api.github.com/repos/${repo}/actions/workflows/${name}.yml/dispatches`, {
+      method: 'POST',
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ref: 'main' })
+    });
+    alert(`Triggered ${name}.yml workflow!`);
+  } catch (e) {
+    alert('Failed: ' + e.message);
+  }
+}
+
+// ─────────────────────────────────────────────
+// MISC HELPERS
+// ─────────────────────────────────────────────
+function destroyChart(id) {
+  if (charts[id]) { charts[id].destroy(); delete charts[id]; }
+}
+
+function addClient() {
+  alert('Client creation form coming soon. Edit data/clients.json to add clients.');
+}
+function addTask() {
+  alert('Task creation form coming soon. Edit data/pipeline.json to add tasks.');
+}
+
+// ─────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  loadAll();
+  // Service Worker
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
+  // Initial chart render for active section
+  setTimeout(() => renderSection('brief'), 200);
+});
+</script>
+</body>
+</html>

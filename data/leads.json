@@ -1,0 +1,35 @@
+{
+  "last_updated": "2026-06-23T07:00:00+09:00",
+  "phases": {
+    "phase1": {
+      "label": "Phase 1: US Market",
+      "flag": "🇺🇸",
+      "target": "Shopify stores $1M-$10M ARR",
+      "columns": ["prospecting", "contacted", "demo_scheduled", "proposal_sent", "negotiating", "closed_won", "closed_lost"]
+    },
+    "phase2": {
+      "label": "Phase 2: UK / AU / CA",
+      "flag": "🇬🇧🇦🇺🇨🇦",
+      "target": "English-speaking EC brands",
+      "columns": ["prospecting", "contacted", "demo_scheduled", "proposal_sent", "negotiating", "closed_won", "closed_lost"]
+    },
+    "phase3": {
+      "label": "Phase 3: UAE / Gulf",
+      "flag": "🇦🇪",
+      "target": "Luxury & premium brands",
+      "columns": ["prospecting", "contacted", "demo_scheduled", "proposal_sent", "negotiating", "closed_won", "closed_lost"]
+    }
+  },
+  "leads": [
+    {"id": "l001", "company": "NovaBrew Coffee", "contact": "Mark T.", "phase": "phase1", "status": "contacted", "value": 2800, "last_touch": "2026-06-20", "notes": "Interested in Pro plan"},
+    {"id": "l002", "company": "ZenYoga Wear", "contact": "Lisa K.", "phase": "phase1", "status": "demo_scheduled", "value": 1800, "last_touch": "2026-06-22", "notes": "Demo on June 26"},
+    {"id": "l003", "company": "PureKeto Foods", "contact": "James R.", "phase": "phase1", "status": "proposal_sent", "value": 2800, "last_touch": "2026-06-21", "notes": "Waiting for budget approval"},
+    {"id": "l004", "company": "StyleHub UK", "contact": "Emma W.", "phase": "phase2", "status": "contacted", "value": 1800, "last_touch": "2026-06-19", "notes": "Fashion brand, high volume"},
+    {"id": "l005", "company": "OzOutdoors AU", "contact": "Ben M.", "phase": "phase2", "status": "prospecting", "value": 2800, "last_touch": "2026-06-18", "notes": "Found via LinkedIn"},
+    {"id": "l006", "company": "LuxArabic Scents", "contact": "Khalid A.", "phase": "phase3", "status": "prospecting", "value": 4500, "last_touch": "2026-06-15", "notes": "Premium perfume brand"},
+    {"id": "l007", "company": "GreenLeaf CA", "contact": "Sophie L.", "phase": "phase2", "status": "negotiating", "value": 2800, "last_touch": "2026-06-23", "notes": "Negotiating annual contract"},
+    {"id": "l008", "company": "TechTrend US", "contact": "David P.", "phase": "phase1", "status": "closed_won", "value": 2800, "last_touch": "2026-06-10", "notes": "Signed! Onboarding July 1"},
+    {"id": "l009", "company": "GulfLux Fashion", "contact": "Fatima H.", "phase": "phase3", "status": "contacted", "value": 3500, "last_touch": "2026-06-22", "notes": "High-end abaya brand"},
+    {"id": "l010", "company": "MuscleMax UK", "contact": "Chris B.", "phase": "phase2", "status": "demo_scheduled", "value": 1800, "last_touch": "2026-06-23", "notes": "Sports supplements"}
+  ]
+}

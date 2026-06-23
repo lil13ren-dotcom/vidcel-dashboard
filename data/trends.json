@@ -1,0 +1,21 @@
+{
+  "last_updated": "2026-06-23T07:00:00+09:00",
+  "shopify_trending": [
+    {"category": "AI Gadgets & Smart Home", "trend": "up", "growth": 38, "competition": "medium", "video_potential": "high", "notes": "Strong on TikTok Shop"},
+    {"category": "Functional Beverages", "trend": "up", "growth": 52, "competition": "low", "video_potential": "high", "notes": "Collagen, adaptogens booming"},
+    {"category": "Sustainable Fashion", "trend": "stable", "growth": 12, "competition": "high", "video_potential": "medium", "notes": "Gen Z driver"},
+    {"category": "Pet Premium Products", "trend": "up", "growth": 29, "competition": "low", "video_potential": "high", "notes": "High AOV, loyal buyers"},
+    {"category": "Home Fitness Equipment", "trend": "down", "growth": -8, "competition": "high", "video_potential": "low", "notes": "Post-COVID correction"},
+    {"category": "Skincare / Beauty Tech", "trend": "up", "growth": 41, "competition": "medium", "video_potential": "high", "notes": "LED devices, serums"},
+    {"category": "Coffee & Specialty Tea", "trend": "stable", "growth": 18, "competition": "medium", "video_potential": "high", "notes": "Subscription model works well"},
+    {"category": "Auto Accessories", "trend": "stable", "growth": 9, "competition": "medium", "video_potential": "medium", "notes": "Evergreen category"}
+  ],
+  "monthly_growth": [
+    {"month": "Jan", "ai_gadgets": 22, "functional_bev": 35, "pet": 18, "beauty": 28},
+    {"month": "Feb", "ai_gadgets": 26, "functional_bev": 38, "pet": 20, "beauty": 31},
+    {"month": "Mar", "ai_gadgets": 30, "functional_bev": 44, "pet": 23, "beauty": 35},
+    {"month": "Apr", "ai_gadgets": 33, "functional_bev": 48, "pet": 25, "beauty": 38},
+    {"month": "May", "ai_gadgets": 36, "functional_bev": 50, "pet": 27, "beauty": 40},
+    {"month": "Jun", "ai_gadgets": 38, "functional_bev": 52, "pet": 29, "beauty": 41}
+  ]
+}

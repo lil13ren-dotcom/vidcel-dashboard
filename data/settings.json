@@ -1,0 +1,18 @@
+{
+  "github_repo": "",
+  "github_token_hint": "ghp_...",
+  "claude_api_key_hint": "sk-ant-...",
+  "timezone": "Asia/Tokyo",
+  "currency": "USD",
+  "vidcel_pricing": {
+    "starter": {"videos": 4, "price": 900, "revision": 1},
+    "standard": {"videos": 8, "price": 1800, "revision": 2},
+    "pro": {"videos": 16, "price": 2800, "revision": 3},
+    "custom": {"videos": null, "price": null, "revision": "unlimited"}
+  },
+  "ai_tool_costs": {
+    "kling": {"cost_per_video": 0.8, "label": "Kling 2.0"},
+    "seedance": {"cost_per_video": 0.6, "label": "Seedance 1.0"},
+    "luma": {"cost_per_video": 0.5, "label": "Luma Dream Machine"}
+  }
+}

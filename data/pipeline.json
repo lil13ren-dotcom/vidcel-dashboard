@@ -1,0 +1,15 @@
+{
+  "last_updated": "2026-06-23T10:00:00+09:00",
+  "tasks": [
+    {"id": "t001", "client": "TechFlow Store", "title": "Product Demo - Wireless Earbuds", "status": "waiting", "priority": "high", "due": "2026-06-25T10:00:00+09:00", "notes": "Client wants fast cuts, energetic music"},
+    {"id": "t002", "client": "LuxeGlow Beauty", "title": "Serum Launch Ad - 30s", "status": "generating", "priority": "high", "due": "2026-06-24T18:00:00+09:00", "notes": "Kling 2.0, soft lighting"},
+    {"id": "t003", "client": "FitCore Supplements", "title": "Protein Shake UGC Style", "status": "review", "priority": "medium", "due": "2026-06-24T12:00:00+09:00", "notes": "Gym setting"},
+    {"id": "t004", "client": "HomeNest Decor", "title": "Living Room Showcase 60s", "status": "revision", "priority": "medium", "due": "2026-06-26T10:00:00+09:00", "notes": "Client wants brighter color grade"},
+    {"id": "t005", "client": "AutoEdge Parts", "title": "Oil Filter Install Tutorial", "status": "delivered", "priority": "low", "due": "2026-06-22T18:00:00+09:00", "notes": "Delivered on time"},
+    {"id": "t006", "client": "PetPal Store", "title": "Dog Toy Unboxing Reel", "status": "waiting", "priority": "medium", "due": "2026-06-28T10:00:00+09:00", "notes": "Fun & playful tone"},
+    {"id": "t007", "client": "TechFlow Store", "title": "Smart Speaker Comparison", "status": "generating", "priority": "high", "due": "2026-06-25T18:00:00+09:00", "notes": "Side-by-side format"},
+    {"id": "t008", "client": "LuxeGlow Beauty", "title": "Foundation Tutorial UGC", "status": "waiting", "priority": "low", "due": "2026-06-30T10:00:00+09:00", "notes": "Natural daylight look"},
+    {"id": "t009", "client": "FitCore Supplements", "title": "Pre-Workout Energy Ad", "status": "review", "priority": "high", "due": "2026-06-24T09:00:00+09:00", "notes": "High energy, dynamic cuts"},
+    {"id": "t010", "client": "HomeNest Decor", "title": "Kitchen Accessories Bundle", "status": "delivered", "priority": "medium", "due": "2026-06-21T18:00:00+09:00", "notes": "Delivered 1 day early"}
+  ]
+}

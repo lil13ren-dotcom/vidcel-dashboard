@@ -1,0 +1,45 @@
+{
+  "last_updated": "2026-06-23T07:00:00+09:00",
+  "competitors": [
+    {
+      "id": "comp1",
+      "name": "VidAI Agency",
+      "founded": "2024",
+      "funding": "$12M Series A",
+      "pricing": "$1,500 - $5,000/mo",
+      "strengths": ["Large team", "Fast turnaround", "VC-backed"],
+      "weaknesses": ["Generic style", "Poor communication", "Cookie-cutter output"],
+      "radar": {"quality": 70, "speed": 80, "price": 50, "support": 60, "innovation": 75, "retention": 65}
+    },
+    {
+      "id": "comp2",
+      "name": "Pictory Pro Agency",
+      "founded": "2023",
+      "funding": "Bootstrapped",
+      "pricing": "$800 - $2,500/mo",
+      "strengths": ["Low price", "Template-based", "Shopify integration"],
+      "weaknesses": ["Low customization", "Template feel", "Slow revisions"],
+      "radar": {"quality": 55, "speed": 70, "price": 80, "support": 50, "innovation": 45, "retention": 55}
+    },
+    {
+      "id": "comp3",
+      "name": "HeyGen Studios",
+      "founded": "2023",
+      "funding": "$75M",
+      "pricing": "$2,000 - $8,000/mo",
+      "strengths": ["Avatar tech", "Scale", "Enterprise focus"],
+      "weaknesses": ["Expensive", "Uncanny valley", "Not product-focused"],
+      "radar": {"quality": 75, "speed": 85, "price": 30, "support": 70, "innovation": 90, "retention": 70}
+    },
+    {
+      "id": "vidcel",
+      "name": "Vidcel (Us)",
+      "founded": "2025",
+      "funding": "Bootstrapped",
+      "pricing": "$900 - $2,800/mo",
+      "strengths": ["AI-native workflow", "Shopify expertise", "Fast iteration", "Personal service"],
+      "weaknesses": ["Small team", "Limited capacity", "No enterprise tier yet"],
+      "radar": {"quality": 88, "speed": 82, "price": 75, "support": 92, "innovation": 90, "retention": 85}
+    }
+  ]
+}

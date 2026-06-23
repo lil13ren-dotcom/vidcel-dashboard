@@ -1,0 +1,39 @@
+name: Self-Healing Check
+
+on:
+  schedule:
+    # Every hour
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  self-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install anthropic requests jsonschema
+
+      - name: Run self-healing check
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/self_check.py
+
+      - name: Commit fixes if any
+        run: |
+          git config user.name "vidcel-bot"
+          git config user.email "bot@vidcel.io"
+          git add data/
+          git diff --staged --quiet || git commit -m "fix: self-healing auto-fix $(date -u '+%Y-%m-%d %H:%M UTC')"
+          git push

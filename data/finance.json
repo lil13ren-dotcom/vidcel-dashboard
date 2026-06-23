@@ -1,0 +1,40 @@
+{
+  "last_updated": "2026-06-23T07:00:00+09:00",
+  "current_month": "2026-06",
+  "summary": {
+    "revenue": 11900,
+    "cost": 3240,
+    "profit": 8660,
+    "profit_margin": 72.8
+  },
+  "bep": {
+    "monthly_fixed_costs": 1200,
+    "variable_cost_per_video": 18,
+    "price_per_video": 200,
+    "bep_videos": 7,
+    "current_videos": 45
+  },
+  "monthly_history": [
+    {"month": "2026-01", "revenue": 6300, "cost": 1890, "profit": 4410},
+    {"month": "2026-02", "revenue": 7200, "cost": 2100, "profit": 5100},
+    {"month": "2026-03", "revenue": 8500, "cost": 2450, "profit": 6050},
+    {"month": "2026-04", "revenue": 9800, "cost": 2800, "profit": 7000},
+    {"month": "2026-05", "revenue": 10900, "cost": 3100, "profit": 7800},
+    {"month": "2026-06", "revenue": 11900, "cost": 3240, "profit": 8660}
+  ],
+  "cost_breakdown": {
+    "ai_tools": 1240,
+    "freelancers": 800,
+    "software": 420,
+    "marketing": 380,
+    "misc": 400
+  },
+  "invoices": [
+    {"client": "TechFlow Store", "amount": 2800, "status": "paid", "due": "2026-06-01"},
+    {"client": "LuxeGlow Beauty", "amount": 1800, "status": "paid", "due": "2026-06-01"},
+    {"client": "FitCore Supplements", "amount": 2800, "status": "pending", "due": "2026-06-30"},
+    {"client": "HomeNest Decor", "amount": 1800, "status": "paid", "due": "2026-06-01"},
+    {"client": "AutoEdge Parts", "amount": 900, "status": "overdue", "due": "2026-06-15"},
+    {"client": "PetPal Store", "amount": 1800, "status": "paid", "due": "2026-06-01"}
+  ]
+}

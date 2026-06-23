@@ -1,0 +1,59 @@
+{
+  "last_updated": "2026-06-23T07:00:00+09:00",
+  "categories": {
+    "ai_video": {
+      "label": "AI Video",
+      "icon": "🎬",
+      "items": [
+        {"title": "Kling 2.0 releases with 4K output support", "source": "TechCrunch", "url": "#", "time": "2h ago", "hot": true},
+        {"title": "Sora API now available for enterprise", "source": "OpenAI", "url": "#", "time": "5h ago", "hot": false},
+        {"title": "Runway Gen-4 benchmarks leaked", "source": "Reddit", "url": "#", "time": "8h ago", "hot": false}
+      ]
+    },
+    "ai_agents": {
+      "label": "AI Agents",
+      "icon": "🤖",
+      "items": [
+        {"title": "Claude 4 Opus agent loops hit 99% task completion", "source": "Anthropic", "url": "#", "time": "1h ago", "hot": true},
+        {"title": "AutoGPT v2 now supports multi-agent orchestration", "source": "GitHub", "url": "#", "time": "3h ago", "hot": false},
+        {"title": "LangGraph 0.3 drops with stateful memory", "source": "LangChain", "url": "#", "time": "6h ago", "hot": false}
+      ]
+    },
+    "cold_email": {
+      "label": "Cold Email",
+      "icon": "📧",
+      "items": [
+        {"title": "Gmail bulk sender policy update for 2026", "source": "Google", "url": "#", "time": "12h ago", "hot": true},
+        {"title": "Instantly.ai adds AI sequence personalization", "source": "Instantly", "url": "#", "time": "1d ago", "hot": false},
+        {"title": "SPF/DKIM best practices updated", "source": "Dmarcian", "url": "#", "time": "2d ago", "hot": false}
+      ]
+    },
+    "shopify_ec": {
+      "label": "Shopify / EC",
+      "icon": "🛒",
+      "items": [
+        {"title": "Shopify Summer '26 edition announced", "source": "Shopify", "url": "#", "time": "3h ago", "hot": true},
+        {"title": "TikTok Shop US GMV hits $10B in Q1", "source": "Bloomberg", "url": "#", "time": "1d ago", "hot": false},
+        {"title": "Amazon DSP video ad performance up 34%", "source": "AdWeek", "url": "#", "time": "2d ago", "hot": false}
+      ]
+    },
+    "competitors": {
+      "label": "Competitors",
+      "icon": "⚔️",
+      "items": [
+        {"title": "VidAI raises $12M Series A", "source": "Crunchbase", "url": "#", "time": "2d ago", "hot": true},
+        {"title": "Pictory adds Shopify direct integration", "source": "Pictory Blog", "url": "#", "time": "3d ago", "hot": false},
+        {"title": "HeyGen enterprise tier launched", "source": "HeyGen", "url": "#", "time": "4d ago", "hot": false}
+      ]
+    },
+    "social_algo": {
+      "label": "Instagram / TikTok",
+      "icon": "📱",
+      "items": [
+        {"title": "TikTok algo now prioritizes 15-30s videos", "source": "Social Media Today", "url": "#", "time": "6h ago", "hot": true},
+        {"title": "Instagram Reels reach peaks at 9am & 6pm JST", "source": "Later", "url": "#", "time": "1d ago", "hot": false},
+        {"title": "B2B video content sees 3x engagement on LinkedIn", "source": "Hootsuite", "url": "#", "time": "2d ago", "hot": false}
+      ]
+    }
+  }
+}

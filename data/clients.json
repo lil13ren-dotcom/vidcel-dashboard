@@ -1,0 +1,100 @@
+{
+  "last_updated": "2026-06-23T07:00:00+09:00",
+  "clients": [
+    {
+      "id": "c001",
+      "name": "TechFlow Store",
+      "status": "active",
+      "plan": "Pro",
+      "monthly_fee": 2800,
+      "currency": "USD",
+      "next_delivery": "2026-06-28",
+      "videos_this_month": 12,
+      "videos_target": 16,
+      "since": "2025-10-01",
+      "contact": "alex@techflow.com",
+      "niche": "Shopify Tech",
+      "satisfaction": 9
+    },
+    {
+      "id": "c002",
+      "name": "LuxeGlow Beauty",
+      "status": "active",
+      "plan": "Standard",
+      "monthly_fee": 1800,
+      "currency": "USD",
+      "next_delivery": "2026-06-25",
+      "videos_this_month": 8,
+      "videos_target": 8,
+      "since": "2026-01-15",
+      "contact": "sarah@luxeglow.co",
+      "niche": "Beauty EC",
+      "satisfaction": 10
+    },
+    {
+      "id": "c003",
+      "name": "FitCore Supplements",
+      "status": "revision",
+      "plan": "Pro",
+      "monthly_fee": 2800,
+      "currency": "USD",
+      "next_delivery": "2026-06-26",
+      "videos_this_month": 10,
+      "videos_target": 16,
+      "since": "2025-12-01",
+      "contact": "mike@fitcore.com",
+      "niche": "Health & Fitness",
+      "satisfaction": 7
+    },
+    {
+      "id": "c004",
+      "name": "HomeNest Decor",
+      "status": "active",
+      "plan": "Standard",
+      "monthly_fee": 1800,
+      "currency": "USD",
+      "next_delivery": "2026-07-02",
+      "videos_this_month": 6,
+      "videos_target": 8,
+      "since": "2026-03-01",
+      "contact": "jen@homenest.co",
+      "niche": "Home Decor",
+      "satisfaction": 9
+    },
+    {
+      "id": "c005",
+      "name": "AutoEdge Parts",
+      "status": "at_risk",
+      "plan": "Starter",
+      "monthly_fee": 900,
+      "currency": "USD",
+      "next_delivery": "2026-06-24",
+      "videos_this_month": 2,
+      "videos_target": 4,
+      "since": "2026-05-01",
+      "contact": "tom@autoedge.com",
+      "niche": "Auto Parts",
+      "satisfaction": 5
+    },
+    {
+      "id": "c006",
+      "name": "PetPal Store",
+      "status": "active",
+      "plan": "Standard",
+      "monthly_fee": 1800,
+      "currency": "USD",
+      "next_delivery": "2026-06-30",
+      "videos_this_month": 7,
+      "videos_target": 8,
+      "since": "2026-02-15",
+      "contact": "nina@petpal.store",
+      "niche": "Pet Products",
+      "satisfaction": 8
+    }
+  ],
+  "plans": {
+    "Starter": {"videos": 4, "price": 900},
+    "Standard": {"videos": 8, "price": 1800},
+    "Pro": {"videos": 16, "price": 2800}
+  }
+}
