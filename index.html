@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vidcel Ops Dashboard</title>
+<title>Vidcel 運営ダッシュボード</title>
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0ABFB8">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -570,70 +570,70 @@ textarea { resize: vertical; }
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-logo">
     <h1>Vidcel</h1>
-    <span>Operations Dashboard</span>
+    <span>運営ダッシュボード</span>
   </div>
   <div class="sidebar-nav">
     <div class="nav-section">
-      <div class="nav-label">Core</div>
+      <div class="nav-label">コア</div>
       <a class="nav-item active" data-section="brief" onclick="nav('brief',this)">
-        <span class="icon">📰</span> Daily Brief
+        <span class="icon">📰</span> デイリーブリーフ
       </a>
       <a class="nav-item" data-section="clients" onclick="nav('clients',this)">
-        <span class="icon">👥</span> Clients
+        <span class="icon">👥</span> クライアント
       </a>
       <a class="nav-item" data-section="pipeline" onclick="nav('pipeline',this)">
-        <span class="icon">🎬</span> Pipeline
+        <span class="icon">🎬</span> パイプライン
       </a>
     </div>
     <div class="nav-section">
-      <div class="nav-label">Finance</div>
+      <div class="nav-label">財務</div>
       <a class="nav-item" data-section="finance" onclick="nav('finance',this)">
-        <span class="icon">💰</span> Finance
+        <span class="icon">💰</span> ファイナンス
       </a>
       <a class="nav-item" data-section="costcalc" onclick="nav('costcalc',this)">
-        <span class="icon">🧮</span> Cost Calc
+        <span class="icon">🧮</span> コスト計算
       </a>
       <a class="nav-item" data-section="quote" onclick="nav('quote',this)">
-        <span class="icon">📄</span> Quote
+        <span class="icon">📄</span> 見積もり
       </a>
     </div>
     <div class="nav-section">
-      <div class="nav-label">Growth</div>
+      <div class="nav-label">グロース</div>
       <a class="nav-item" data-section="copy" onclick="nav('copy',this)">
-        <span class="icon">✍️</span> Copy Gen
+        <span class="icon">✍️</span> コピー生成
       </a>
       <a class="nav-item" data-section="leads" onclick="nav('leads',this)">
-        <span class="icon">🎯</span> Leads
+        <span class="icon">🎯</span> リード
       </a>
       <a class="nav-item" data-section="compete" onclick="nav('compete',this)">
-        <span class="icon">⚔️</span> Compete
+        <span class="icon">⚔️</span> 競合分析
       </a>
     </div>
     <div class="nav-section">
-      <div class="nav-label">Email</div>
+      <div class="nav-label">メール</div>
       <a class="nav-item" data-section="domain" onclick="nav('domain',this)">
-        <span class="icon">🌐</span> Domain
+        <span class="icon">🌐</span> ドメイン
       </a>
       <a class="nav-item" data-section="analytics" onclick="nav('analytics',this)">
-        <span class="icon">📊</span> Analytics
+        <span class="icon">📊</span> アナリティクス
       </a>
     </div>
     <div class="nav-section">
-      <div class="nav-label">Intel</div>
+      <div class="nav-label">市場情報</div>
       <a class="nav-item" data-section="trends" onclick="nav('trends',this)">
-        <span class="icon">📈</span> Trends
+        <span class="icon">📈</span> トレンド
       </a>
     </div>
     <div class="nav-section">
-      <div class="nav-label">System</div>
+      <div class="nav-label">システム</div>
       <a class="nav-item" data-section="settings" onclick="nav('settings',this)">
-        <span class="icon">⚙️</span> Settings
+        <span class="icon">⚙️</span> 設定
       </a>
     </div>
   </div>
   <div class="sidebar-footer">
     <span class="status-dot"></span>
-    <span id="last-updated">Loading...</span>
+    <span id="last-updated">読み込み中...</span>
   </div>
 </nav>
 
@@ -645,8 +645,8 @@ textarea { resize: vertical; }
       <div class="topbar-meta" id="today-date"></div>
     </div>
     <div class="topbar-actions">
-      <button class="btn btn-ghost btn-sm" onclick="refreshData()">↻ Refresh</button>
-      <button class="btn btn-primary btn-sm" onclick="syncToGitHub()">⬆ Sync GitHub</button>
+      <button class="btn btn-ghost btn-sm" onclick="refreshData()">↻ 更新</button>
+      <button class="btn btn-primary btn-sm" onclick="syncToGitHub()">⬆ GitHub同期</button>
     </div>
   </div>
 
@@ -654,8 +654,8 @@ textarea { resize: vertical; }
   <section class="section active" id="s-brief">
     <div class="section-header">
       <div>
-        <div class="section-title">Daily Brief</div>
-        <div class="section-sub">AI & market intelligence — updated 7am JST daily</div>
+        <div class="section-title">デイリーブリーフ</div>
+        <div class="section-sub">AI・市場情報 — 毎朝7時（JST）自動更新</div>
       </div>
       <div id="brief-updated" class="text-dim fs-12"></div>
     </div>
@@ -668,37 +668,37 @@ textarea { resize: vertical; }
   <section class="section" id="s-clients">
     <div class="section-header">
       <div>
-        <div class="section-title">Clients</div>
-        <div class="section-sub">Active contracts & delivery tracking</div>
+        <div class="section-title">クライアント</div>
+        <div class="section-sub">契約状況・納品管理</div>
       </div>
-      <button class="btn btn-primary btn-sm" onclick="addClient()">+ Add Client</button>
+      <button class="btn btn-primary btn-sm" onclick="addClient()">＋ クライアント追加</button>
     </div>
     <div class="grid grid-4 mb-16" id="client-stats">
       <!-- Stats populated by JS -->
     </div>
     <div class="grid grid-2" style="gap:16px; margin-bottom:16px;">
       <div class="card">
-        <div class="card-title">Revenue Mix</div>
+        <div class="card-title">収益構成</div>
         <div class="chart-wrap"><canvas id="clientDonut"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-title">Monthly Growth</div>
+        <div class="card-title">月次推移</div>
         <div class="chart-wrap"><canvas id="clientLine"></canvas></div>
       </div>
     </div>
     <div class="card">
-      <div class="card-title">Client Roster</div>
+      <div class="card-title">クライアント一覧</div>
       <div class="table-wrap">
         <table id="client-table">
           <thead>
             <tr>
-              <th>Client</th>
-              <th>Status</th>
-              <th>Plan</th>
-              <th>Monthly Fee</th>
-              <th>Videos</th>
-              <th>Next Delivery</th>
-              <th>Satisfaction</th>
+              <th>クライアント</th>
+              <th>ステータス</th>
+              <th>プラン</th>
+              <th>月額</th>
+              <th>動画本数</th>
+              <th>次回納品</th>
+              <th>満足度</th>
             </tr>
           </thead>
           <tbody id="client-tbody"></tbody>
@@ -711,10 +711,10 @@ textarea { resize: vertical; }
   <section class="section" id="s-pipeline">
     <div class="section-header">
       <div>
-        <div class="section-title">Pipeline</div>
-        <div class="section-sub">Video production kanban with 48h countdown</div>
+        <div class="section-title">パイプライン</div>
+        <div class="section-sub">動画制作カンバン — 48時間カウントダウン付き</div>
       </div>
-      <button class="btn btn-primary btn-sm" onclick="addTask()">+ Add Task</button>
+      <button class="btn btn-primary btn-sm" onclick="addTask()">＋ タスク追加</button>
     </div>
     <div class="kanban" id="kanban-board">
       <!-- Populated by JS -->
@@ -725,29 +725,29 @@ textarea { resize: vertical; }
   <section class="section" id="s-finance">
     <div class="section-header">
       <div>
-        <div class="section-title">Finance</div>
-        <div class="section-sub">Revenue, costs, profit & break-even</div>
+        <div class="section-title">ファイナンス</div>
+        <div class="section-sub">売上・コスト・利益・損益分岐点</div>
       </div>
     </div>
     <div class="grid grid-3 mb-16" id="finance-stats"></div>
     <div class="grid grid-2" style="gap:16px; margin-bottom:16px;">
       <div class="card">
-        <div class="card-title">Revenue vs Profit — 6 Month</div>
+        <div class="card-title">売上 vs 利益 — 6ヶ月推移</div>
         <div class="chart-wrap"><canvas id="financeLineChart"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-title">Cost Breakdown</div>
+        <div class="card-title">コスト内訳</div>
         <div class="chart-wrap"><canvas id="financeDonut"></canvas></div>
       </div>
     </div>
     <div class="card" style="margin-bottom:16px;">
-      <div class="card-title">Break-Even Progress</div>
+      <div class="card-title">損益分岐点の進捗</div>
       <div id="bep-content"></div>
     </div>
     <div class="card">
-      <div class="card-title">Invoice Status</div>
+      <div class="card-title">請求書ステータス</div>
       <div class="table-wrap"><table id="invoice-table">
-        <thead><tr><th>Client</th><th>Amount</th><th>Status</th><th>Due Date</th></tr></thead>
+        <thead><tr><th>クライアント</th><th>金額</th><th>ステータス</th><th>支払期限</th></tr></thead>
         <tbody id="invoice-tbody"></tbody>
       </table></div>
     </div>
@@ -757,15 +757,15 @@ textarea { resize: vertical; }
   <section class="section" id="s-costcalc">
     <div class="section-header">
       <div>
-        <div class="section-title">Cost Calculator</div>
-        <div class="section-sub">Per-video AI tool cost & margin analysis</div>
+        <div class="section-title">コスト計算機</div>
+        <div class="section-sub">1動画あたりのAIツールコスト・利益率分析</div>
       </div>
     </div>
     <div class="grid grid-2" style="gap:16px;">
       <div class="card">
-        <div class="card-title">Video Production Inputs</div>
+        <div class="card-title">制作コスト入力</div>
         <div class="calc-row">
-          <span class="calc-label">AI Tool</span>
+          <span class="calc-label">AIツール</span>
           <select class="calc-input" id="calc-tool" onchange="calcCost()" style="width:160px;">
             <option value="kling">Kling 2.0</option>
             <option value="seedance">Seedance 1.0</option>
@@ -773,31 +773,31 @@ textarea { resize: vertical; }
           </select>
         </div>
         <div class="calc-row">
-          <span class="calc-label">Videos / Month</span>
+          <span class="calc-label">動画本数/月</span>
           <input type="number" class="calc-input" id="calc-videos" value="8" min="1" max="200" oninput="calcCost()">
         </div>
         <div class="calc-row">
-          <span class="calc-label">Editing Time (h)</span>
+          <span class="calc-label">編集時間（時間）</span>
           <input type="number" class="calc-input" id="calc-hours" value="1.5" step="0.5" min="0" oninput="calcCost()">
         </div>
         <div class="calc-row">
-          <span class="calc-label">Editor Rate ($/h)</span>
+          <span class="calc-label">編集単価（$/時）</span>
           <input type="number" class="calc-input" id="calc-rate" value="12" min="0" oninput="calcCost()">
         </div>
         <div class="calc-row">
-          <span class="calc-label">Fixed Costs / Mo</span>
+          <span class="calc-label">固定費/月</span>
           <input type="number" class="calc-input" id="calc-fixed" value="420" min="0" oninput="calcCost()">
         </div>
         <div class="calc-row">
-          <span class="calc-label">Client Revenue</span>
+          <span class="calc-label">クライアント売上</span>
           <input type="number" class="calc-input" id="calc-revenue" value="1800" min="0" oninput="calcCost()">
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Cost Breakdown</div>
+        <div class="card-title">コスト内訳</div>
         <div class="calc-result" id="calc-result"></div>
         <div class="margin-warning" id="margin-warning">
-          ⚠️ Profit margin below 40% — consider raising price or reducing video count
+          ⚠️ 利益率が40%を下回っています — 価格引き上げまたは動画本数の削減を検討してください
         </div>
         <div class="chart-wrap-sm mt-16"><canvas id="calcChart"></canvas></div>
       </div>
@@ -808,44 +808,44 @@ textarea { resize: vertical; }
   <section class="section" id="s-quote">
     <div class="section-header">
       <div>
-        <div class="section-title">Quote Generator</div>
-        <div class="section-sub">Build client proposals with Vidcel pricing</div>
+        <div class="section-title">見積もり生成</div>
+        <div class="section-sub">Vidcel価格表を使ったクライアント提案書の作成</div>
       </div>
-      <button class="btn btn-primary btn-sm" onclick="printQuote()">🖨 Print / PDF</button>
+      <button class="btn btn-primary btn-sm" onclick="printQuote()">🖨 印刷 / PDF</button>
     </div>
     <div class="grid grid-2" style="gap:16px;">
       <div class="card">
-        <div class="card-title">Quote Builder</div>
+        <div class="card-title">見積もりビルダー</div>
         <div class="copy-form">
-          <div><label>Client Name</label><input type="text" id="q-client" placeholder="Acme Store" oninput="buildQuote()"></div>
-          <div><label>Niche / Product</label><input type="text" id="q-niche" placeholder="Health supplements" oninput="buildQuote()"></div>
+          <div><label>クライアント名</label><input type="text" id="q-client" placeholder="株式会社サンプル" oninput="buildQuote()"></div>
+          <div><label>ニッチ / 商品</label><input type="text" id="q-niche" placeholder="健康サプリメント" oninput="buildQuote()"></div>
           <div>
-            <label>Base Plan</label>
+            <label>ベースプラン</label>
             <select id="q-plan" onchange="buildQuote()">
-              <option value="starter">Starter — 4 videos / $900</option>
-              <option value="standard" selected>Standard — 8 videos / $1,800</option>
-              <option value="pro">Pro — 16 videos / $2,800</option>
-              <option value="custom">Custom</option>
+              <option value="starter">スターター — 4本 / $900</option>
+              <option value="standard" selected>スタンダード — 8本 / $1,800</option>
+              <option value="pro">プロ — 16本 / $2,800</option>
+              <option value="custom">カスタム</option>
             </select>
           </div>
-          <div><label>Add-ons</label>
+          <div><label>オプション</label>
             <label style="display:flex;align-items:center;gap:6px;margin-top:4px;font-size:13px;font-weight:400;color:var(--text);">
-              <input type="checkbox" id="q-rush" onchange="buildQuote()"> Rush delivery (+$300)
+              <input type="checkbox" id="q-rush" onchange="buildQuote()"> 特急納品（+$300）
             </label>
             <label style="display:flex;align-items:center;gap:6px;margin-top:4px;font-size:13px;font-weight:400;color:var(--text);">
-              <input type="checkbox" id="q-extra" onchange="buildQuote()"> Extra revision pack (+$200)
+              <input type="checkbox" id="q-extra" onchange="buildQuote()"> 追加修正パック（+$200）
             </label>
             <label style="display:flex;align-items:center;gap:6px;margin-top:4px;font-size:13px;font-weight:400;color:var(--text);">
-              <input type="checkbox" id="q-strategy" onchange="buildQuote()"> Strategy call (+$150)
+              <input type="checkbox" id="q-strategy" onchange="buildQuote()"> 戦略MTG（+$150）
             </label>
           </div>
-          <div><label>Notes</label><textarea id="q-notes" rows="3" placeholder="Special requirements..." oninput="buildQuote()"></textarea></div>
+          <div><label>備考</label><textarea id="q-notes" rows="3" placeholder="特記事項..." oninput="buildQuote()"></textarea></div>
         </div>
       </div>
       <div class="card" id="quote-preview">
-        <div class="card-title">Quote Preview</div>
+        <div class="card-title">見積もりプレビュー</div>
         <div id="quote-output">
-          <p class="text-muted">Fill in the fields to generate a quote →</p>
+          <p class="text-muted">左のフォームを入力すると見積もりが生成されます →</p>
         </div>
       </div>
     </div>
@@ -855,29 +855,29 @@ textarea { resize: vertical; }
   <section class="section" id="s-copy">
     <div class="section-header">
       <div>
-        <div class="section-title">Copy Generator</div>
-        <div class="section-sub">AI-powered DM, cold email & LP copy via Claude API</div>
+        <div class="section-title">コピー生成</div>
+        <div class="section-sub">Claude APIによるDM・コールドメール・LP文章の自動生成</div>
       </div>
     </div>
     <div class="copy-tabs">
-      <button class="copy-tab active" onclick="switchCopyTab('dm',this)">📩 DM Script</button>
-      <button class="copy-tab" onclick="switchCopyTab('cold',this)">📧 Cold Email</button>
-      <button class="copy-tab" onclick="switchCopyTab('lp',this)">🖥 Landing Page</button>
+      <button class="copy-tab active" onclick="switchCopyTab('dm',this)">📩 DMスクリプト</button>
+      <button class="copy-tab" onclick="switchCopyTab('cold',this)">📧 コールドメール</button>
+      <button class="copy-tab" onclick="switchCopyTab('lp',this)">🖥 ランディングページ</button>
     </div>
     <div class="grid grid-2" style="gap:16px;">
       <div class="card">
-        <div class="card-title">Inputs</div>
+        <div class="card-title">入力項目</div>
         <div class="copy-form" id="copy-form">
           <!-- Dynamic form per tab -->
         </div>
-        <button class="btn btn-primary mt-16" style="width:100%;" onclick="generateCopy()">✨ Generate with Claude</button>
+        <button class="btn btn-primary mt-16" style="width:100%;" onclick="generateCopy()">✨ Claudeで生成する</button>
       </div>
       <div class="card">
         <div class="card-title flex-between">
-          <span>Output</span>
-          <button class="btn btn-ghost btn-sm" onclick="copyCopyOutput()">Copy</button>
+          <span>出力結果</span>
+          <button class="btn btn-ghost btn-sm" onclick="copyCopyOutput()">コピー</button>
         </div>
-        <div class="copy-output" id="copy-output">Output will appear here...</div>
+        <div class="copy-output" id="copy-output">ここに出力されます...</div>
       </div>
     </div>
   </section>
@@ -886,10 +886,10 @@ textarea { resize: vertical; }
   <section class="section" id="s-leads">
     <div class="section-header">
       <div>
-        <div class="section-title">Leads</div>
-        <div class="section-sub">Regional pipeline by phase</div>
+        <div class="section-title">リード管理</div>
+        <div class="section-sub">フェーズ別・地域別パイプライン</div>
       </div>
-      <button class="btn btn-primary btn-sm" onclick="addLead()">+ Add Lead</button>
+      <button class="btn btn-primary btn-sm" onclick="addLead()">＋ リード追加</button>
     </div>
     <div class="grid grid-4 mb-16" id="leads-stats"></div>
     <div class="leads-phases" id="leads-phases"></div>
@@ -899,17 +899,17 @@ textarea { resize: vertical; }
   <section class="section" id="s-compete">
     <div class="section-header">
       <div>
-        <div class="section-title">Competitive Intel</div>
-        <div class="section-sub">Market positioning & radar analysis</div>
+        <div class="section-title">競合分析</div>
+        <div class="section-sub">市場ポジショニング・レーダーチャート</div>
       </div>
     </div>
     <div class="grid grid-2" style="gap:16px; margin-bottom:16px;">
       <div class="card">
-        <div class="card-title">Competitive Radar</div>
+        <div class="card-title">競合レーダーチャート</div>
         <div class="radar-wrap"><canvas id="radarChart"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-title">Positioning Matrix</div>
+        <div class="card-title">ポジショニングマトリクス</div>
         <div id="positioning-matrix" style="padding:8px 0;"></div>
       </div>
     </div>
@@ -920,8 +920,8 @@ textarea { resize: vertical; }
   <section class="section" id="s-domain">
     <div class="section-header">
       <div>
-        <div class="section-title">Domain Health</div>
-        <div class="section-sub">Warmup progress & deliverability signals</div>
+        <div class="section-title">ドメインヘルス</div>
+        <div class="section-sub">ウォームアップ進捗・到達率シグナル</div>
       </div>
     </div>
     <div id="domain-list"></div>
@@ -931,18 +931,18 @@ textarea { resize: vertical; }
   <section class="section" id="s-analytics">
     <div class="section-header">
       <div>
-        <div class="section-title">Email Analytics</div>
-        <div class="section-sub">Instantly.ai performance metrics</div>
+        <div class="section-title">メールアナリティクス</div>
+        <div class="section-sub">Instantly.ai パフォーマンス指標</div>
       </div>
     </div>
     <div class="grid grid-4 mb-16" id="analytics-stats"></div>
     <div class="grid grid-2" style="gap:16px; margin-bottom:16px;">
       <div class="card">
-        <div class="card-title">Weekly Send Volume</div>
+        <div class="card-title">週次送信数</div>
         <div class="chart-wrap"><canvas id="analyticsBar"></canvas></div>
       </div>
       <div class="card">
-        <div class="card-title">Top Sequences</div>
+        <div class="card-title">トップシーケンス</div>
         <div id="top-sequences"></div>
       </div>
     </div>
@@ -952,20 +952,20 @@ textarea { resize: vertical; }
   <section class="section" id="s-trends">
     <div class="section-header">
       <div>
-        <div class="section-title">Market Trends</div>
-        <div class="section-sub">Shopify trending categories — updated weekly</div>
+        <div class="section-title">市場トレンド</div>
+        <div class="section-sub">Shopifyトレンドカテゴリー — 毎週更新</div>
       </div>
     </div>
     <div class="card mb-16">
-      <div class="card-title">Category Growth Chart</div>
+      <div class="card-title">カテゴリー成長チャート</div>
       <div class="chart-wrap"><canvas id="trendsChart"></canvas></div>
     </div>
     <div class="card">
-      <div class="card-title">Trending Categories</div>
+      <div class="card-title">トレンドカテゴリー一覧</div>
       <div class="table-wrap">
         <table id="trends-table">
           <thead><tr>
-            <th>Category</th><th>Trend</th><th>Growth %</th><th>Competition</th><th>Video Potential</th><th>Notes</th>
+            <th>カテゴリー</th><th>トレンド</th><th>成長率</th><th>競合度</th><th>動画ポテンシャル</th><th>メモ</th>
           </tr></thead>
           <tbody id="trends-tbody"></tbody>
         </table>
@@ -977,42 +977,42 @@ textarea { resize: vertical; }
   <section class="section" id="s-settings">
     <div class="section-header">
       <div>
-        <div class="section-title">Settings</div>
-        <div class="section-sub">API keys, GitHub sync, pricing config</div>
+        <div class="section-title">設定</div>
+        <div class="section-sub">APIキー・GitHub同期・料金設定</div>
       </div>
-      <button class="btn btn-primary btn-sm" onclick="saveSettings()">💾 Save Settings</button>
+      <button class="btn btn-primary btn-sm" onclick="saveSettings()">💾 設定を保存</button>
     </div>
     <div class="grid grid-2" style="gap:16px;">
       <div>
         <div class="card settings-section" style="margin-bottom:16px;">
-          <div class="settings-section"><h3>🔑 API Keys</h3>
+          <div class="settings-section"><h3>🔑 APIキー</h3>
             <div class="settings-row">
-              <label>GitHub Token</label>
+              <label>GitHubトークン</label>
               <input type="password" class="settings-input" id="s-github-token" placeholder="ghp_...">
             </div>
             <div class="settings-row">
-              <label>GitHub Repo</label>
+              <label>GitHubリポジトリ</label>
               <input type="text" class="settings-input" id="s-github-repo" placeholder="username/vidcel-dashboard">
             </div>
             <div class="settings-row">
-              <label>Claude API Key</label>
+              <label>Claude APIキー</label>
               <input type="password" class="settings-input" id="s-claude-key" placeholder="sk-ant-...">
             </div>
           </div>
         </div>
         <div class="card">
-          <div class="settings-section"><h3>⚙️ General</h3>
+          <div class="settings-section"><h3>⚙️ 一般設定</h3>
             <div class="settings-row">
-              <label>Timezone</label>
+              <label>タイムゾーン</label>
               <select class="settings-input" id="s-timezone">
-                <option value="Asia/Tokyo">Asia/Tokyo (JST)</option>
+                <option value="Asia/Tokyo">Asia/Tokyo（JST）</option>
                 <option value="America/New_York">America/New_York</option>
                 <option value="America/Los_Angeles">America/Los_Angeles</option>
                 <option value="Europe/London">Europe/London</option>
               </select>
             </div>
             <div class="settings-row">
-              <label>Currency</label>
+              <label>通貨</label>
               <select class="settings-input" id="s-currency">
                 <option value="USD">USD $</option>
                 <option value="JPY">JPY ¥</option>
@@ -1024,29 +1024,29 @@ textarea { resize: vertical; }
       </div>
       <div>
         <div class="card mb-16">
-          <div class="settings-section"><h3>💴 Vidcel Pricing</h3>
+          <div class="settings-section"><h3>💴 Vidcel 料金設定</h3>
             <div id="pricing-config"></div>
           </div>
         </div>
         <div class="card">
-          <div class="settings-section"><h3>🤖 GitHub Actions Status</h3>
+          <div class="settings-section"><h3>🤖 GitHub Actions ステータス</h3>
             <div id="actions-status">
               <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);">
-                <span class="fs-12">daily.yml (7am JST)</span>
-                <span class="badge badge-green">Active</span>
+                <span class="fs-12">daily.yml（毎朝7時 JST）</span>
+                <span class="badge badge-green">稼働中</span>
               </div>
               <div class="flex-between" style="padding:8px 0; border-bottom:1px solid var(--border);">
-                <span class="fs-12">weekly.yml (Mon 8am JST)</span>
-                <span class="badge badge-green">Active</span>
+                <span class="fs-12">weekly.yml（月曜 8時 JST）</span>
+                <span class="badge badge-green">稼働中</span>
               </div>
               <div class="flex-between" style="padding:8px 0;">
-                <span class="fs-12">self_check.yml (hourly)</span>
-                <span class="badge badge-green">Active</span>
+                <span class="fs-12">self_check.yml（毎時）</span>
+                <span class="badge badge-green">稼働中</span>
               </div>
             </div>
             <div class="mt-16">
-              <button class="btn btn-ghost btn-sm" onclick="triggerWorkflow('daily')">▶ Run Daily Now</button>
-              <button class="btn btn-ghost btn-sm" style="margin-left:6px;" onclick="triggerWorkflow('weekly')">▶ Run Weekly Now</button>
+              <button class="btn btn-ghost btn-sm" onclick="triggerWorkflow('daily')">▶ デイリー今すぐ実行</button>
+              <button class="btn btn-ghost btn-sm" style="margin-left:6px;" onclick="triggerWorkflow('weekly')">▶ ウィークリー今すぐ実行</button>
             </div>
           </div>
         </div>
@@ -1058,19 +1058,19 @@ textarea { resize: vertical; }
 <!-- ─── MOBILE BOTTOM NAV ─── -->
 <nav class="mobile-nav">
   <div class="mobile-nav-inner">
-    <div class="mobile-nav-item active" onclick="nav('brief',this)"><span class="icon">📰</span>Brief</div>
-    <div class="mobile-nav-item" onclick="nav('clients',this)"><span class="icon">👥</span>Clients</div>
-    <div class="mobile-nav-item" onclick="nav('pipeline',this)"><span class="icon">🎬</span>Pipeline</div>
-    <div class="mobile-nav-item" onclick="nav('finance',this)"><span class="icon">💰</span>Finance</div>
-    <div class="mobile-nav-item" onclick="nav('costcalc',this)"><span class="icon">🧮</span>Calc</div>
-    <div class="mobile-nav-item" onclick="nav('quote',this)"><span class="icon">📄</span>Quote</div>
-    <div class="mobile-nav-item" onclick="nav('copy',this)"><span class="icon">✍️</span>Copy</div>
-    <div class="mobile-nav-item" onclick="nav('leads',this)"><span class="icon">🎯</span>Leads</div>
-    <div class="mobile-nav-item" onclick="nav('compete',this)"><span class="icon">⚔️</span>Compete</div>
-    <div class="mobile-nav-item" onclick="nav('domain',this)"><span class="icon">🌐</span>Domain</div>
-    <div class="mobile-nav-item" onclick="nav('analytics',this)"><span class="icon">📊</span>Stats</div>
-    <div class="mobile-nav-item" onclick="nav('trends',this)"><span class="icon">📈</span>Trends</div>
-    <div class="mobile-nav-item" onclick="nav('settings',this)"><span class="icon">⚙️</span>Settings</div>
+    <div class="mobile-nav-item active" onclick="nav('brief',this)"><span class="icon">📰</span>ブリーフ</div>
+    <div class="mobile-nav-item" onclick="nav('clients',this)"><span class="icon">👥</span>クライアント</div>
+    <div class="mobile-nav-item" onclick="nav('pipeline',this)"><span class="icon">🎬</span>パイプライン</div>
+    <div class="mobile-nav-item" onclick="nav('finance',this)"><span class="icon">💰</span>財務</div>
+    <div class="mobile-nav-item" onclick="nav('costcalc',this)"><span class="icon">🧮</span>計算</div>
+    <div class="mobile-nav-item" onclick="nav('quote',this)"><span class="icon">📄</span>見積</div>
+    <div class="mobile-nav-item" onclick="nav('copy',this)"><span class="icon">✍️</span>コピー</div>
+    <div class="mobile-nav-item" onclick="nav('leads',this)"><span class="icon">🎯</span>リード</div>
+    <div class="mobile-nav-item" onclick="nav('compete',this)"><span class="icon">⚔️</span>競合</div>
+    <div class="mobile-nav-item" onclick="nav('domain',this)"><span class="icon">🌐</span>ドメイン</div>
+    <div class="mobile-nav-item" onclick="nav('analytics',this)"><span class="icon">📊</span>統計</div>
+    <div class="mobile-nav-item" onclick="nav('trends',this)"><span class="icon">📈</span>トレンド</div>
+    <div class="mobile-nav-item" onclick="nav('settings',this)"><span class="icon">⚙️</span>設定</div>
   </div>
 </nav>
 
@@ -1087,11 +1087,11 @@ let copyActiveTab = 'dm';
 let kanbanTimer = null;
 
 const SECTION_TITLES = {
-  brief: 'Daily Brief', clients: 'Clients', pipeline: 'Pipeline',
-  finance: 'Finance', costcalc: 'Cost Calculator', quote: 'Quote Generator',
-  copy: 'Copy Generator', leads: 'Leads', compete: 'Competitive Intel',
-  domain: 'Domain Health', analytics: 'Email Analytics', trends: 'Market Trends',
-  settings: 'Settings'
+  brief: 'デイリーブリーフ', clients: 'クライアント', pipeline: 'パイプライン',
+  finance: 'ファイナンス', costcalc: 'コスト計算機', quote: '見積もり生成',
+  copy: 'コピー生成', leads: 'リード管理', compete: '競合分析',
+  domain: 'ドメインヘルス', analytics: 'メールアナリティクス', trends: '市場トレンド',
+  settings: '設定'
 };
 
 // ─────────────────────────────────────────────
@@ -1173,16 +1173,16 @@ function renderAll() {
 function setDate() {
   const now = new Date();
   const opts = { weekday:'long', year:'numeric', month:'long', day:'numeric', timeZone: SETTINGS.timezone || 'Asia/Tokyo' };
-  document.getElementById('today-date').textContent = now.toLocaleDateString('en-US', opts);
+  document.getElementById('today-date').textContent = now.toLocaleDateString('ja-JP', opts);
 }
 
 function updateLastUpdated() {
   const el = document.getElementById('last-updated');
   if (DATA.news && DATA.news.last_updated) {
     const d = new Date(DATA.news.last_updated);
-    el.textContent = 'Updated ' + d.toLocaleString('en-US', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
+    el.textContent = '更新: ' + d.toLocaleString('ja-JP', {month:'short', day:'numeric', hour:'2-digit', minute:'2-digit'});
   } else {
-    el.textContent = 'Local data';
+    el.textContent = 'ローカルデータ';
   }
 }
 
@@ -1201,7 +1201,7 @@ function countdown(dueStr) {
   const now = new Date();
   const due = new Date(dueStr);
   const diff = due - now;
-  if (diff < 0) return { label: 'OVERDUE', cls: 'urgent' };
+  if (diff < 0) return { label: '期限超過', cls: 'urgent' };
   const h = Math.floor(diff / 3600000);
   const m = Math.floor((diff % 3600000) / 60000);
   if (h < 12) return { label: h + 'h ' + m + 'm', cls: 'urgent' };
@@ -1236,7 +1236,7 @@ function renderBrief() {
     </div>
   `).join('');
   const upd = document.getElementById('brief-updated');
-  if (news.last_updated) upd.textContent = 'Last updated: ' + new Date(news.last_updated).toLocaleString();
+  if (news.last_updated) upd.textContent = '最終更新: ' + new Date(news.last_updated).toLocaleString('ja-JP');
 }
 
 // ─────────────────────────────────────────────
@@ -1251,16 +1251,16 @@ function renderClients() {
   const atRisk = clients.filter(c => c.status === 'at_risk').length;
   const avgSat = (clients.reduce((s, c) => s + c.satisfaction, 0) / clients.length).toFixed(1);
   document.getElementById('client-stats').innerHTML = `
-    <div class="stat-card"><div class="stat-label">Total Clients</div><div class="stat-value text-teal">${clients.length}</div><div class="stat-change up">↑ 2 this month</div></div>
-    <div class="stat-card"><div class="stat-label">Monthly Revenue</div><div class="stat-value">$${totalRevenue.toLocaleString()}</div><div class="stat-change up">↑ $900 MoM</div></div>
-    <div class="stat-card"><div class="stat-label">Active</div><div class="stat-value text-green">${active}</div><div class="stat-change">of ${clients.length} total</div></div>
-    <div class="stat-card"><div class="stat-label">Avg Satisfaction</div><div class="stat-value">${avgSat}<span style="font-size:14px;color:var(--text-dim)">/10</span></div><div class="stat-change ${atRisk > 0 ? 'down' : 'up'}">${atRisk > 0 ? atRisk + ' at risk' : 'All healthy'}</div></div>
+    <div class="stat-card"><div class="stat-label">総クライアント数</div><div class="stat-value text-teal">${clients.length}</div><div class="stat-change up">↑ 今月2件増加</div></div>
+    <div class="stat-card"><div class="stat-label">月間売上</div><div class="stat-value">$${totalRevenue.toLocaleString()}</div><div class="stat-change up">↑ $900 前月比</div></div>
+    <div class="stat-card"><div class="stat-label">アクティブ</div><div class="stat-value text-green">${active}</div><div class="stat-change">全${clients.length}件中</div></div>
+    <div class="stat-card"><div class="stat-label">平均満足度</div><div class="stat-value">${avgSat}<span style="font-size:14px;color:var(--text-dim)">/10</span></div><div class="stat-change ${atRisk > 0 ? 'down' : 'up'}">${atRisk > 0 ? atRisk + '件リスクあり' : 'すべて良好'}</div></div>
   `;
   const statusMap = {
-    active: '<span class="badge badge-green">Active</span>',
-    revision: '<span class="badge badge-yellow">Revision</span>',
-    at_risk: '<span class="badge badge-red">At Risk</span>',
-    paused: '<span class="badge badge-blue">Paused</span>'
+    active: '<span class="badge badge-green">稼働中</span>',
+    revision: '<span class="badge badge-yellow">修正中</span>',
+    at_risk: '<span class="badge badge-red">要注意</span>',
+    paused: '<span class="badge badge-blue">一時停止</span>'
   };
   document.getElementById('client-tbody').innerHTML = clients.map(c => `
     <tr>
@@ -1316,7 +1316,7 @@ function renderClientCharts() {
     data: {
       labels: months,
       datasets: [{
-        label: 'Revenue',
+        label: '売上',
         data: fin.monthly_history.map(m => m.revenue),
         borderColor: '#0ABFB8',
         backgroundColor: 'rgba(10,191,184,0.1)',
@@ -1338,11 +1338,11 @@ function renderClientCharts() {
 // 3. PIPELINE
 // ─────────────────────────────────────────────
 const COLS = [
-  { id:'waiting', label:'Waiting', color:'var(--text-muted)' },
-  { id:'generating', label:'Generating', color:'var(--blue)' },
-  { id:'review', label:'Review', color:'var(--yellow)' },
-  { id:'revision', label:'Revision', color:'var(--orange)' },
-  { id:'delivered', label:'Delivered', color:'var(--green)' }
+  { id:'waiting', label:'待機中', color:'var(--text-muted)' },
+  { id:'generating', label:'生成中', color:'var(--blue)' },
+  { id:'review', label:'レビュー', color:'var(--yellow)' },
+  { id:'revision', label:'修正中', color:'var(--orange)' },
+  { id:'delivered', label:'納品済み', color:'var(--green)' }
 ];
 
 function renderPipeline() {
@@ -1361,6 +1361,7 @@ function renderPipeline() {
         <div class="kanban-body">
           ${colTasks.map(task => {
             const cd = countdown(task.due);
+            const priorityLabel = task.priority === 'high' ? '高' : task.priority === 'medium' ? '中' : '低';
             const pBadge = task.priority === 'high' ? 'badge-red' : task.priority === 'medium' ? 'badge-yellow' : 'badge-blue';
             return `
               <div class="kanban-card">
@@ -1368,7 +1369,7 @@ function renderPipeline() {
                 <div class="kanban-card-client">${task.client}</div>
                 <div style="display:flex;justify-content:space-between;align-items:center;">
                   <div class="kanban-timer ${cd.cls}">⏱ ${cd.label}</div>
-                  <span class="badge ${pBadge}" style="font-size:9px;">${task.priority}</span>
+                  <span class="badge ${pBadge}" style="font-size:9px;">${priorityLabel}</span>
                 </div>
                 ${task.notes ? `<div class="fs-11 text-muted" style="margin-top:4px;">${task.notes}</div>` : ''}
               </div>
@@ -1397,40 +1398,40 @@ function renderFinance() {
   if (!d) return;
   const s = d.summary;
   document.getElementById('finance-stats').innerHTML = `
-    <div class="stat-card"><div class="stat-label">Revenue (MTD)</div><div class="stat-value text-teal">$${s.revenue.toLocaleString()}</div><div class="stat-change up">↑ 9.2% MoM</div></div>
-    <div class="stat-card"><div class="stat-label">Cost (MTD)</div><div class="stat-value text-red">$${s.cost.toLocaleString()}</div><div class="stat-change">AI tools + ops</div></div>
-    <div class="stat-card"><div class="stat-label">Net Profit</div><div class="stat-value text-green">$${s.profit.toLocaleString()}</div><div class="stat-change up">Margin: ${s.profit_margin}%</div></div>
+    <div class="stat-card"><div class="stat-label">売上（月次累計）</div><div class="stat-value text-teal">$${s.revenue.toLocaleString()}</div><div class="stat-change up">↑ 9.2% 前月比</div></div>
+    <div class="stat-card"><div class="stat-label">コスト（月次累計）</div><div class="stat-value text-red">$${s.cost.toLocaleString()}</div><div class="stat-change">AIツール + 運営費</div></div>
+    <div class="stat-card"><div class="stat-label">純利益</div><div class="stat-value text-green">$${s.profit.toLocaleString()}</div><div class="stat-change up">利益率: ${s.profit_margin}%</div></div>
   `;
   const bep = d.bep;
   const bepPct = Math.min(100, (bep.current_videos / bep.bep_videos) * 100);
   document.getElementById('bep-content').innerHTML = `
     <div class="flex-between mb-16" style="gap:24px;">
       <div class="text-center">
-        <div class="fs-11 text-muted" style="margin-bottom:4px;">Fixed Costs / Mo</div>
+        <div class="fs-11 text-muted" style="margin-bottom:4px;">固定費/月</div>
         <div style="font-size:22px;font-weight:700;">$${bep.monthly_fixed_costs.toLocaleString()}</div>
       </div>
       <div class="text-center">
-        <div class="fs-11 text-muted" style="margin-bottom:4px;">BEP Videos</div>
+        <div class="fs-11 text-muted" style="margin-bottom:4px;">BEP本数</div>
         <div style="font-size:22px;font-weight:700;color:var(--yellow);">${bep.bep_videos}</div>
       </div>
       <div class="text-center">
-        <div class="fs-11 text-muted" style="margin-bottom:4px;">Current Videos</div>
+        <div class="fs-11 text-muted" style="margin-bottom:4px;">現在の本数</div>
         <div style="font-size:22px;font-weight:700;color:var(--green);">${bep.current_videos}</div>
       </div>
       <div class="text-center">
-        <div class="fs-11 text-muted" style="margin-bottom:4px;">Coverage</div>
+        <div class="fs-11 text-muted" style="margin-bottom:4px;">カバレッジ</div>
         <div style="font-size:22px;font-weight:700;color:var(--teal);">${(bep.current_videos / bep.bep_videos).toFixed(1)}x</div>
       </div>
     </div>
-    <div style="font-size:12px;color:var(--text-dim);margin-bottom:6px;">BEP Progress (${bep.current_videos} / ${bep.bep_videos} videos)</div>
+    <div style="font-size:12px;color:var(--text-dim);margin-bottom:6px;">BEP進捗 (${bep.current_videos} / ${bep.bep_videos} 本)</div>
     <div class="progress-bar" style="height:12px;">
       <div class="progress-fill green" style="width:${bepPct}%"></div>
     </div>
   `;
   const statusMap = {
-    paid: '<span class="badge badge-green">Paid</span>',
-    pending: '<span class="badge badge-yellow">Pending</span>',
-    overdue: '<span class="badge badge-red">Overdue</span>'
+    paid: '<span class="badge badge-green">支払済</span>',
+    pending: '<span class="badge badge-yellow">未払い</span>',
+    overdue: '<span class="badge badge-red">支払超過</span>'
   };
   document.getElementById('invoice-tbody').innerHTML = d.invoices.map(inv => `
     <tr>
@@ -1455,8 +1456,8 @@ function renderFinanceCharts() {
     data: {
       labels,
       datasets: [
-        { label:'Revenue', data: d.monthly_history.map(m=>m.revenue), borderColor:'#0ABFB8', backgroundColor:'rgba(10,191,184,0.08)', fill:true, tension:0.4, pointRadius:4 },
-        { label:'Profit', data: d.monthly_history.map(m=>m.profit), borderColor:'#22C55E', backgroundColor:'rgba(34,197,94,0.05)', fill:true, tension:0.4, pointRadius:4 }
+        { label:'売上', data: d.monthly_history.map(m=>m.revenue), borderColor:'#0ABFB8', backgroundColor:'rgba(10,191,184,0.08)', fill:true, tension:0.4, pointRadius:4 },
+        { label:'利益', data: d.monthly_history.map(m=>m.profit), borderColor:'#22C55E', backgroundColor:'rgba(34,197,94,0.05)', fill:true, tension:0.4, pointRadius:4 }
       ]
     },
     options: {
@@ -1471,7 +1472,7 @@ function renderFinanceCharts() {
   charts['financeDonut'] = new Chart(ctx2, {
     type: 'doughnut',
     data: {
-      labels: ['AI Tools','Freelancers','Software','Marketing','Misc'],
+      labels: ['AIツール','外注','ソフトウェア','マーケ','その他'],
       datasets: [{ data: Object.values(cb), backgroundColor:['#0ABFB8','#3B82F6','#A855F7','#F59E0B','#EF4444'], borderWidth:0 }]
     },
     options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{position:'right',labels:{color:'#8892A4',font:{size:11}}} }, cutout:'65%' }
@@ -1498,13 +1499,13 @@ function calcCost() {
   const margin = revenue > 0 ? (profit / revenue * 100).toFixed(1) : 0;
 
   document.getElementById('calc-result').innerHTML = `
-    <div class="calc-result-row"><span>AI Tool Cost</span><span class="text-red">$${aiCost.toFixed(2)}</span></div>
-    <div class="calc-result-row"><span>Editing Cost</span><span class="text-red">$${editCost.toFixed(2)}</span></div>
-    <div class="calc-result-row"><span>Fixed Costs</span><span class="text-red">$${fixed.toFixed(2)}</span></div>
-    <div class="calc-result-row"><span style="font-weight:600;">Total Cost</span><span class="fw-700 text-red">$${totalCost.toFixed(2)}</span></div>
-    <div class="calc-result-row"><span style="font-weight:600;">Revenue</span><span class="fw-700 text-teal">$${revenue.toFixed(2)}</span></div>
-    <div class="calc-result-row"><span style="font-weight:700;">Net Profit</span><span class="fw-700" style="color:${profit>=0?'var(--green)':'var(--red)'}">$${profit.toFixed(2)}</span></div>
-    <div class="calc-result-row"><span style="font-weight:700;">Margin</span><span class="fw-700" style="color:${margin>=40?'var(--green)':margin>=20?'var(--yellow)':'var(--red)'}">${margin}%</span></div>
+    <div class="calc-result-row"><span>AIツールコスト</span><span class="text-red">$${aiCost.toFixed(2)}</span></div>
+    <div class="calc-result-row"><span>編集コスト</span><span class="text-red">$${editCost.toFixed(2)}</span></div>
+    <div class="calc-result-row"><span>固定費</span><span class="text-red">$${fixed.toFixed(2)}</span></div>
+    <div class="calc-result-row"><span style="font-weight:600;">総コスト</span><span class="fw-700 text-red">$${totalCost.toFixed(2)}</span></div>
+    <div class="calc-result-row"><span style="font-weight:600;">売上</span><span class="fw-700 text-teal">$${revenue.toFixed(2)}</span></div>
+    <div class="calc-result-row"><span style="font-weight:700;">純利益</span><span class="fw-700" style="color:${profit>=0?'var(--green)':'var(--red)'}">$${profit.toFixed(2)}</span></div>
+    <div class="calc-result-row"><span style="font-weight:700;">利益率</span><span class="fw-700" style="color:${margin>=40?'var(--green)':margin>=20?'var(--yellow)':'var(--red)'}">${margin}%</span></div>
   `;
   const warn = document.getElementById('margin-warning');
   warn.classList.toggle('show', parseFloat(margin) < 40 && revenue > 0);
@@ -1514,7 +1515,7 @@ function calcCost() {
   charts['calcChart'] = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['AI Tool', 'Editing', 'Fixed', 'Profit'],
+      labels: ['AIツール', '編集', '固定費', '利益'],
       datasets: [{
         data: [aiCost, editCost, fixed, Math.max(0, profit)],
         backgroundColor: ['#EF4444','#F97316','#F59E0B','#22C55E'],
@@ -1556,29 +1557,29 @@ function buildQuote() {
   document.getElementById('quote-output').innerHTML = `
     <div style="border-bottom:2px solid var(--teal);padding-bottom:12px;margin-bottom:16px;">
       <div style="font-size:20px;font-weight:700;color:var(--teal);">Vidcel</div>
-      <div style="font-size:11px;color:var(--text-muted);">AI-Powered Video Production</div>
+      <div style="font-size:11px;color:var(--text-muted);">AIを活用した動画制作サービス</div>
     </div>
     <div style="margin-bottom:16px;">
       <div class="fw-700" style="font-size:15px;">${client}</div>
       ${niche ? `<div class="fs-12 text-dim">${niche}</div>` : ''}
-      <div class="fs-12 text-muted">Proposal date: ${new Date().toLocaleDateString()}</div>
+      <div class="fs-12 text-muted">提案日: ${new Date().toLocaleDateString('ja-JP')}</div>
     </div>
     <table class="quote-table" style="margin-bottom:16px;">
       <tr style="border-bottom:1px solid var(--border);">
-        <td><strong>${planKey.charAt(0).toUpperCase()+planKey.slice(1)} Plan</strong><br><span class="fs-11 text-dim">${plan.videos} videos/mo · ${plan.revisions} revision${plan.revisions!==1?'s':''} · 30-day cycle</span></td>
+        <td><strong>${planKey.charAt(0).toUpperCase()+planKey.slice(1)}プラン</strong><br><span class="fs-11 text-dim">${plan.videos}本/月 · 修正${plan.revisions}回 · 30日サイクル</span></td>
         <td style="text-align:right;font-weight:700;">$${plan.price.toLocaleString()}</td>
       </tr>
-      ${rush?`<tr style="border-bottom:1px solid var(--border);"><td>Rush Delivery (48h turnaround)<br><span class="fs-11 text-dim">Priority queue + faster delivery</span></td><td style="text-align:right;font-weight:600;">$300</td></tr>`:''}
-      ${extra?`<tr style="border-bottom:1px solid var(--border);"><td>Extra Revision Pack<br><span class="fs-11 text-dim">+2 additional revision rounds</span></td><td style="text-align:right;font-weight:600;">$200</td></tr>`:''}
-      ${strategy?`<tr style="border-bottom:1px solid var(--border);"><td>Strategy Call (1h)<br><span class="fs-11 text-dim">Video content strategy session</span></td><td style="text-align:right;font-weight:600;">$150</td></tr>`:''}
+      ${rush?`<tr style="border-bottom:1px solid var(--border);"><td>特急納品（48時間）<br><span class="fs-11 text-dim">優先キュー + 早期納品</span></td><td style="text-align:right;font-weight:600;">$300</td></tr>`:''}
+      ${extra?`<tr style="border-bottom:1px solid var(--border);"><td>追加修正パック<br><span class="fs-11 text-dim">修正ラウンド+2回</span></td><td style="text-align:right;font-weight:600;">$200</td></tr>`:''}
+      ${strategy?`<tr style="border-bottom:1px solid var(--border);"><td>戦略MTG（1時間）<br><span class="fs-11 text-dim">動画コンテンツ戦略セッション</span></td><td style="text-align:right;font-weight:600;">$150</td></tr>`:''}
       <tr>
-        <td><strong>Monthly Total</strong></td>
+        <td><strong>月額合計</strong></td>
         <td style="text-align:right;" class="quote-total">$${total.toLocaleString()}</td>
       </tr>
     </table>
     ${notes ? `<div class="card" style="font-size:12px;color:var(--text-dim);">${notes}</div>` : ''}
     <div class="fs-11 text-muted mt-16">
-      All prices in USD · Monthly billing · Cancel anytime with 30-day notice
+      すべての価格はUSD · 月払い · 30日前通知でいつでも解約可能
     </div>
   `;
 }
@@ -1592,22 +1593,22 @@ function printQuote() {
 // ─────────────────────────────────────────────
 const COPY_FORMS = {
   dm: [
-    { id:'dm-brand', label:'Brand Name', placeholder:'TechFlow Store' },
-    { id:'dm-product', label:'Main Product', placeholder:'Wireless earbuds' },
-    { id:'dm-pain', label:'Pain Point', placeholder:'Low conversion on product page' },
-    { id:'dm-tone', label:'Tone', type:'select', options:['Conversational','Professional','Bold','Friendly'] }
+    { id:'dm-brand', label:'ブランド名', placeholder:'TechFlow Store' },
+    { id:'dm-product', label:'主要商品', placeholder:'ワイヤレスイヤホン' },
+    { id:'dm-pain', label:'ペインポイント', placeholder:'商品ページのCVRが低い' },
+    { id:'dm-tone', label:'トーン', type:'select', options:['Conversational','Professional','Bold','Friendly'] }
   ],
   cold: [
-    { id:'ce-prospect', label:'Prospect Company', placeholder:'NovaBrew Coffee' },
-    { id:'ce-role', label:'Prospect Role', placeholder:'CMO / Founder' },
-    { id:'ce-niche', label:'Niche', placeholder:'DTC coffee brand' },
-    { id:'ce-angle', label:'Angle', type:'select', options:['ROI-focused','Curiosity hook','Social proof','Pain point'] }
+    { id:'ce-prospect', label:'見込み客企業名', placeholder:'NovaBrew Coffee' },
+    { id:'ce-role', label:'担当者の役職', placeholder:'CMO / 創業者' },
+    { id:'ce-niche', label:'ニッチ', placeholder:'DTC コーヒーブランド' },
+    { id:'ce-angle', label:'アプローチ', type:'select', options:['ROI-focused','Curiosity hook','Social proof','Pain point'] }
   ],
   lp: [
-    { id:'lp-product', label:'Product', placeholder:'AI video production service' },
-    { id:'lp-audience', label:'Target Audience', placeholder:'Shopify store owners' },
-    { id:'lp-benefit', label:'Key Benefit', placeholder:'3x ROAS on video ads' },
-    { id:'lp-cta', label:'CTA', placeholder:'Book a free demo' }
+    { id:'lp-product', label:'商品・サービス', placeholder:'AI動画制作サービス' },
+    { id:'lp-audience', label:'ターゲット層', placeholder:'Shopifyストアオーナー' },
+    { id:'lp-benefit', label:'主なベネフィット', placeholder:'動画広告でROAS3倍' },
+    { id:'lp-cta', label:'CTA', placeholder:'無料デモを予約する' }
   ]
 };
 
@@ -1644,12 +1645,12 @@ async function generateCopy() {
 
   if (!apiKey) {
     out.className = 'copy-output';
-    out.textContent = '⚙️ Please add your Claude API key in Settings to use the copy generator.';
+    out.textContent = '⚙️ コピー生成を使用するには、設定画面でClaude APIキーを入力してください。';
     return;
   }
 
   out.className = 'copy-output loading';
-  out.textContent = '✨ Generating with Claude...';
+  out.textContent = '✨ Claudeで生成中...';
 
   let prompt = '';
   if (copyActiveTab === 'dm') {
@@ -1685,7 +1686,7 @@ async function generateCopy() {
     }
   } catch (e) {
     out.className = 'copy-output';
-    out.textContent = 'Error connecting to Claude API: ' + e.message;
+    out.textContent = 'Claude APIへの接続エラー: ' + e.message;
   }
 }
 
@@ -1693,8 +1694,8 @@ function copyCopyOutput() {
   const text = document.getElementById('copy-output').textContent;
   navigator.clipboard.writeText(text).then(() => {
     const btn = event.target;
-    btn.textContent = 'Copied!';
-    setTimeout(() => btn.textContent = 'Copy', 1500);
+    btn.textContent = 'コピーしました！';
+    setTimeout(() => btn.textContent = 'コピー', 1500);
   });
 }
 
@@ -1709,10 +1710,10 @@ function renderLeads() {
   const won = leads.filter(l => l.status === 'closed_won').length;
   const pipeline = leads.filter(l => !['closed_won','closed_lost'].includes(l.status)).length;
   document.getElementById('leads-stats').innerHTML = `
-    <div class="stat-card"><div class="stat-label">Total Leads</div><div class="stat-value text-teal">${leads.length}</div></div>
-    <div class="stat-card"><div class="stat-label">Pipeline Value</div><div class="stat-value">$${totalValue.toLocaleString()}</div></div>
-    <div class="stat-card"><div class="stat-label">Active Pipeline</div><div class="stat-value text-yellow">${pipeline}</div></div>
-    <div class="stat-card"><div class="stat-label">Won</div><div class="stat-value text-green">${won}</div></div>
+    <div class="stat-card"><div class="stat-label">総リード数</div><div class="stat-value text-teal">${leads.length}</div></div>
+    <div class="stat-card"><div class="stat-label">パイプライン総額</div><div class="stat-value">$${totalValue.toLocaleString()}</div></div>
+    <div class="stat-card"><div class="stat-label">商談中</div><div class="stat-value text-yellow">${pipeline}</div></div>
+    <div class="stat-card"><div class="stat-label">成約済み</div><div class="stat-value text-green">${won}</div></div>
   `;
 
   const phases = d.phases;
@@ -1720,10 +1721,10 @@ function renderLeads() {
   phasesEl.innerHTML = Object.entries(phases).map(([key, phase]) => {
     const phaseLeads = leads.filter(l => l.phase === key);
     const cols = ['prospecting','contacted','demo_scheduled','proposal_sent','negotiating','closed_won','closed_lost'];
-    const colLabels = { prospecting:'Prospecting', contacted:'Contacted', demo_scheduled:'Demo Set', proposal_sent:'Proposal', negotiating:'Negotiating', closed_won:'Won ✓', closed_lost:'Lost' };
+    const colLabels = { prospecting:'見込み発掘', contacted:'連絡済み', demo_scheduled:'デモ設定', proposal_sent:'提案送付', negotiating:'交渉中', closed_won:'成約 ✓', closed_lost:'失注' };
     return `
       <div>
-        <div class="phase-label">${phase.flag} ${phase.label} <span class="badge badge-teal" style="font-size:10px;">${phaseLeads.length} leads</span></div>
+        <div class="phase-label">${phase.flag} ${phase.label} <span class="badge badge-teal" style="font-size:10px;">${phaseLeads.length}件</span></div>
         <div class="kanban" style="overflow-x:auto;">
           ${cols.map(col => {
             const colLeads = phaseLeads.filter(l => l.status === col);
@@ -1753,11 +1754,11 @@ function renderLeads() {
 }
 
 function addLead() {
-  const company = prompt('Company name:');
+  const company = prompt('会社名:');
   if (!company) return;
-  const contact = prompt('Contact name:');
-  const value = parseInt(prompt('Deal value (USD):') || '1800');
-  const phase = prompt('Phase (phase1/phase2/phase3):') || 'phase1';
+  const contact = prompt('担当者名:');
+  const value = parseInt(prompt('案件金額（USD）:') || '1800');
+  const phase = prompt('フェーズ (phase1/phase2/phase3):') || 'phase1';
   if (!DATA.leads) return;
   DATA.leads.leads.push({
     id: 'l' + Date.now(), company, contact: contact || '', phase,
@@ -1805,7 +1806,7 @@ function renderCompeteCharts() {
   const d = DATA.competitors;
   if (!d) return;
   destroyChart('radarChart');
-  const labels = ['Quality','Speed','Price','Support','Innovation','Retention'];
+  const labels = ['品質','スピード','価格','サポート','革新性','継続率'];
   const colors = ['#EF4444','#F59E0B','#3B82F6','#0ABFB8'];
   const ctx = document.getElementById('radarChart').getContext('2d');
   charts['radarChart'] = new Chart(ctx, {
@@ -1848,36 +1849,36 @@ function renderDomain() {
         <div class="domain-header">
           <div>
             <div class="domain-name">${dom.domain}</div>
-            <div class="fs-11 text-muted">${dom.provider} · Age: ${dom.age_days} days · ${authIcons}</div>
+            <div class="fs-11 text-muted">${dom.provider} · 経過: ${dom.age_days}日 · ${authIcons}</div>
           </div>
           <div class="signal signal-${dom.status === 'go' ? 'go' : dom.status === 'caution' ? 'caution' : 'stop'}">
-            ${dom.status === 'go' ? '✓ GO' : dom.status === 'caution' ? '⚠ CAUTION' : '✗ STOP'}
+            ${dom.status === 'go' ? '✓ 送信OK' : dom.status === 'caution' ? '⚠ 注意' : '✗ 停止'}
           </div>
         </div>
         <div style="margin-bottom:12px;">
-          <div class="flex-between fs-11 text-dim"><span>Warmup Progress (Day ${dom.warmup_day}/${dom.warmup_target})</span><span>${pct}%</span></div>
+          <div class="flex-between fs-11 text-dim"><span>ウォームアップ進捗（Day ${dom.warmup_day}/${dom.warmup_target}）</span><span>${pct}%</span></div>
           <div class="progress-bar" style="height:8px;"><div class="progress-fill" style="width:${pct}%"></div></div>
         </div>
         <div class="domain-metrics">
           <div class="domain-metric">
             <div class="domain-metric-value" style="color:${dom.open_rate >= 35 ? 'var(--green)' : 'var(--yellow)'}">${dom.open_rate}%</div>
-            <div class="domain-metric-label">Open Rate</div>
+            <div class="domain-metric-label">開封率</div>
           </div>
           <div class="domain-metric">
             <div class="domain-metric-value" style="color:${dom.reply_rate >= 5 ? 'var(--green)' : 'var(--yellow)'}">${dom.reply_rate}%</div>
-            <div class="domain-metric-label">Reply Rate</div>
+            <div class="domain-metric-label">返信率</div>
           </div>
           <div class="domain-metric">
             <div class="domain-metric-value" style="color:${dom.bounce_rate <= 2 ? 'var(--green)' : dom.bounce_rate <= 4 ? 'var(--yellow)' : 'var(--red)'}">${dom.bounce_rate}%</div>
-            <div class="domain-metric-label">Bounce Rate</div>
+            <div class="domain-metric-label">バウンス率</div>
           </div>
           <div class="domain-metric">
             <div class="domain-metric-value" style="color:${dom.spam_rate <= 0.1 ? 'var(--green)' : dom.spam_rate <= 0.3 ? 'var(--yellow)' : 'var(--red)'}">${dom.spam_rate}%</div>
-            <div class="domain-metric-label">Spam Rate</div>
+            <div class="domain-metric-label">スパム率</div>
           </div>
         </div>
         <div style="margin-top:10px;" class="flex-between">
-          <span class="fs-11 text-dim">Daily limit: <strong>${dom.daily_send_limit}</strong> · Sending: <strong>${dom.current_volume}</strong></span>
+          <span class="fs-11 text-dim">1日上限: <strong>${dom.daily_send_limit}</strong> · 送信中: <strong>${dom.current_volume}</strong></span>
           <div class="progress-bar" style="width:120px;height:6px;"><div class="progress-fill ${dom.current_volume/dom.daily_send_limit > 0.9 ? 'yellow' : ''}" style="width:${(dom.current_volume/dom.daily_send_limit*100).toFixed(0)}%"></div></div>
         </div>
       </div>
@@ -1893,21 +1894,21 @@ function renderAnalytics() {
   if (!d) return;
   const ins = d.instantly;
   document.getElementById('analytics-stats').innerHTML = `
-    <div class="stat-card"><div class="stat-label">Emails / Month</div><div class="stat-value text-teal">${ins.emails_sent_month.toLocaleString()}</div><div class="stat-change up">↑ vs last month</div></div>
-    <div class="stat-card"><div class="stat-label">Open Rate</div><div class="stat-value text-green">${ins.open_rate}%</div><div class="stat-change up">Target: 35%+</div></div>
-    <div class="stat-card"><div class="stat-label">Reply Rate</div><div class="stat-value">${ins.reply_rate}%</div><div class="stat-change up">Target: 5%+</div></div>
-    <div class="stat-card"><div class="stat-label">Meetings Booked</div><div class="stat-value text-purple">${ins.meetings_booked}</div><div class="stat-change">This month</div></div>
+    <div class="stat-card"><div class="stat-label">送信数/月</div><div class="stat-value text-teal">${ins.emails_sent_month.toLocaleString()}</div><div class="stat-change up">↑ 前月比増加</div></div>
+    <div class="stat-card"><div class="stat-label">開封率</div><div class="stat-value text-green">${ins.open_rate}%</div><div class="stat-change up">目標: 35%以上</div></div>
+    <div class="stat-card"><div class="stat-label">返信率</div><div class="stat-value">${ins.reply_rate}%</div><div class="stat-change up">目標: 5%以上</div></div>
+    <div class="stat-card"><div class="stat-label">商談獲得数</div><div class="stat-value text-purple">${ins.meetings_booked}</div><div class="stat-change">今月</div></div>
   `;
   const seqEl = document.getElementById('top-sequences');
   seqEl.innerHTML = d.top_sequences.map(s => `
     <div style="padding:12px 0; border-bottom:1px solid var(--border);">
       <div class="flex-between mb-16" style="margin-bottom:4px;">
         <div class="fw-700 fs-12 truncate" style="max-width:200px;">${s.name}</div>
-        <span class="badge badge-teal">${s.sent} sent</span>
+        <span class="badge badge-teal">${s.sent}件送信</span>
       </div>
       <div style="display:flex;gap:16px;">
-        <div><div class="fs-11 text-muted">Open</div><div class="fw-700 text-green fs-12">${s.open_rate}%</div></div>
-        <div><div class="fs-11 text-muted">Reply</div><div class="fw-700 text-teal fs-12">${s.reply_rate}%</div></div>
+        <div><div class="fs-11 text-muted">開封率</div><div class="fw-700 text-green fs-12">${s.open_rate}%</div></div>
+        <div><div class="fs-11 text-muted">返信率</div><div class="fw-700 text-teal fs-12">${s.reply_rate}%</div></div>
       </div>
     </div>
   `).join('');
@@ -1923,9 +1924,9 @@ function renderAnalyticsCharts() {
     data: {
       labels: d.weekly_sends.map(w => w.week),
       datasets: [
-        { label:'Sent', data: d.weekly_sends.map(w=>w.sent), backgroundColor:'rgba(59,130,246,0.7)', borderRadius:4, borderWidth:0 },
-        { label:'Opens', data: d.weekly_sends.map(w=>w.opens), backgroundColor:'rgba(34,197,94,0.7)', borderRadius:4, borderWidth:0 },
-        { label:'Replies', data: d.weekly_sends.map(w=>w.replies), backgroundColor:'rgba(10,191,184,0.7)', borderRadius:4, borderWidth:0 }
+        { label:'送信数', data: d.weekly_sends.map(w=>w.sent), backgroundColor:'rgba(59,130,246,0.7)', borderRadius:4, borderWidth:0 },
+        { label:'開封数', data: d.weekly_sends.map(w=>w.opens), backgroundColor:'rgba(34,197,94,0.7)', borderRadius:4, borderWidth:0 },
+        { label:'返信数', data: d.weekly_sends.map(w=>w.replies), backgroundColor:'rgba(10,191,184,0.7)', borderRadius:4, borderWidth:0 }
       ]
     },
     options: {
@@ -1968,10 +1969,10 @@ function renderTrendsChart() {
     data: {
       labels: d.monthly_growth.map(m => m.month),
       datasets: [
-        { label:'AI Gadgets', data: d.monthly_growth.map(m=>m.ai_gadgets), borderColor:'#0ABFB8', tension:0.4, pointRadius:3 },
-        { label:'Functional Bev', data: d.monthly_growth.map(m=>m.functional_bev), borderColor:'#22C55E', tension:0.4, pointRadius:3 },
-        { label:'Pet Products', data: d.monthly_growth.map(m=>m.pet), borderColor:'#A855F7', tension:0.4, pointRadius:3 },
-        { label:'Beauty Tech', data: d.monthly_growth.map(m=>m.beauty), borderColor:'#F59E0B', tension:0.4, pointRadius:3 }
+        { label:'AIガジェット', data: d.monthly_growth.map(m=>m.ai_gadgets), borderColor:'#0ABFB8', tension:0.4, pointRadius:3 },
+        { label:'機能性飲料', data: d.monthly_growth.map(m=>m.functional_bev), borderColor:'#22C55E', tension:0.4, pointRadius:3 },
+        { label:'ペット用品', data: d.monthly_growth.map(m=>m.pet), borderColor:'#A855F7', tension:0.4, pointRadius:3 },
+        { label:'美容テック', data: d.monthly_growth.map(m=>m.beauty), borderColor:'#F59E0B', tension:0.4, pointRadius:3 }
       ]
     },
     options: {
@@ -2012,7 +2013,7 @@ function loadSettingsForm() {
   if (el) el.innerHTML = Object.entries(p).map(([k,v]) => `
     <div class="flex-between" style="padding:6px 0;border-bottom:1px solid var(--border);">
       <span class="fs-12 fw-700">${k.charAt(0).toUpperCase()+k.slice(1)}</span>
-      <span class="fs-12 text-dim">${v.videos || 'Custom'} videos · $${v.price || 'TBD'} · ${v.revision} revision(s)</span>
+      <span class="fs-12 text-dim">${v.videos || 'カスタム'}本 · $${v.price || '要相談'} · 修正${v.revision}回</span>
     </div>
   `).join('');
 }
@@ -2024,7 +2025,7 @@ function saveSettings() {
   if (gt) localStorage.setItem('vidcel_github_token', gt);
   if (gr) localStorage.setItem('vidcel_github_repo', gr);
   if (ck) localStorage.setItem('vidcel_claude_key', ck);
-  alert('Settings saved to browser storage.');
+  alert('設定をブラウザに保存しました。');
 }
 
 function getStoredKey(name) {
@@ -2061,7 +2062,7 @@ async function syncToGitHub() {
   const token = getStoredKey('github_token');
   const repo  = getStoredKey('github_repo') || SETTINGS.github_repo;
   if (!token || !repo) {
-    alert('Please configure GitHub token and repo in Settings first.');
+    alert('設定画面でGitHubトークンとリポジトリを先に設定してください。');
     nav('settings', document.querySelector('[data-section="settings"]'));
     return;
   }
@@ -2069,22 +2070,22 @@ async function syncToGitHub() {
   for (const f of files) {
     if (DATA[f]) await saveToGitHub(f);
   }
-  alert('Data synced to GitHub!');
+  alert('GitHubにデータを同期しました！');
 }
 
 async function triggerWorkflow(name) {
   const token = getStoredKey('github_token');
   const repo  = getStoredKey('github_repo') || SETTINGS.github_repo;
-  if (!token || !repo) { alert('Configure GitHub settings first.'); return; }
+  if (!token || !repo) { alert('先にGitHub設定を行ってください。'); return; }
   try {
     await fetch(`https://api.github.com/repos/${repo}/actions/workflows/${name}.yml/dispatches`, {
       method: 'POST',
       headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
       body: JSON.stringify({ ref: 'main' })
     });
-    alert(`Triggered ${name}.yml workflow!`);
+    alert(`${name}.yml ワークフローを実行しました！`);
   } catch (e) {
-    alert('Failed: ' + e.message);
+    alert('エラー: ' + e.message);
   }
 }
 
@@ -2096,10 +2097,10 @@ function destroyChart(id) {
 }
 
 function addClient() {
-  alert('Client creation form coming soon. Edit data/clients.json to add clients.');
+  alert('クライアント追加フォームは近日公開予定です。data/clients.json を直接編集して追加できます。');
 }
 function addTask() {
-  alert('Task creation form coming soon. Edit data/pipeline.json to add tasks.');
+  alert('タスク追加フォームは近日公開予定です。data/pipeline.json を直接編集して追加できます。');
 }
 
 // ─────────────────────────────────────────────
