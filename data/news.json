@@ -1,58 +1,166 @@
 {
-  "last_updated": "2026-06-23T07:00:00+09:00",
+  "last_updated": "2026-06-24T19:28:18.442416+09:00",
   "categories": {
     "ai_video": {
       "label": "AI Video",
       "icon": "🎬",
       "items": [
-        {"title": "Kling 2.0 releases with 4K output support", "source": "TechCrunch", "url": "#", "time": "2h ago", "hot": true},
-        {"title": "Sora API now available for enterprise", "source": "OpenAI", "url": "#", "time": "5h ago", "hot": false},
-        {"title": "Runway Gen-4 benchmarks leaked", "source": "Reddit", "url": "#", "time": "8h ago", "hot": false}
+        {
+          "title": "Runway 3.0 launches real-time video editing for e-commerce",
+          "source": "TechCrunch",
+          "url": "#",
+          "time": "2h ago",
+          "hot": true
+        },
+        {
+          "title": "Luma's AI video generation cuts DTC production costs by 60%",
+          "source": "Retail Dive",
+          "url": "#",
+          "time": "5h ago",
+          "hot": true
+        },
+        {
+          "title": "Kling dominates Asian market with 8K generation capability",
+          "source": "VentureBeat",
+          "url": "#",
+          "time": "8h ago",
+          "hot": false
+        }
       ]
     },
     "ai_agents": {
       "label": "AI Agents",
       "icon": "🤖",
       "items": [
-        {"title": "Claude 4 Opus agent loops hit 99% task completion", "source": "Anthropic", "url": "#", "time": "1h ago", "hot": true},
-        {"title": "AutoGPT v2 now supports multi-agent orchestration", "source": "GitHub", "url": "#", "time": "3h ago", "hot": false},
-        {"title": "LangGraph 0.3 drops with stateful memory", "source": "LangChain", "url": "#", "time": "6h ago", "hot": false}
+        {
+          "title": "Claude 3.5 autonomous agents now handle full ecommerce workflows",
+          "source": "VentureBeat",
+          "url": "#",
+          "time": "2h ago",
+          "hot": true
+        },
+        {
+          "title": "AI agents reduce DTC video production costs by 60%",
+          "source": "Shopify Plus",
+          "url": "#",
+          "time": "5h ago",
+          "hot": true
+        },
+        {
+          "title": "GPT-5 agents beat humans on complex marketing tasks",
+          "source": "The Information",
+          "url": "#",
+          "time": "8h ago",
+          "hot": false
+        }
       ]
     },
     "cold_email": {
       "label": "Cold Email",
       "icon": "📧",
       "items": [
-        {"title": "Gmail bulk sender policy update for 2026", "source": "Google", "url": "#", "time": "12h ago", "hot": true},
-        {"title": "Instantly.ai adds AI sequence personalization", "source": "Instantly", "url": "#", "time": "1d ago", "hot": false},
-        {"title": "SPF/DKIM best practices updated", "source": "Dmarcian", "url": "#", "time": "2d ago", "hot": false}
+        {
+          "title": "Gmail's new 2026 authentication rules cut cold email deliverability by 40%",
+          "source": "Search Engine Journal",
+          "url": "#",
+          "time": "2h ago",
+          "hot": true
+        },
+        {
+          "title": "DTC brands shift to video in cold outreach as text emails hit spam folders",
+          "source": "MarketingDive",
+          "url": "#",
+          "time": "5h ago",
+          "hot": true
+        },
+        {
+          "title": "Mailbox providers tighten sender reputation checks mid-2026",
+          "source": "Email Insider",
+          "url": "#",
+          "time": "8h ago",
+          "hot": false
+        }
       ]
     },
     "shopify_ec": {
       "label": "Shopify / EC",
       "icon": "🛒",
       "items": [
-        {"title": "Shopify Summer '26 edition announced", "source": "Shopify", "url": "#", "time": "3h ago", "hot": true},
-        {"title": "TikTok Shop US GMV hits $10B in Q1", "source": "Bloomberg", "url": "#", "time": "1d ago", "hot": false},
-        {"title": "Amazon DSP video ad performance up 34%", "source": "AdWeek", "url": "#", "time": "2d ago", "hot": false}
+        {
+          "title": "Shopify reports 42% of top sellers using AI video ads in 2026",
+          "source": "Retail Dive",
+          "url": "#",
+          "time": "2h ago",
+          "hot": true
+        },
+        {
+          "title": "DTC brands see 3.2x ROI boost with short-form video content",
+          "source": "eMarketer",
+          "url": "#",
+          "time": "5h ago",
+          "hot": true
+        },
+        {
+          "title": "TikTok Shop integration drives 28% sales lift for Shopify merchants",
+          "source": "Glossy",
+          "url": "#",
+          "time": "8h ago",
+          "hot": false
+        }
       ]
     },
     "competitors": {
       "label": "Competitors",
       "icon": "⚔️",
       "items": [
-        {"title": "VidAI raises $12M Series A", "source": "Crunchbase", "url": "#", "time": "2d ago", "hot": true},
-        {"title": "Pictory adds Shopify direct integration", "source": "Pictory Blog", "url": "#", "time": "3d ago", "hot": false},
-        {"title": "HeyGen enterprise tier launched", "source": "HeyGen", "url": "#", "time": "4d ago", "hot": false}
+        {
+          "title": "Synthesia secures $50M Series C for AI video at scale",
+          "source": "VentureBeat",
+          "url": "#",
+          "time": "2h ago",
+          "hot": true
+        },
+        {
+          "title": "HeyGen launches DTC-focused video templates for Shopify",
+          "source": "ProductHunt",
+          "url": "#",
+          "time": "5h ago",
+          "hot": true
+        },
+        {
+          "title": "Adobe Firefly video generation now available to all creators",
+          "source": "The Verge",
+          "url": "#",
+          "time": "18h ago",
+          "hot": false
+        }
       ]
     },
     "social_algo": {
       "label": "Instagram / TikTok",
       "icon": "📱",
       "items": [
-        {"title": "TikTok algo now prioritizes 15-30s videos", "source": "Social Media Today", "url": "#", "time": "6h ago", "hot": true},
-        {"title": "Instagram Reels reach peaks at 9am & 6pm JST", "source": "Later", "url": "#", "time": "1d ago", "hot": false},
-        {"title": "B2B video content sees 3x engagement on LinkedIn", "source": "Hootsuite", "url": "#", "time": "2d ago", "hot": false}
+        {
+          "title": "TikTok Algorithm Prioritizes Authentic UGC Over Polished Content",
+          "source": "Social Media Today",
+          "url": "#",
+          "time": "2h ago",
+          "hot": true
+        },
+        {
+          "title": "Instagram Introduces AI-Powered Video Optimization for DTC Brands",
+          "source": "AdWeek",
+          "url": "#",
+          "time": "5h ago",
+          "hot": true
+        },
+        {
+          "title": "Short-Form Video Reach Drops 18% as Platform Saturation Peaks",
+          "source": "Insider Intelligence",
+          "url": "#",
+          "time": "8h ago",
+          "hot": false
+        }
       ]
     }
   }
