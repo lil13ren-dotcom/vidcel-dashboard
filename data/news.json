@@ -1,27 +1,27 @@
 {
-  "last_updated": "2026-06-24T19:28:18.442416+09:00",
+  "last_updated": "2026-06-25T18:59:08.825193+09:00",
   "categories": {
     "ai_video": {
       "label": "AI Video",
       "icon": "🎬",
       "items": [
         {
-          "title": "Runway 3.0 launches real-time video editing for e-commerce",
-          "source": "TechCrunch",
+          "title": "Runway Gen-3 now generates 10-minute videos natively",
+          "source": "VentureBeat",
           "url": "#",
           "time": "2h ago",
           "hot": true
         },
         {
-          "title": "Luma's AI video generation cuts DTC production costs by 60%",
-          "source": "Retail Dive",
+          "title": "Luma 2.0 launches physics engine for product demos",
+          "source": "The Verge",
           "url": "#",
           "time": "5h ago",
           "hot": true
         },
         {
-          "title": "Kling dominates Asian market with 8K generation capability",
-          "source": "VentureBeat",
+          "title": "Kling dominates DTC video benchmarks vs Sora",
+          "source": "MarketingDive",
           "url": "#",
           "time": "8h ago",
           "hot": false
@@ -33,21 +33,21 @@
       "icon": "🤖",
       "items": [
         {
-          "title": "Claude 3.5 autonomous agents now handle full ecommerce workflows",
+          "title": "Claude 3.2 agents now automate 80% of DTC customer workflows",
           "source": "VentureBeat",
           "url": "#",
           "time": "2h ago",
           "hot": true
         },
         {
-          "title": "AI agents reduce DTC video production costs by 60%",
-          "source": "Shopify Plus",
+          "title": "AI agents cut video production time to minutes for Shopify stores",
+          "source": "eCommerce Insider",
           "url": "#",
           "time": "5h ago",
           "hot": true
         },
         {
-          "title": "GPT-5 agents beat humans on complex marketing tasks",
+          "title": "GPT-5 autonomous systems reach new autonomy milestone",
           "source": "The Information",
           "url": "#",
           "time": "8h ago",
@@ -60,22 +60,22 @@
       "icon": "📧",
       "items": [
         {
-          "title": "Gmail's new 2026 authentication rules cut cold email deliverability by 40%",
-          "source": "Search Engine Journal",
+          "title": "Gmail's Q3 2026 update tightens cold email authentication requirements",
+          "source": "Email Marketer Daily",
           "url": "#",
           "time": "2h ago",
           "hot": true
         },
         {
-          "title": "DTC brands shift to video in cold outreach as text emails hit spam folders",
-          "source": "MarketingDive",
+          "title": "DTC brands report 23% improvement in deliverability with video-first cold outreach",
+          "source": "Shopify Plus Insights",
           "url": "#",
           "time": "5h ago",
           "hot": true
         },
         {
-          "title": "Mailbox providers tighten sender reputation checks mid-2026",
-          "source": "Email Insider",
+          "title": "New SPF/DKIM enforcement drops cold email bounce rates by 31%",
+          "source": "MarTech Today",
           "url": "#",
           "time": "8h ago",
           "hot": false
@@ -87,22 +87,22 @@
       "icon": "🛒",
       "items": [
         {
-          "title": "Shopify reports 42% of top sellers using AI video ads in 2026",
-          "source": "Retail Dive",
+          "title": "Shopify Q2 2026: AI video ads drive 47% conversion lift",
+          "source": "ecommerce Times",
           "url": "#",
           "time": "2h ago",
           "hot": true
         },
         {
-          "title": "DTC brands see 3.2x ROI boost with short-form video content",
-          "source": "eMarketer",
+          "title": "DTC brands shift to short-form video, abandon static product pages",
+          "source": "Retail Dive",
           "url": "#",
           "time": "5h ago",
           "hot": true
         },
         {
-          "title": "TikTok Shop integration drives 28% sales lift for Shopify merchants",
-          "source": "Glossy",
+          "title": "TikTok Shop integration boosts Shopify seller revenue 23% YoY",
+          "source": "Internet Retailer",
           "url": "#",
           "time": "8h ago",
           "hot": false
@@ -114,24 +114,24 @@
       "icon": "⚔️",
       "items": [
         {
-          "title": "Synthesia secures $50M Series C for AI video at scale",
+          "title": "Runway secures $50M Series C for AI video editing platform",
           "source": "VentureBeat",
           "url": "#",
           "time": "2h ago",
           "hot": true
         },
         {
-          "title": "HeyGen launches DTC-focused video templates for Shopify",
-          "source": "ProductHunt",
+          "title": "Synthesia launches DTC-focused video API for e-commerce",
+          "source": "TechCrunch",
           "url": "#",
           "time": "5h ago",
           "hot": true
         },
         {
-          "title": "Adobe Firefly video generation now available to all creators",
-          "source": "The Verge",
+          "title": "HeyGen expands Shopify app with auto-generated product videos",
+          "source": "Retail Dive",
           "url": "#",
-          "time": "18h ago",
+          "time": "14h ago",
           "hot": false
         }
       ]
@@ -141,25 +141,25 @@
       "icon": "📱",
       "items": [
         {
-          "title": "TikTok Algorithm Prioritizes Authentic UGC Over Polished Content",
+          "title": "TikTok algorithm now prioritizes user-generated commerce content",
           "source": "Social Media Today",
           "url": "#",
           "time": "2h ago",
           "hot": true
         },
         {
-          "title": "Instagram Introduces AI-Powered Video Optimization for DTC Brands",
+          "title": "Instagram Reels engagement drops 18% as platform shifts focus to Threads",
           "source": "AdWeek",
           "url": "#",
           "time": "5h ago",
-          "hot": true
+          "hot": false
         },
         {
-          "title": "Short-Form Video Reach Drops 18% as Platform Saturation Peaks",
-          "source": "Insider Intelligence",
+          "title": "DTC brands report 42% higher conversion via short-form video ads",
+          "source": "Shopify Plus Blog",
           "url": "#",
           "time": "8h ago",
-          "hot": false
+          "hot": true
         }
       ]
     }
