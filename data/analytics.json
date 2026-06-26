@@ -1,16 +1,16 @@
 {
-  "last_updated": "2026-06-25T14:30:00+09:00",
+  "last_updated": "2026-06-26T14:30:00+09:00",
   "instantly": {
-    "campaigns_active": 4,
-    "emails_sent_today": 67,
-    "emails_sent_week": 398,
-    "emails_sent_month": 1456,
-    "open_rate": 42.1,
-    "reply_rate": 8.2,
-    "bounce_rate": 1.3,
+    "campaigns_active": 5,
+    "emails_sent_today": 89,
+    "emails_sent_week": 487,
+    "emails_sent_month": 1545,
+    "open_rate": 43.6,
+    "reply_rate": 8.7,
+    "bounce_rate": 1.2,
     "unsubscribe_rate": 0.2,
-    "leads_generated": 31,
-    "meetings_booked": 6
+    "leads_generated": 38,
+    "meetings_booked": 7
   },
   "weekly_sends": [
     {
@@ -33,29 +33,29 @@
     },
     {
       "week": "W25",
-      "sent": 398,
-      "opens": 168,
-      "replies": 33
+      "sent": 487,
+      "opens": 212,
+      "replies": 42
     }
   ],
   "top_sequences": [
     {
       "name": "Shopify Brand Outreach v3",
-      "sent": 512,
-      "open_rate": 45.3,
-      "reply_rate": 9.4
+      "sent": 556,
+      "open_rate": 46.2,
+      "reply_rate": 9.8
     },
     {
       "name": "EC Decision Maker Cold",
-      "sent": 418,
-      "open_rate": 39.8,
-      "reply_rate": 7.1
+      "sent": 445,
+      "open_rate": 41.3,
+      "reply_rate": 7.6
     },
     {
       "name": "Follow-up Sequence A",
-      "sent": 426,
-      "open_rate": 42.5,
-      "reply_rate": 7.8
+      "sent": 461,
+      "open_rate": 43.8,
+      "reply_rate": 8.4
     }
   ]
 }
