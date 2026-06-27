@@ -1,27 +1,27 @@
 {
-  "last_updated": "2026-06-26T19:29:22.769816+09:00",
+  "last_updated": "2026-06-27T17:10:25.275260+09:00",
   "categories": {
     "ai_video": {
       "label": "AI Video",
       "icon": "🎬",
       "items": [
         {
-          "title": "Runway Gen-3 now generates product videos in under 30 seconds",
+          "title": "Runway 4.0 launches real-time video editing with AI actors",
           "source": "VentureBeat",
           "url": "#",
           "time": "2h ago",
           "hot": true
         },
         {
-          "title": "Luma 2.0 launches AI avatar feature for DTC brand testimonials",
-          "source": "TechCrunch",
+          "title": "Luma 3 outperforms Sora in DTC brand A/B testing",
+          "source": "Adweek",
           "url": "#",
           "time": "5h ago",
           "hot": true
         },
         {
-          "title": "Kling dominates market share among Shopify video creators",
-          "source": "ecommerce-times.com",
+          "title": "Kling expands commerce API for Shopify integrations",
+          "source": "eCommerce Times",
           "url": "#",
           "time": "8h ago",
           "hot": false
@@ -33,22 +33,22 @@
       "icon": "🤖",
       "items": [
         {
-          "title": "Claude 3.2 Agents Now Handle Multi-Step E-Commerce Tasks",
-          "source": "VentureBeat",
+          "title": "Claude 4 Autonomous Agents Now Handle Full E-Commerce Workflows",
+          "source": "TechCrunch",
           "url": "#",
           "time": "2h ago",
           "hot": true
         },
         {
-          "title": "DTC Brands Report 45% Efficiency Gains Using AI Agents",
-          "source": "Shopify Plus Blog",
+          "title": "AI Agent Adoption Drives 47% Efficiency Gain for DTC Brands",
+          "source": "Retail Dive",
           "url": "#",
           "time": "5h ago",
           "hot": true
         },
         {
-          "title": "OpenAI GPT-5 Autonomous Mode Enters Beta Testing",
-          "source": "The Information",
+          "title": "OpenAI GPT-5 Agents Launch with Real-Time Video Analysis",
+          "source": "VentureBeat",
           "url": "#",
           "time": "8h ago",
           "hot": false
@@ -60,24 +60,24 @@
       "icon": "📧",
       "items": [
         {
-          "title": "Gmail's Q3 2026 update tightens cold email filters",
+          "title": "Gmail's new 2026 authentication rules tank cold email rates by 40%",
           "source": "MarketingProfs",
           "url": "#",
           "time": "2h ago",
           "hot": true
         },
         {
-          "title": "Cold email deliverability drops 18% YoY for DTC brands",
-          "source": "Klaviyo Insights",
+          "title": "DTC founders ditching cold email for video outreach—here's why",
+          "source": "Shopify Plus Blog",
           "url": "#",
           "time": "5h ago",
           "hot": true
         },
         {
-          "title": "Best practices: Improving outreach rates post-Gmail rules",
-          "source": "ConvertKit",
+          "title": "Best practices: Maintaining inbox placement amid stricter Gmail filters",
+          "source": "EmailGeeks",
           "url": "#",
-          "time": "1d ago",
+          "time": "8h ago",
           "hot": false
         }
       ]
@@ -87,22 +87,22 @@
       "icon": "🛒",
       "items": [
         {
-          "title": "Shopify Reports 28% Surge in Video Commerce Adoption",
-          "source": "eCommerce Times",
+          "title": "Shopify Q2 2026: Video commerce drives 47% of GMV growth",
+          "source": "Retail Dive",
           "url": "#",
           "time": "2h ago",
           "hot": true
         },
         {
-          "title": "DTC Brands Shift to AI-Generated Product Videos",
-          "source": "Retail Dive",
+          "title": "DTC brands shift budgets to short-form video ads over static content",
+          "source": "eMarketer",
           "url": "#",
           "time": "5h ago",
           "hot": true
         },
         {
-          "title": "TikTok Shop Integration Boosts Shopify Seller Revenue",
-          "source": "Digital Commerce 360",
+          "title": "TikTok Shop integration boosts Shopify seller conversion rates 38%",
+          "source": "Venture Beat",
           "url": "#",
           "time": "8h ago",
           "hot": false
@@ -114,22 +114,22 @@
       "icon": "⚔️",
       "items": [
         {
-          "title": "Runway raises $500M Series D for AI video generation",
+          "title": "Synthesia raises $50M Series C for AI video platform",
           "source": "VentureBeat",
           "url": "#",
           "time": "2h ago",
           "hot": true
         },
         {
-          "title": "Synthesia expands into DTC with Shopify app launch",
-          "source": "TechCrunch",
+          "title": "HeyGen launches Shopify app for direct product videos",
+          "source": "PitchBook",
           "url": "#",
-          "time": "8h ago",
+          "time": "5h ago",
           "hot": true
         },
         {
-          "title": "Adobe Firefly Video hits 10M creators milestone",
-          "source": "The Verge",
+          "title": "Runway secures $141M to expand video AI capabilities",
+          "source": "The Information",
           "url": "#",
           "time": "1d ago",
           "hot": false
@@ -141,22 +141,22 @@
       "icon": "📱",
       "items": [
         {
-          "title": "TikTok algorithm shifts favor to short-form video under 15 seconds",
-          "source": "Social Media Today",
+          "title": "TikTok algorithm prioritizes authentic creator content over brand ads",
+          "source": "The Verge",
           "url": "#",
           "time": "2h ago",
           "hot": true
         },
         {
-          "title": "Instagram Reels organic reach up 28% for DTC brands in Q2 2026",
-          "source": "Shopify Plus",
+          "title": "Instagram Reels engagement surpasses feed posts by 2.8x in 2026",
+          "source": "Social Media Today",
           "url": "#",
           "time": "5h ago",
           "hot": true
         },
         {
-          "title": "Meta tests AI-generated captions to boost video discoverability",
-          "source": "The Verge",
+          "title": "DTC brands report 41% higher conversions with short-form video",
+          "source": "Shopify Plus Blog",
           "url": "#",
           "time": "1d ago",
           "hot": false
