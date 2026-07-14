@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "LighthouseRawCompany",
+  "description": "Raw, unscored research record for a single company. This is the sole contract between the collection stage (research/scrapers) and the analysis stage. Nothing downstream should reach back out to the web — everything it needs must be in this record.",
+  "type": "object",
+  "required": ["id", "industry", "name", "website", "city", "state", "website_signals", "social"],
+  "properties": {
+    "id": { "type": "string", "description": "Stable slug, e.g. roofing-01" },
+    "industry": { "type": "string", "enum": ["Roofing", "HVAC", "Remodeling"] },
+    "name": { "type": "string" },
+    "website": { "type": "string", "format": "uri" },
+    "google_maps_url": { "type": ["string", "null"] },
+    "rating": { "type": ["number", "null"], "description": "Public star rating, 0-5, null if not confidently found" },
+    "review_count": { "type": ["integer", "null"] },
+    "phone": { "type": ["string", "null"] },
+    "email": { "type": ["string", "null"], "description": "Only if publicly listed on the site" },
+    "city": { "type": "string" },
+    "state": { "type": "string" },
+    "website_signals": {
+      "type": "object",
+      "description": "Binary presence/absence facts extracted from the live site using the fixed rubric in lighthouse/prompts/website_signal_prompt.py. Booleans only — no subjective judgment.",
+      "properties": {
+        "https": { "type": "boolean" },
+        "mobile_friendly": { "type": "boolean" },
+        "cta": { "type": "boolean" },
+        "quote_form": { "type": "boolean" },
+        "contact_form": { "type": "boolean" },
+        "financing": { "type": "boolean" },
+        "warranty": { "type": "boolean" },
+        "faq": { "type": "boolean" },
+        "about_us": { "type": "boolean" },
+        "team_page": { "type": "boolean" },
+        "certifications": { "type": "boolean" },
+        "service_area": { "type": "boolean" },
+        "portfolio": { "type": "boolean" },
+        "case_studies": { "type": "boolean" },
+        "before_after": { "type": "boolean" },
+        "testimonials": { "type": "boolean" },
+        "customer_photos": { "type": "boolean" },
+        "customer_videos": { "type": "boolean" }
+      },
+      "required": ["https", "mobile_friendly", "cta", "quote_form", "contact_form", "financing", "warranty", "faq", "about_us", "team_page", "certifications", "service_area", "portfolio", "case_studies", "before_after", "testimonials", "customer_photos", "customer_videos"]
+    },
+    "social": {
+      "type": "object",
+      "properties": {
+        "instagram": { "type": ["string", "null"] },
+        "facebook": { "type": ["string", "null"] },
+        "youtube": { "type": ["string", "null"] },
+        "tiktok": { "type": ["string", "null"] }
+      }
+    },
+    "review_snippets": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Short, legally public review excerpts (e.g. visible in search snippets or on the business's own testimonials page). Never store scraped full review databases."
+    },
+    "homepage_text_excerpt": {
+      "type": ["string", "null"],
+      "description": "A faithful excerpt/summary (a few hundred words) of the actual visible homepage copy, used for rule-based keyword comparison against customer language. Not a paraphrase or opinion — real wording from the page."
+    },
+    "sources": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "URLs actually consulted, for auditability"
+    }
+  }
+}
