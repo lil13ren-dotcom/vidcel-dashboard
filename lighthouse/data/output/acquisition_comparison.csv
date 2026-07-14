@@ -1,0 +1,21 @@
+company_id,company_name,industry,v1_overall_opportunity_score,v2_overall_opportunity_score,score_delta,v1_method,v2_homepage_status,v2_pages_fetched,v2_data_coverage_ratio,v2_is_decision_grade
+roofing-01,Kidd Roofing,Roofing,71.7,,,search_snippet_reconstruction,policy_blocked,0,0.17,False
+roofing-02,Bold Brothers Roofing,Roofing,62.6,,,search_snippet_reconstruction,policy_blocked,0,0.17,False
+roofing-03,Adamson Roofing Company,Roofing,66.1,,,search_snippet_reconstruction,policy_blocked,0,0.17,False
+roofing-04,Gibson Roofing,Roofing,59.9,,,search_snippet_reconstruction,policy_blocked,0,0.17,False
+roofing-05,Best Roofing Now,Roofing,62.3,,,search_snippet_reconstruction,policy_blocked,0,0.17,False
+roofing-06,Owl Roofing,Roofing,47.8,,,search_snippet_reconstruction,policy_blocked,0,0.0,False
+roofing-07,Lyons Roofing,Roofing,64.2,,,search_snippet_reconstruction,policy_blocked,0,0.17,False
+roofing-08,Bill Ragan Roofing Company,Roofing,76.6,,,search_snippet_reconstruction,policy_blocked,0,0.17,False
+roofing-09,Ace Roofing,Roofing,0.0,,,search_snippet_reconstruction,policy_blocked,0,0.0,False
+roofing-10,Straight Line Roofing & Construction,Roofing,71.7,,,search_snippet_reconstruction,policy_blocked,0,0.17,False
+hvac-01,Carter Comfort Systems,HVAC,67.7,,,search_snippet_reconstruction,policy_blocked,0,0.17,False
+hvac-02,River City Heating & Air,HVAC,66.5,,,search_snippet_reconstruction,policy_blocked,0,0.17,False
+hvac-03,Advantage Air Mechanical,HVAC,44.7,,,search_snippet_reconstruction,policy_blocked,0,0.0,False
+hvac-04,Harker Heating & Cooling,HVAC,61.2,,,search_snippet_reconstruction,policy_blocked,0,0.17,False
+hvac-05,Horizon Homes,HVAC,45.3,,,search_snippet_reconstruction,policy_blocked,0,0.0,False
+remodeling-01,Catalyst Construction & Kitchen Remodeling,Remodeling,0.0,,,search_snippet_reconstruction,policy_blocked,0,0.0,False
+remodeling-02,New Creations Custom Kitchen and Bath,Remodeling,0.0,,,search_snippet_reconstruction,policy_blocked,0,0.0,False
+remodeling-03,Carolina Home Remodeling,Remodeling,0.0,,,search_snippet_reconstruction,policy_blocked,0,0.0,False
+remodeling-04,Mark Hammer Construction LTD,Remodeling,0.0,,,search_snippet_reconstruction,policy_blocked,0,0.0,False
+remodeling-05,Crystal Kitchen + Bath,Remodeling,59.4,,,search_snippet_reconstruction,policy_blocked,0,0.17,False

@@ -1,47 +1,56 @@
 # Project Lighthouse — Backlog
 
-## Phase 1 follow-ups (same scope, better data)
+## Phase 1.1 follow-ups (the acquisition layer exists now — this is what's left)
 
-- [ ] **P0 — Restore direct page-fetch access.** `WebFetch` returned 403
-      for every destination during this POC's actual data collection run
-      (confirmed environment-level egress block, not per-site — see
-      `Decision_Log.md`, 2026-07-14). As a direct result, `mobile_friendly`,
-      `before_after`, and `customer_photos` are unverified (not
-      confirmed-false) for all 20 companies. Fixing this is the single
-      highest-leverage change before running this pipeline on real
-      outbound targets — right now those three signals can't be trusted
-      at all.
+- [ ] **P0 — Run the real live E2E from an internet-enabled environment.**
+      The acquisition layer (`lighthouse/scrapers/website_fetcher.py` +
+      friends) is built, unit-tested (81 tests, fixture-based, no live
+      network needed), and `mypy --strict`-clean, but this sandbox cannot
+      reach arbitrary external hosts at all (confirmed via `curl` control
+      tests — see `Decision_Log.md`, 2026-07-14). The 20-company rerun in
+      `lighthouse/data/output_v1_1/` is genuinely `NOT_DECISION_GRADE` as
+      a result (0% homepage fetch success). Run
+      `python3 -m lighthouse.live_e2e --run` (or
+      `python3 -m lighthouse.pipeline_v2` for the full 20) from a normal
+      internet-enabled machine to get the first real decision-grade
+      result and a real `acquisition_comparison.md`.
+- [ ] Exercise Tier 2 (Playwright) against a real JS-heavy site once
+      network access is available — it's currently only proven against a
+      local `file://` fixture.
 - [ ] Integrate a real ratings/reviews source (Google Places API or Yelp
       Fusion API) so `rating`/`review_count`/`google_maps_url` are
-      confirmed data, not best-effort search snippets. Highest-leverage
-      fix — Google Score and therefore Overall Opportunity Score both
-      depend directly on this.
-- [ ] Increase review text volume per company (currently limited to
-      whatever a web search surfaces) so `review_intelligence.py` and
-      `website_comparison.py` clear `has_sufficient_review_text` more
-      often instead of being suppressed.
-- [ ] Add a second page fetch (e.g. `/gallery`, `/reviews`) per company
-      where the homepage doesn't settle a signal, instead of relying on
-      homepage-only detection.
-- [ ] Spot-check a sample of the 20 collected records by hand against the
-      live sites to measure rubric accuracy before trusting it at scale.
+      confirmed data. Out of scope for Phase 1.1 (which targeted website
+      acquisition specifically) but still the other half of
+      `overall_opportunity_score`'s demand term.
+- [ ] Add a vision-model or human review pass for `before_after` /
+      `customer_photos` — currently capped at 0.4 confidence from text
+      heuristics alone by design (`signal_extractor.py`), never claims
+      full visual confirmation.
+- [ ] Consider widening the crawl beyond 5 pages, or scoping pages
+      per-signal more precisely, once real fetch data shows which
+      signals are still landing as `UNKNOWN` most often.
 
-## Scale-up (still Phase 1 methodology, more companies)
+## Scale-up (still same methodology, more companies)
 
-- [ ] Re-run the same pipeline against 100-200 companies per industry
-      once the methodology is validated, to get statistically meaningful
-      `industry_summary.md` averages instead of a 5-10 company sample.
+- [ ] Re-run against 100-200 companies per industry once a real (network-
+      enabled) Phase 1.1 run validates the acquisition method, for
+      statistically meaningful `industry_summary.md` averages.
 - [ ] Add more industries beyond Roofing/HVAC/Remodeling (e.g. plumbing,
-      landscaping, electrical) using the exact same `RawCompany` schema.
+      landscaping, electrical) using the same `RawCompanyV2` schema.
 
 ## Engine improvements
 
-- [ ] Unit tests for `analysis/scoring.py` and `analysis/opportunity_engine.py`
-      against fixed fixtures (deterministic functions are cheap to test
-      and should be locked down before Phase 2 builds on top of them).
-- [ ] Consider a confidence field per collected fact (e.g. "rating
-      confirmed via knowledge panel" vs "confirmed via 3rd-party
-      aggregator") if data quality varies enough to matter downstream.
+- [x] Unit tests for the scoring/opportunity/gate engine — done in Phase
+      1.1 (`lighthouse/tests/`, 81 tests, `pytest --cov` ~83% overall,
+      90-100% on the security/evidence-critical modules).
+- [ ] Same test coverage treatment for the v1 (search-snippet) modules —
+      `outputs/csv_writer.py`/`md_writer.py` are currently only exercised
+      via the full `python -m lighthouse.pipeline` integration run, not
+      unit tests.
+- [ ] Revisit the `mypy --strict` vs. default split for `lighthouse/tests/`
+      (see `pyproject.toml`, `Decision_Log.md`) if a future contributor
+      wants full strict coverage there too — the gap is pytest/respx
+      fixture annotation boilerplate, not a code-quality issue.
 
 ## Future phases (design captured in Architecture.md, not started)
 

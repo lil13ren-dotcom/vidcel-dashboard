@@ -22,6 +22,7 @@ Phase 2+ (designed, not implemented — see docs/lighthouse/Architecture.md):
     and the analysis stage would be untouched because it only ever
     consumes RawCompany objects.
 """
+
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
@@ -38,14 +39,14 @@ class Collector(ABC):
         raise NotImplementedError
 
 
-def load_raw_companies(paths: list) -> list:
+def load_raw_companies(paths: list[str]) -> list[RawCompany]:
     """Load and validate RawCompany records from one or more JSON files.
 
     Each file may contain either a single object or a list of objects.
     """
     import json
 
-    companies = []
+    companies: list[RawCompany] = []
     for path in paths:
         with open(path) as f:
             data = json.load(f)

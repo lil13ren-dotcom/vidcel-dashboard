@@ -7,9 +7,10 @@ numeric answer). This is intentional per the project brief: AI is used
 upstream to *observe* facts (prompts/website_signal_prompt.py); it is
 never used to *score* them.
 """
+
 from __future__ import annotations
 
-from lighthouse.models import RawCompany
+from lighthouse.models import RawCompany, WebsiteSignals
 
 # --- category definitions -------------------------------------------------
 # Each maps to one "Collect" bucket from the brief. Weights sum to 100
@@ -17,22 +18,39 @@ from lighthouse.models import RawCompany
 # companies and industries.
 
 WEBSITE_CORE_SIGNALS = [
-    "https", "mobile_friendly", "cta", "quote_form", "contact_form",
-    "financing", "warranty", "faq", "about_us", "team_page",
-    "certifications", "service_area",
+    "https",
+    "mobile_friendly",
+    "cta",
+    "quote_form",
+    "contact_form",
+    "financing",
+    "warranty",
+    "faq",
+    "about_us",
+    "team_page",
+    "certifications",
+    "service_area",
 ]
 
 PROOF_SIGNALS = [
-    "portfolio", "case_studies", "before_after",
-    "testimonials", "customer_photos", "customer_videos",
+    "portfolio",
+    "case_studies",
+    "before_after",
+    "testimonials",
+    "customer_photos",
+    "customer_videos",
 ]
 
 TRUST_SIGNALS = [
-    "portfolio", "before_after", "team_page", "certifications", "warranty",
+    "portfolio",
+    "before_after",
+    "team_page",
+    "certifications",
+    "warranty",
 ]
 
 
-def _pct_present(signals, keys) -> float:
+def _pct_present(signals: WebsiteSignals, keys: list[str]) -> float:
     present = sum(1 for k in keys if getattr(signals, k))
     return 100.0 * present / len(keys)
 
@@ -64,7 +82,11 @@ def trust_score(company: RawCompany) -> float:
     """
     signal_component = _pct_present(company.website_signals, TRUST_SIGNALS)
     if company.rating is not None and company.review_count is not None:
-        reviews_component = min(100.0, 50.0 * (company.rating / 5.0) + 50.0 * min(company.review_count, 100) / 100.0)
+        reviews_component = min(
+            100.0,
+            50.0 * (company.rating / 5.0)
+            + 50.0 * min(company.review_count, 100) / 100.0,
+        )
     else:
         reviews_component = 0.0
     # weight: 5 site-evidence types + 1 reviews component, equal weight
@@ -81,7 +103,9 @@ def social_score(company: RawCompany) -> float:
     that is where a video-production opportunity is most visible.
     """
     weights = {"facebook": 20, "instagram": 20, "youtube": 30, "tiktok": 30}
-    return sum(w for platform, w in weights.items() if getattr(company.social, platform))
+    return sum(
+        w for platform, w in weights.items() if getattr(company.social, platform)
+    )
 
 
 def video_score(company: RawCompany) -> float:
@@ -109,18 +133,23 @@ def overall_opportunity_score(company: RawCompany) -> float:
     strong website is not a good target — there's no gap to sell into.
     """
     demand = min(google_score(company), 100.0) / 100.0
-    maturity = sum([
-        website_score(company),
-        trust_score(company),
-        proof_score(company),
-        social_score(company),
-        video_score(company),
-    ]) / 5.0
+    maturity = (
+        sum(
+            [
+                website_score(company),
+                trust_score(company),
+                proof_score(company),
+                social_score(company),
+                video_score(company),
+            ]
+        )
+        / 5.0
+    )
     gap = 1.0 - (maturity / 100.0)
     return 100.0 * demand * gap
 
 
-def score_company(company: RawCompany) -> dict:
+def score_company(company: RawCompany) -> dict[str, float]:
     return {
         "google_score": google_score(company),
         "website_score": website_score(company),

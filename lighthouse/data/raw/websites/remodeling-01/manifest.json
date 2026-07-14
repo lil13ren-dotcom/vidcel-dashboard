@@ -1,0 +1,18 @@
+{
+  "company_id": "remodeling-01",
+  "pages": [
+    {
+      "requested_url": "https://www.catalystconstructionpdx.com/",
+      "final_url": "https://www.catalystconstructionpdx.com/",
+      "status": "policy_blocked",
+      "http_status": null,
+      "fetched_at": "2026-07-14T05:40:46.918208+00:00",
+      "content_hash": null,
+      "method": "http",
+      "attempts": 1,
+      "error_code": "ProxyError",
+      "error_message": "403 Forbidden",
+      "artifact_file": null
+    }
+  ]
+}

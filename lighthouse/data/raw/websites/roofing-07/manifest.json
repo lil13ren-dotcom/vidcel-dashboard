@@ -1,0 +1,18 @@
+{
+  "company_id": "roofing-07",
+  "pages": [
+    {
+      "requested_url": "https://lyonsroofing.com/",
+      "final_url": "https://lyonsroofing.com/",
+      "status": "policy_blocked",
+      "http_status": null,
+      "fetched_at": "2026-07-14T05:40:43.933380+00:00",
+      "content_hash": null,
+      "method": "http",
+      "attempts": 1,
+      "error_code": "ProxyError",
+      "error_message": "403 Forbidden",
+      "artifact_file": null
+    }
+  ]
+}

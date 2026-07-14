@@ -1,0 +1,38 @@
+[
+  {
+    "id": "smoke-us-01",
+    "industry": "Roofing",
+    "name": "Kidd Roofing",
+    "website": "https://www.kiddroof.com/",
+    "city": "Austin",
+    "state": "TX",
+    "website_signals": {
+      "https": false, "mobile_friendly": false, "cta": false, "quote_form": false,
+      "contact_form": false, "financing": false, "warranty": false, "faq": false,
+      "about_us": false, "team_page": false, "certifications": false, "service_area": false,
+      "portfolio": false, "case_studies": false, "before_after": false,
+      "testimonials": false, "customer_photos": false, "customer_videos": false
+    },
+    "social": {"instagram": null, "facebook": null, "youtube": null, "tiktok": null},
+    "rating": 4.9,
+    "review_count": 768
+  },
+  {
+    "id": "smoke-jp-01",
+    "industry": "Smoke Test",
+    "name": "Toyota Motor Corporation (JP)",
+    "website": "https://www.toyota.co.jp/",
+    "city": "Toyota",
+    "state": "Aichi",
+    "website_signals": {
+      "https": false, "mobile_friendly": false, "cta": false, "quote_form": false,
+      "contact_form": false, "financing": false, "warranty": false, "faq": false,
+      "about_us": false, "team_page": false, "certifications": false, "service_area": false,
+      "portfolio": false, "case_studies": false, "before_after": false,
+      "testimonials": false, "customer_photos": false, "customer_videos": false
+    },
+    "social": {"instagram": null, "facebook": null, "youtube": null, "tiktok": null},
+    "rating": null,
+    "review_count": null
+  }
+]

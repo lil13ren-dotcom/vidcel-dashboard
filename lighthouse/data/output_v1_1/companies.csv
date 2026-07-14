@@ -1,0 +1,21 @@
+id,industry,name,website,google_maps_url,rating,review_count,phone,email,city,state,instagram,facebook,youtube,tiktok,homepage_fetch_status,pages_attempted,pages_fetched,acquisition_method
+roofing-01,Roofing,Kidd Roofing,https://www.kiddroof.com/,,4.9,768,512-671-7791,,Austin,TX,,,,,policy_blocked,1,0,none
+roofing-02,Roofing,Bold Brothers Roofing,https://www.boldbrothersroofing.com/,,5.0,127,,,Denver,CO,,,,,policy_blocked,1,0,none
+roofing-03,Roofing,Adamson Roofing Company,https://www.adamsonroofingcompany.com/,,4.9,110,(678) 424-1919,,Atlanta,GA,,,,,policy_blocked,1,0,none
+roofing-04,Roofing,Gibson Roofing,https://gibsonroofing.com/,,4.9,105,503-690-7663,info@gibsonroofing.com,Portland,OR,,,,,policy_blocked,1,0,none
+roofing-05,Roofing,Best Roofing Now,https://www.bestroofingnow.com/,,5.0,64,(704) 605-6047,,Charlotte,NC,,,,,policy_blocked,1,0,none
+roofing-06,Roofing,Owl Roofing,https://owlroofing.com/,,5.0,,651-977-6027,info@owlroofing.com,Minneapolis,MN,,,,,policy_blocked,1,0,none
+roofing-07,Roofing,Lyons Roofing,https://lyonsroofing.com/,,4.8,691,602-638-3135,apepper@lyonsroofing.com,Phoenix,AZ,,,,,policy_blocked,1,0,none
+roofing-08,Roofing,Bill Ragan Roofing Company,https://www.billraganroofing.com/,,4.9,206,(615) 242-0333,,Nashville,TN,,,,,policy_blocked,1,0,none
+roofing-09,Roofing,Ace Roofing,https://roofingace.com/,,,,(614) 457-1111,,Columbus,OH,,,,,policy_blocked,1,0,none
+roofing-10,Roofing,Straight Line Roofing & Construction,https://www.straightlineconstruction.com/,,4.9,624,916-985-9995,office@straightlineconstruction.com,Sacramento,CA,,,,,policy_blocked,1,0,none
+hvac-01,HVAC,Carter Comfort Systems,https://www.cartercomfort.com/,,5.0,300,(208) 739-4181,john@cartercomfort.com,Caldwell,ID,,,,,policy_blocked,1,0,none
+hvac-02,HVAC,River City Heating & Air,https://rivercityheatingair.com/,,4.7,240,(804) 674-9300,,Richmond,VA,,,,,policy_blocked,1,0,none
+hvac-03,HVAC,Advantage Air Mechanical,https://www.advantageairmechanical.com/,,4.5,,(520) 792-9400,Office@AdvantageAirMechanical.com,Tucson,AZ,,,,,policy_blocked,1,0,none
+hvac-04,HVAC,Harker Heating & Cooling,https://www.harkerheating.com/,,4.9,1736,(608) 255-6902,info@harkerheating.com,Madison,WI,,,,,policy_blocked,1,0,none
+hvac-05,HVAC,Horizon Homes,https://horizonmaine.com/,,4.9,,207-221-3221,,Westbrook,ME,,,,,policy_blocked,1,0,none
+remodeling-01,Remodeling,Catalyst Construction & Kitchen Remodeling,https://www.catalystconstructionpdx.com/,,,,(503) 914-9146,,Portland,OR,,,,,policy_blocked,1,0,none
+remodeling-02,Remodeling,New Creations Custom Kitchen and Bath,https://newcreationsaustin.com/,,,,(512) 963-9043,,Austin,TX,,,,,policy_blocked,1,0,none
+remodeling-03,Remodeling,Carolina Home Remodeling,https://www.carolinahomeremodeling.com/,,,,(704) 714-1257,info@carolinahomeremodeling.com,Charlotte,NC,,,,,policy_blocked,1,0,none
+remodeling-04,Remodeling,Mark Hammer Construction LTD,https://mhammerconstruction.com/,,,,(303) 895-9073,,Denver,CO,,,,,policy_blocked,1,0,none
+remodeling-05,Remodeling,Crystal Kitchen + Bath,https://crystalkitchen.com/,,4.9,47,763-544-5950,,Minneapolis,MN,,,,,policy_blocked,1,0,none

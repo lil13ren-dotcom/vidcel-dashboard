@@ -1,0 +1,19 @@
+{
+  "passed": false,
+  "run_status": "NOT_DECISION_GRADE",
+  "metrics": {
+    "companies_total": 20,
+    "homepage_fetch_success_rate": 0.0,
+    "relevant_page_inspected_rate": 0.0,
+    "companies_decision_grade": 0,
+    "companies_not_decision_grade": 20,
+    "failure_as_absence_violations": 0,
+    "incomplete_evidence_records": 0,
+    "nondeterministic_scoring_records": 0,
+    "legacy_false_defaults_removed": true
+  },
+  "failure_reasons": [
+    "homepage direct-fetch success rate 0% is below the 85% minimum",
+    "'at least one relevant page inspected' rate 0% is below the 75% minimum"
+  ]
+}

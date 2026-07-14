@@ -1,0 +1,1982 @@
+[
+  {
+    "id": "roofing-01",
+    "industry": "Roofing",
+    "name": "Kidd Roofing",
+    "website": "https://www.kiddroof.com/",
+    "city": "Austin",
+    "state": "TX",
+    "website_signals": {
+      "https": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "fetch failed before a response was received (policy_blocked); the requested URL's scheme is not evidence of what the site actually serves",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "mobile_friendly": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "homepage was not successfully fetched",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_photos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "image-dependent signal; textual heuristics found no explicit caption and no visual/vision review was performed",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_videos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no pages successfully fetched",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "cta": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "quote_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "contact_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "financing": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "warranty": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "faq": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "about_us": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "team_page": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "certifications": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "service_area": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "portfolio": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "case_studies": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "before_after": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "testimonials": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.336443+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      }
+    },
+    "social": {
+      "instagram": null,
+      "facebook": null,
+      "youtube": null,
+      "tiktok": null
+    },
+    "acquisition": {
+      "homepage_status": "policy_blocked",
+      "pages_attempted": 1,
+      "pages_fetched": 0,
+      "method_used": "none",
+      "run_at": "2026-07-14T05:40:42.336443+00:00",
+      "collector_version": "lighthouse-fetcher-1.1.0",
+      "blocked_reason": "403 Forbidden"
+    },
+    "google_maps_url": null,
+    "rating": 4.9,
+    "review_count": 768,
+    "phone": "512-671-7791",
+    "email": null,
+    "review_snippets": [],
+    "homepage_text_excerpt": null,
+    "sources": [
+      "https://www.kiddroof.com/"
+    ]
+  },
+  {
+    "id": "roofing-02",
+    "industry": "Roofing",
+    "name": "Bold Brothers Roofing",
+    "website": "https://www.boldbrothersroofing.com/",
+    "city": "Denver",
+    "state": "CO",
+    "website_signals": {
+      "https": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "fetch failed before a response was received (policy_blocked); the requested URL's scheme is not evidence of what the site actually serves",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "mobile_friendly": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "homepage was not successfully fetched",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_photos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "image-dependent signal; textual heuristics found no explicit caption and no visual/vision review was performed",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_videos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no pages successfully fetched",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "cta": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "quote_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "contact_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "financing": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "warranty": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "faq": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "about_us": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "team_page": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "certifications": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "service_area": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "portfolio": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "case_studies": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "before_after": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "testimonials": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337028+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      }
+    },
+    "social": {
+      "instagram": null,
+      "facebook": null,
+      "youtube": null,
+      "tiktok": null
+    },
+    "acquisition": {
+      "homepage_status": "policy_blocked",
+      "pages_attempted": 1,
+      "pages_fetched": 0,
+      "method_used": "none",
+      "run_at": "2026-07-14T05:40:42.337028+00:00",
+      "collector_version": "lighthouse-fetcher-1.1.0",
+      "blocked_reason": "403 Forbidden"
+    },
+    "google_maps_url": null,
+    "rating": 5.0,
+    "review_count": 127,
+    "phone": null,
+    "email": null,
+    "review_snippets": [],
+    "homepage_text_excerpt": null,
+    "sources": [
+      "https://www.boldbrothersroofing.com/"
+    ]
+  },
+  {
+    "id": "roofing-03",
+    "industry": "Roofing",
+    "name": "Adamson Roofing Company",
+    "website": "https://www.adamsonroofingcompany.com/",
+    "city": "Atlanta",
+    "state": "GA",
+    "website_signals": {
+      "https": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "fetch failed before a response was received (policy_blocked); the requested URL's scheme is not evidence of what the site actually serves",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "mobile_friendly": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "homepage was not successfully fetched",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_photos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "image-dependent signal; textual heuristics found no explicit caption and no visual/vision review was performed",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_videos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no pages successfully fetched",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "cta": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "quote_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "contact_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "financing": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "warranty": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "faq": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "about_us": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "team_page": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "certifications": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "service_area": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "portfolio": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "case_studies": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "before_after": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "testimonials": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.337841+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      }
+    },
+    "social": {
+      "instagram": null,
+      "facebook": null,
+      "youtube": null,
+      "tiktok": null
+    },
+    "acquisition": {
+      "homepage_status": "policy_blocked",
+      "pages_attempted": 1,
+      "pages_fetched": 0,
+      "method_used": "none",
+      "run_at": "2026-07-14T05:40:42.337841+00:00",
+      "collector_version": "lighthouse-fetcher-1.1.0",
+      "blocked_reason": "403 Forbidden"
+    },
+    "google_maps_url": null,
+    "rating": 4.9,
+    "review_count": 110,
+    "phone": "(678) 424-1919",
+    "email": null,
+    "review_snippets": [],
+    "homepage_text_excerpt": null,
+    "sources": [
+      "https://www.adamsonroofingcompany.com/"
+    ]
+  },
+  {
+    "id": "roofing-04",
+    "industry": "Roofing",
+    "name": "Gibson Roofing",
+    "website": "https://gibsonroofing.com/",
+    "city": "Portland",
+    "state": "OR",
+    "website_signals": {
+      "https": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "fetch failed before a response was received (policy_blocked); the requested URL's scheme is not evidence of what the site actually serves",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "mobile_friendly": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "homepage was not successfully fetched",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_photos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "image-dependent signal; textual heuristics found no explicit caption and no visual/vision review was performed",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_videos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no pages successfully fetched",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "cta": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "quote_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "contact_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "financing": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "warranty": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "faq": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "about_us": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "team_page": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "certifications": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "service_area": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "portfolio": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "case_studies": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "before_after": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "testimonials": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:42.338718+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      }
+    },
+    "social": {
+      "instagram": null,
+      "facebook": null,
+      "youtube": null,
+      "tiktok": null
+    },
+    "acquisition": {
+      "homepage_status": "policy_blocked",
+      "pages_attempted": 1,
+      "pages_fetched": 0,
+      "method_used": "none",
+      "run_at": "2026-07-14T05:40:42.338718+00:00",
+      "collector_version": "lighthouse-fetcher-1.1.0",
+      "blocked_reason": "403 Forbidden"
+    },
+    "google_maps_url": null,
+    "rating": 4.9,
+    "review_count": 105,
+    "phone": "503-690-7663",
+    "email": "info@gibsonroofing.com",
+    "review_snippets": [],
+    "homepage_text_excerpt": null,
+    "sources": [
+      "https://gibsonroofing.com/"
+    ]
+  },
+  {
+    "id": "roofing-05",
+    "industry": "Roofing",
+    "name": "Best Roofing Now",
+    "website": "https://www.bestroofingnow.com/",
+    "city": "Charlotte",
+    "state": "NC",
+    "website_signals": {
+      "https": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "fetch failed before a response was received (policy_blocked); the requested URL's scheme is not evidence of what the site actually serves",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "mobile_friendly": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "homepage was not successfully fetched",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_photos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "image-dependent signal; textual heuristics found no explicit caption and no visual/vision review was performed",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_videos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no pages successfully fetched",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "cta": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "quote_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "contact_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "financing": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "warranty": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "faq": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "about_us": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "team_page": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "certifications": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "service_area": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "portfolio": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "case_studies": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "before_after": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "testimonials": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.817119+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      }
+    },
+    "social": {
+      "instagram": null,
+      "facebook": null,
+      "youtube": null,
+      "tiktok": null
+    },
+    "acquisition": {
+      "homepage_status": "policy_blocked",
+      "pages_attempted": 1,
+      "pages_fetched": 0,
+      "method_used": "none",
+      "run_at": "2026-07-14T05:40:43.817119+00:00",
+      "collector_version": "lighthouse-fetcher-1.1.0",
+      "blocked_reason": "403 Forbidden"
+    },
+    "google_maps_url": null,
+    "rating": 5.0,
+    "review_count": 64,
+    "phone": "(704) 605-6047",
+    "email": null,
+    "review_snippets": [
+      "the price was not only good but the warranty is amazing and the roof looks GREAT!"
+    ],
+    "homepage_text_excerpt": null,
+    "sources": [
+      "https://www.bestroofingnow.com/"
+    ]
+  },
+  {
+    "id": "roofing-06",
+    "industry": "Roofing",
+    "name": "Owl Roofing",
+    "website": "https://owlroofing.com/",
+    "city": "Minneapolis",
+    "state": "MN",
+    "website_signals": {
+      "https": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "fetch failed before a response was received (policy_blocked); the requested URL's scheme is not evidence of what the site actually serves",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "mobile_friendly": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "homepage was not successfully fetched",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_photos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "image-dependent signal; textual heuristics found no explicit caption and no visual/vision review was performed",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_videos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no pages successfully fetched",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "cta": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "quote_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "contact_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "financing": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "warranty": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "faq": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "about_us": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "team_page": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "certifications": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "service_area": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "portfolio": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "case_studies": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "before_after": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "testimonials": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.930220+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      }
+    },
+    "social": {
+      "instagram": null,
+      "facebook": null,
+      "youtube": null,
+      "tiktok": null
+    },
+    "acquisition": {
+      "homepage_status": "policy_blocked",
+      "pages_attempted": 1,
+      "pages_fetched": 0,
+      "method_used": "none",
+      "run_at": "2026-07-14T05:40:43.930220+00:00",
+      "collector_version": "lighthouse-fetcher-1.1.0",
+      "blocked_reason": "403 Forbidden"
+    },
+    "google_maps_url": null,
+    "rating": 5.0,
+    "review_count": null,
+    "phone": "651-977-6027",
+    "email": "info@owlroofing.com",
+    "review_snippets": [
+      "did an excellent job with our roof and windows, and the entire experience was straightforward from the beginning. He communicated clearly, showed attention to detail, and delivered high-quality work."
+    ],
+    "homepage_text_excerpt": null,
+    "sources": [
+      "https://owlroofing.com/"
+    ]
+  },
+  {
+    "id": "roofing-07",
+    "industry": "Roofing",
+    "name": "Lyons Roofing",
+    "website": "https://lyonsroofing.com/",
+    "city": "Phoenix",
+    "state": "AZ",
+    "website_signals": {
+      "https": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "fetch failed before a response was received (policy_blocked); the requested URL's scheme is not evidence of what the site actually serves",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "mobile_friendly": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "homepage was not successfully fetched",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_photos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "image-dependent signal; textual heuristics found no explicit caption and no visual/vision review was performed",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_videos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no pages successfully fetched",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "cta": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "quote_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "contact_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "financing": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "warranty": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "faq": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "about_us": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "team_page": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "certifications": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "service_area": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "portfolio": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "case_studies": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "before_after": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "testimonials": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.933369+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      }
+    },
+    "social": {
+      "instagram": null,
+      "facebook": null,
+      "youtube": null,
+      "tiktok": null
+    },
+    "acquisition": {
+      "homepage_status": "policy_blocked",
+      "pages_attempted": 1,
+      "pages_fetched": 0,
+      "method_used": "none",
+      "run_at": "2026-07-14T05:40:43.933369+00:00",
+      "collector_version": "lighthouse-fetcher-1.1.0",
+      "blocked_reason": "403 Forbidden"
+    },
+    "google_maps_url": null,
+    "rating": 4.8,
+    "review_count": 691,
+    "phone": "602-638-3135",
+    "email": "apepper@lyonsroofing.com",
+    "review_snippets": [],
+    "homepage_text_excerpt": null,
+    "sources": [
+      "https://lyonsroofing.com/"
+    ]
+  },
+  {
+    "id": "roofing-08",
+    "industry": "Roofing",
+    "name": "Bill Ragan Roofing Company",
+    "website": "https://www.billraganroofing.com/",
+    "city": "Nashville",
+    "state": "TN",
+    "website_signals": {
+      "https": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "fetch failed before a response was received (policy_blocked); the requested URL's scheme is not evidence of what the site actually serves",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "mobile_friendly": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "homepage was not successfully fetched",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_photos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "image-dependent signal; textual heuristics found no explicit caption and no visual/vision review was performed",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_videos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no pages successfully fetched",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "cta": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "quote_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "contact_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "financing": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "warranty": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "faq": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "about_us": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "team_page": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "certifications": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "service_area": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "portfolio": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "case_studies": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "before_after": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "testimonials": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:43.937053+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      }
+    },
+    "social": {
+      "instagram": null,
+      "facebook": null,
+      "youtube": null,
+      "tiktok": null
+    },
+    "acquisition": {
+      "homepage_status": "policy_blocked",
+      "pages_attempted": 1,
+      "pages_fetched": 0,
+      "method_used": "none",
+      "run_at": "2026-07-14T05:40:43.937053+00:00",
+      "collector_version": "lighthouse-fetcher-1.1.0",
+      "blocked_reason": "403 Forbidden"
+    },
+    "google_maps_url": null,
+    "rating": 4.9,
+    "review_count": 206,
+    "phone": "(615) 242-0333",
+    "email": null,
+    "review_snippets": [
+      "My claim was approved by the insurance company, and Bill Ragan made the process so easy. The roofing crew showed up when Bill Ragan said they would and did an outstanding job over the two-day period of installation."
+    ],
+    "homepage_text_excerpt": null,
+    "sources": [
+      "https://www.billraganroofing.com/"
+    ]
+  },
+  {
+    "id": "roofing-09",
+    "industry": "Roofing",
+    "name": "Ace Roofing",
+    "website": "https://roofingace.com/",
+    "city": "Columbus",
+    "state": "OH",
+    "website_signals": {
+      "https": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "fetch failed before a response was received (policy_blocked); the requested URL's scheme is not evidence of what the site actually serves",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "mobile_friendly": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "homepage was not successfully fetched",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_photos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "image-dependent signal; textual heuristics found no explicit caption and no visual/vision review was performed",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_videos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no pages successfully fetched",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "cta": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "quote_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "contact_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "financing": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "warranty": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "faq": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "about_us": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "team_page": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "certifications": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "service_area": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "portfolio": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "case_studies": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "before_after": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "testimonials": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.300679+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      }
+    },
+    "social": {
+      "instagram": null,
+      "facebook": null,
+      "youtube": null,
+      "tiktok": null
+    },
+    "acquisition": {
+      "homepage_status": "policy_blocked",
+      "pages_attempted": 1,
+      "pages_fetched": 0,
+      "method_used": "none",
+      "run_at": "2026-07-14T05:40:45.300679+00:00",
+      "collector_version": "lighthouse-fetcher-1.1.0",
+      "blocked_reason": "403 Forbidden"
+    },
+    "google_maps_url": null,
+    "rating": null,
+    "review_count": null,
+    "phone": "(614) 457-1111",
+    "email": null,
+    "review_snippets": [
+      "I couldn't be more pleased with Ace Roofing. I had a leak in my roof that was shutting down my furnace (unit is in the attic). The owner got me scheduled quickly and kept me informed via call when Steve would arrive. He quickly found and fixed the problem and also took photos to show me the repairs. This company is EXCELLENT in every way, and I highly recommend them."
+    ],
+    "homepage_text_excerpt": null,
+    "sources": [
+      "https://roofingace.com/"
+    ]
+  },
+  {
+    "id": "roofing-10",
+    "industry": "Roofing",
+    "name": "Straight Line Roofing & Construction",
+    "website": "https://www.straightlineconstruction.com/",
+    "city": "Sacramento",
+    "state": "CA",
+    "website_signals": {
+      "https": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "fetch failed before a response was received (policy_blocked); the requested URL's scheme is not evidence of what the site actually serves",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "mobile_friendly": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "homepage was not successfully fetched",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_photos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "image-dependent signal; textual heuristics found no explicit caption and no visual/vision review was performed",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "customer_videos": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no pages successfully fetched",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "cta": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "quote_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "contact_form": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "financing": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "warranty": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "faq": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "about_us": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "team_page": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "certifications": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "service_area": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "portfolio": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "case_studies": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "before_after": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      },
+      "testimonials": {
+        "status": "unknown",
+        "value": null,
+        "confidence": 0.0,
+        "source_url": null,
+        "evidence_text": "no relevant page for this signal's topic was successfully fetched this run",
+        "collected_at": "2026-07-14T05:40:45.351612+00:00",
+        "collector_version": "lighthouse-fetcher-1.1.0"
+      }
+    },
+    "social": {
+      "instagram": null,
+      "facebook": null,
+      "youtube": null,
+      "tiktok": null
+    },
+    "acquisition": {
+      "homepage_status": "policy_blocked",
+      "pages_attempted": 1,
+      "pages_fetched": 0,
+      "method_used": "none",
+      "run_at": "2026-07-14T05:40:45.351612+00:00",
+      "collector_version": "lighthouse-fetcher-1.1.0",
+      "blocked_reason": "403 Forbidden"
+    },
+    "google_maps_url": null,
+    "rating": 4.9,
+    "review_count": 624,
+    "phone": "916-985-9995",
+    "email": "office@straightlineconstruction.com",
+    "review_snippets": [
+      "an amazing job, in both the quality and workmanship of the roof replacement and the incredible customer service"
+    ],
+    "homepage_text_excerpt": null,
+    "sources": [
+      "https://www.straightlineconstruction.com/"
+    ]
+  }
+]

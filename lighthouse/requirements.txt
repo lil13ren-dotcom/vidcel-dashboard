@@ -1,0 +1,8 @@
+# Runtime dependencies for the acquisition layer.
+httpx>=0.28
+playwright>=1.61
+
+# Test/dev dependencies.
+pytest>=9.0
+pytest-cov>=7.0
+respx>=0.23

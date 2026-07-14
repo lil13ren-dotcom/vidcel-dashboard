@@ -1,0 +1,18 @@
+{
+  "company_id": "roofing-01",
+  "pages": [
+    {
+      "requested_url": "https://www.kiddroof.com/",
+      "final_url": "https://www.kiddroof.com/",
+      "status": "policy_blocked",
+      "http_status": null,
+      "fetched_at": "2026-07-14T05:40:42.336488+00:00",
+      "content_hash": null,
+      "method": "http",
+      "attempts": 1,
+      "error_code": "ProxyError",
+      "error_message": "403 Forbidden",
+      "artifact_file": null
+    }
+  ]
+}

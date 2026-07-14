@@ -1,0 +1,21 @@
+id,industry,name,city,state,website,google_score_observed,website_score_observed,trust_score_observed,proof_score_observed,social_score_observed,video_score_observed,overall_opportunity_score,data_coverage_ratio,data_confidence,decision_grade,decision_grade_reason
+roofing-01,Roofing,Kidd Roofing,Austin,TX,https://www.kiddroof.com/,98.6,,,,,,,0.17,0.0,False,no website-derived category met the decision-grade coverage threshold
+roofing-02,Roofing,Bold Brothers Roofing,Denver,CO,https://www.boldbrothersroofing.com/,89.0,,,,,,,0.17,0.0,False,no website-derived category met the decision-grade coverage threshold
+roofing-03,Roofing,Adamson Roofing Company,Atlanta,GA,https://www.adamsonroofingcompany.com/,85.1,,,,,,,0.17,0.0,False,no website-derived category met the decision-grade coverage threshold
+roofing-04,Roofing,Gibson Roofing,Portland,OR,https://gibsonroofing.com/,84.4,,,,,,,0.17,0.0,False,no website-derived category met the decision-grade coverage threshold
+roofing-05,Roofing,Best Roofing Now,Charlotte,NC,https://www.bestroofingnow.com/,79.6,,,,,,,0.17,0.0,False,no website-derived category met the decision-grade coverage threshold
+roofing-06,Roofing,Owl Roofing,Minneapolis,MN,https://owlroofing.com/,,,,,,,,0.0,0.0,False,no website-derived category met the decision-grade coverage threshold
+roofing-07,Roofing,Lyons Roofing,Phoenix,AZ,https://lyonsroofing.com/,97.2,,,,,,,0.17,0.0,False,no website-derived category met the decision-grade coverage threshold
+roofing-08,Roofing,Bill Ragan Roofing Company,Nashville,TN,https://www.billraganroofing.com/,98.6,,,,,,,0.17,0.0,False,no website-derived category met the decision-grade coverage threshold
+roofing-09,Roofing,Ace Roofing,Columbus,OH,https://roofingace.com/,,,,,,,,0.0,0.0,False,no website-derived category met the decision-grade coverage threshold
+roofing-10,Roofing,Straight Line Roofing & Construction,Sacramento,CA,https://www.straightlineconstruction.com/,98.6,,,,,,,0.17,0.0,False,no website-derived category met the decision-grade coverage threshold
+hvac-01,HVAC,Carter Comfort Systems,Caldwell,ID,https://www.cartercomfort.com/,100.0,,,,,,,0.17,0.0,False,no website-derived category met the decision-grade coverage threshold
+hvac-02,HVAC,River City Heating & Air,Richmond,VA,https://rivercityheatingair.com/,95.8,,,,,,,0.17,0.0,False,no website-derived category met the decision-grade coverage threshold
+hvac-03,HVAC,Advantage Air Mechanical,Tucson,AZ,https://www.advantageairmechanical.com/,,,,,,,,0.0,0.0,False,no website-derived category met the decision-grade coverage threshold
+hvac-04,HVAC,Harker Heating & Cooling,Madison,WI,https://www.harkerheating.com/,98.6,,,,,,,0.17,0.0,False,no website-derived category met the decision-grade coverage threshold
+hvac-05,HVAC,Horizon Homes,Westbrook,ME,https://horizonmaine.com/,,,,,,,,0.0,0.0,False,no website-derived category met the decision-grade coverage threshold
+remodeling-01,Remodeling,Catalyst Construction & Kitchen Remodeling,Portland,OR,https://www.catalystconstructionpdx.com/,,,,,,,,0.0,0.0,False,no website-derived category met the decision-grade coverage threshold
+remodeling-02,Remodeling,New Creations Custom Kitchen and Bath,Austin,TX,https://newcreationsaustin.com/,,,,,,,,0.0,0.0,False,no website-derived category met the decision-grade coverage threshold
+remodeling-03,Remodeling,Carolina Home Remodeling,Charlotte,NC,https://www.carolinahomeremodeling.com/,,,,,,,,0.0,0.0,False,no website-derived category met the decision-grade coverage threshold
+remodeling-04,Remodeling,Mark Hammer Construction LTD,Denver,CO,https://mhammerconstruction.com/,,,,,,,,0.0,0.0,False,no website-derived category met the decision-grade coverage threshold
+remodeling-05,Remodeling,Crystal Kitchen + Bath,Minneapolis,MN,https://crystalkitchen.com/,75.7,,,,,,,0.17,0.0,False,no website-derived category met the decision-grade coverage threshold
