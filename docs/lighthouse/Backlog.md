@@ -2,6 +2,15 @@
 
 ## Phase 1 follow-ups (same scope, better data)
 
+- [ ] **P0 — Restore direct page-fetch access.** `WebFetch` returned 403
+      for every destination during this POC's actual data collection run
+      (confirmed environment-level egress block, not per-site — see
+      `Decision_Log.md`, 2026-07-14). As a direct result, `mobile_friendly`,
+      `before_after`, and `customer_photos` are unverified (not
+      confirmed-false) for all 20 companies. Fixing this is the single
+      highest-leverage change before running this pipeline on real
+      outbound targets — right now those three signals can't be trusted
+      at all.
 - [ ] Integrate a real ratings/reviews source (Google Places API or Yelp
       Fusion API) so `rating`/`review_count`/`google_maps_url` are
       confirmed data, not best-effort search snippets. Highest-leverage

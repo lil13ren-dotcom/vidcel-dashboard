@@ -20,6 +20,15 @@ WEBSITE_SIGNAL_KEYS = [
 
 SOCIAL_KEYS = ["instagram", "facebook", "youtube", "tiktok"]
 
+RENDER_ONLY_SIGNAL_KEYS = ["mobile_friendly", "before_after", "customer_photos"]
+"""Signals that can only be confirmed by actually rendering the page (viewport
+behavior, real photos). If collection could not fetch the live page (see
+docs/lighthouse/Decision_Log.md, 2026-07-13 WebFetch outage entry), these come
+back `false` by the "unconfirmed -> false" rule, but that `false` means
+"not verified this run," not "confirmed absent." Flagged separately in
+outputs so nobody quotes them to a prospect as fact.
+"""
+
 SIGNAL_LABELS = {
     "https": "HTTPS enabled",
     "mobile_friendly": "Mobile-friendly site",

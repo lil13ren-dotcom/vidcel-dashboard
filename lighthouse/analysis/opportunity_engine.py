@@ -35,7 +35,7 @@ CATALOG = [
     {
         "title": "Before / After Gallery",
         "trigger": _trigger_missing("before_after"),
-        "reason": "No before/after photos — the single strongest proof format for visually-driven trades like roofing, HVAC, and remodeling.",
+        "reason": "Before/after photos were not found or not confirmable during this research pass (worth a direct site check) — the single strongest proof format for visually-driven trades like roofing, HVAC, and remodeling.",
         "impact": "High", "difficulty": "Medium", "ai_automation": "Medium",
     },
     {
@@ -107,7 +107,7 @@ CATALOG = [
     {
         "title": "Mobile Optimization",
         "trigger": _trigger_missing("mobile_friendly"),
-        "reason": "Site is not mobile-friendly, and most local-service searches happen on a phone.",
+        "reason": "Mobile-friendliness could not be confirmed during this research pass and should be checked directly (this requires rendering the live page) — most local-service searches happen on a phone, so it's worth verifying first.",
         "impact": "High", "difficulty": "Medium", "ai_automation": "Low",
     },
 ]

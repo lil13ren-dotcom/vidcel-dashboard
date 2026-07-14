@@ -1,5 +1,47 @@
 # Project Lighthouse — Decision Log
 
+## 2026-07-14 — WebFetch unavailable during real data collection
+
+**What happened:** When the three research agents actually ran against the
+20 real companies, `WebFetch` returned HTTP 403 for every destination
+tried — including neutral control targets (example.com, wikipedia.org) —
+confirming an environment-level egress policy block, not a per-site
+issue. All three agents independently hit this and, correctly, did not
+retry or attempt workarounds; instead they reconstructed `website_signals`
+from `WebSearch` result snippets/aggregator listings (BBB, Yelp, Trane
+dealer pages, etc.) and applied the schema's existing "unconfirmed ->
+false" rule.
+
+**Observed effect:** `mobile_friendly`, `before_after`, and
+`customer_photos` came back `false` for all 20 companies — a 0/20 hit
+rate on every one of them. That uniformity is itself the signal that
+these three specifically require rendering the live page (responsive
+layout, actual images) and cannot be confirmed from search snippets at
+any real business, not that 20/20 real companies genuinely lack them.
+
+**Decision:** Rather than treat this as clean data, mark it as a known
+collection-method artifact:
+- Added `RENDER_ONLY_SIGNAL_KEYS` (`lighthouse/models.py`) for exactly
+  these three signals.
+- `outputs/md_writer.py` now excludes them from "confirmed gaps" lists
+  and instead reports them under "not verified this run" in every company
+  report and the industry summary, with a prominent caveat banner
+  (`DATA_COLLECTION_CAVEAT`) at the top of both.
+- The two opportunity-catalog rules keyed to these signals ("Before/After
+  Gallery", "Mobile Optimization" in `analysis/opportunity_engine.py`)
+  were reworded to say "not confirmed, verify directly" instead of
+  asserting absence as fact.
+- Scoring itself was left unchanged (still conservative-false, consistent
+  with the existing rating/review_count rule) — the fix is in how the
+  result is *reported*, so a rep never states an unverified claim to a
+  prospect as researched fact.
+**Why not just re-run collection until WebFetch works:** the brief calls
+for validating methodology, and the methodology held up — the pipeline
+correctly propagated an "unconfirmed" state through scoring and into the
+final reports instead of silently guessing. Restoring live page access is
+tracked as the top Backlog item for the next run rather than blocking
+this POC on an infrastructure problem outside the pipeline's control.
+
 ## 2026-07-13 — Phase 1 POC build
 
 **Decision:** Scope Phase 1 to exactly 20 companies (10 Roofing, 5 HVAC, 5

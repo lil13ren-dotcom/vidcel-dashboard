@@ -10,19 +10,40 @@ from __future__ import annotations
 import os
 import statistics as stats
 
-from lighthouse.models import ScoredCompany, WEBSITE_SIGNAL_KEYS, SIGNAL_LABELS
+from lighthouse.models import ScoredCompany, WEBSITE_SIGNAL_KEYS, SIGNAL_LABELS, RENDER_ONLY_SIGNAL_KEYS
 from lighthouse.analysis.opportunity_engine import SUGGESTED_PRODUCT, OUTREACH_ANGLE
+
+DATA_COLLECTION_CAVEAT = (
+    "**Data collection note:** in this Phase 1 run, direct page-rendering "
+    "access (`WebFetch`) was unavailable, so website signals were "
+    "reconstructed from search-result snippets rather than the live page. "
+    "That method can confirm most signals (a page titled \"Testimonials\" or "
+    "\"Financing\" turning up in search is good evidence), but it cannot "
+    "confirm signals that require actually seeing the rendered page: "
+    "**mobile-friendliness, before/after photos, and customer-submitted "
+    "photos**. Those three show `false` for every company in this sample — "
+    "read that as *not verified this run*, not *confirmed absent*. See "
+    "`docs/lighthouse/Decision_Log.md` for detail. Everything else below is "
+    "search-confirmed evidence, not a guess."
+)
 
 
 def _present_absent(company) -> tuple:
     present = [SIGNAL_LABELS[k] for k in WEBSITE_SIGNAL_KEYS if getattr(company.website_signals, k)]
-    absent = [SIGNAL_LABELS[k] for k in WEBSITE_SIGNAL_KEYS if not getattr(company.website_signals, k)]
-    return present, absent
+    absent = [
+        SIGNAL_LABELS[k] for k in WEBSITE_SIGNAL_KEYS
+        if not getattr(company.website_signals, k) and k not in RENDER_ONLY_SIGNAL_KEYS
+    ]
+    unverified = [
+        SIGNAL_LABELS[k] for k in RENDER_ONLY_SIGNAL_KEYS
+        if not getattr(company.website_signals, k)
+    ]
+    return present, absent, unverified
 
 
 def write_company_report(sc: ScoredCompany, path: str) -> None:
     c = sc.company
-    present, absent = _present_absent(c)
+    present, absent, unverified = _present_absent(c)
     top_opp = sc.opportunities[0] if sc.opportunities else None
     product = SUGGESTED_PRODUCT.get(top_opp.title, "Digital Trust Audit") if top_opp else "Digital Trust Audit"
     angle = (OUTREACH_ANGLE.get(top_opp.title, "\"{name}, there's a clear gap between how good you are and how that shows up online.\"")
@@ -34,6 +55,9 @@ def write_company_report(sc: ScoredCompany, path: str) -> None:
     lines.append(f"**Industry:** {c.industry}  ")
     lines.append(f"**Location:** {c.city}, {c.state}  ")
     lines.append(f"**Website:** {c.website}  ")
+    lines.append("")
+    lines.append(f"> {DATA_COLLECTION_CAVEAT}")
+    lines.append("")
     if c.rating is not None and c.review_count is not None:
         lines.append(f"**Google:** {c.rating}★ ({c.review_count} reviews)  ")
     else:
@@ -65,7 +89,12 @@ def write_company_report(sc: ScoredCompany, path: str) -> None:
         for a in absent:
             lines.append(f"- Missing: {a}")
     else:
-        lines.append("- No gaps detected against the core signal checklist.")
+        lines.append("- No confirmed gaps against the core signal checklist.")
+    if unverified:
+        lines.append("")
+        lines.append("**Not verified this run (requires a live page render — do not state these as fact):**")
+        for u in unverified:
+            lines.append(f"- {u}")
     lines.append("")
 
     if sc.top_customer_words:
@@ -132,6 +161,8 @@ def write_industry_summary(scored: list, path: str) -> None:
     lines = ["# Project Lighthouse — Industry Summary (Phase 1 POC)", ""]
     lines.append(f"Companies analyzed: **{len(scored)}** across {len(industries)} industries.")
     lines.append("")
+    lines.append(f"> {DATA_COLLECTION_CAVEAT}")
+    lines.append("")
 
     for industry in industries:
         group = [sc for sc in scored if sc.company.industry == industry]
@@ -150,15 +181,18 @@ def write_industry_summary(scored: list, path: str) -> None:
             lines.append(f"| {label} | {avg(attr)} |")
         lines.append("")
 
-        # Most common missing signals across the industry
-        from lighthouse.models import WEBSITE_SIGNAL_KEYS
+        # Most common missing signals across the industry (excludes the
+        # render-only signals that this run couldn't confirm either way —
+        # see DATA_COLLECTION_CAVEAT above)
         gap_counts = {}
         for key in WEBSITE_SIGNAL_KEYS:
+            if key in RENDER_ONLY_SIGNAL_KEYS:
+                continue
             missing = sum(1 for sc in group if not getattr(sc.company.website_signals, key))
             if missing:
                 gap_counts[key] = missing
         if gap_counts:
-            lines.append("**Most common gaps:**")
+            lines.append("**Most common confirmed gaps:**")
             lines.append("")
             for key, count in sorted(gap_counts.items(), key=lambda kv: kv[1], reverse=True)[:5]:
                 pct = round(100 * count / len(group))

@@ -1,0 +1,21 @@
+id,industry,name,city,state,website,google_score,website_score,trust_score,proof_score,social_score,video_score,overall_opportunity_score
+roofing-08,Roofing,Bill Ragan Roofing Company,Nashville,TN,https://www.billraganroofing.com/,98.6,41.7,49.8,0.0,20,0.0,76.6
+roofing-01,Roofing,Kidd Roofing,Austin,TX,https://www.kiddroof.com/,98.6,50.0,49.8,16.7,20,0.0,71.7
+roofing-10,Roofing,Straight Line Roofing & Construction,Sacramento,CA,https://www.straightlineconstruction.com/,98.6,50.0,49.8,16.7,20,0.0,71.7
+hvac-01,HVAC,Carter Comfort Systems,Caldwell,ID,https://www.cartercomfort.com/,100.0,75.0,50.0,16.7,20,0.0,67.7
+hvac-02,HVAC,River City Heating & Air,Richmond,VA,https://rivercityheatingair.com/,95.8,66.7,49.5,16.7,20,0.0,66.5
+roofing-03,Roofing,Adamson Roofing Company,Atlanta,GA,https://www.adamsonroofingcompany.com/,85.1,41.7,49.8,0.0,20,0.0,66.1
+roofing-07,Roofing,Lyons Roofing,Phoenix,AZ,https://lyonsroofing.com/,97.2,66.7,66.3,16.7,20,0.0,64.2
+roofing-02,Roofing,Bold Brothers Roofing,Denver,CO,https://www.boldbrothersroofing.com/,89.0,41.7,66.7,0.0,40,0.0,62.6
+roofing-05,Roofing,Best Roofing Now,Charlotte,NC,https://www.bestroofingnow.com/,79.6,41.7,47.0,0.0,20,0.0,62.3
+hvac-04,HVAC,Harker Heating & Cooling,Madison,WI,https://www.harkerheating.com/,98.6,83.3,49.8,16.7,40,0.0,61.2
+roofing-04,Roofing,Gibson Roofing,Portland,OR,https://gibsonroofing.com/,84.4,58.3,49.8,16.7,20,0.0,59.9
+remodeling-05,Remodeling,Crystal Kitchen + Bath,Minneapolis,MN,https://crystalkitchen.com/,75.7,25.0,28.8,33.3,20,0.0,59.4
+roofing-06,Roofing,Owl Roofing,Minneapolis,MN,https://owlroofing.com/,70.0,25.0,33.3,0.0,70,30.0,47.8
+hvac-05,HVAC,Horizon Homes,Westbrook,ME,https://horizonmaine.com/,68.6,83.3,33.3,33.3,20,0.0,45.3
+hvac-03,HVAC,Advantage Air Mechanical,Tucson,AZ,https://www.advantageairmechanical.com/,63.0,75.0,33.3,16.7,20,0.0,44.7
+roofing-09,Roofing,Ace Roofing,Columbus,OH,https://roofingace.com/,0.0,33.3,33.3,0.0,20,0.0,0.0
+remodeling-01,Remodeling,Catalyst Construction & Kitchen Remodeling,Portland,OR,https://www.catalystconstructionpdx.com/,0.0,41.7,50.0,33.3,40,0.0,0.0
+remodeling-02,Remodeling,New Creations Custom Kitchen and Bath,Austin,TX,https://newcreationsaustin.com/,0.0,25.0,33.3,33.3,40,0.0,0.0
+remodeling-03,Remodeling,Carolina Home Remodeling,Charlotte,NC,https://www.carolinahomeremodeling.com/,0.0,66.7,50.0,33.3,20,0.0,0.0
+remodeling-04,Remodeling,Mark Hammer Construction LTD,Denver,CO,https://mhammerconstruction.com/,0.0,25.0,0.0,16.7,20,0.0,0.0
