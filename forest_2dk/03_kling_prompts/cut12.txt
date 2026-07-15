@@ -1,23 +1,20 @@
-Cut 12 — 南室ステージング・夜バージョン（3秒ホールド）
-タイムライン: 0:26–0:28.5（尺 2.5s）／再生速度 0.9x
-入力: 02_staged_images/cut02_staged.png（Cut 02の生成結果を元に再生成）
+[MODE] Image-to-Video
 
---- Step 1: ステージング画像プロンプト（画像生成） ---
+[INPUT] 02_staged_images/cut12.png
+（Cut 02の生成結果(02_staged_images/cut02.png)を元に、§5の夜バージョンプロンプトで再生成した画像）
+
+[PROMPT]
+（§5より転記）
+
 Same staged room at night: floor lamp on, warm 2700K light, balcony door
 curtain closed, cozy and quiet atmosphere. No people. 9:16 vertical.
 
-出力: 02_staged_images/cut12_staged.png
+[CAMERA]
+Zoom: 0, Pan: 0, Tilt: 0, Roll: 0（Static / Fixed — §4「三脚固定」指定、カメラ移動なし）
 
---- Step 2: Kling Image-to-Video プロンプト ---
-入力画像: 02_staged_images/cut12_staged.png
-
-Static tripod hold of the staged south room at night, warm floor lamp glow,
-curtain closed, very subtle ambient motion only (light flicker, faint curtain
-movement), calm and quiet mood, no people, photorealistic, 9:16 vertical.
-
---- トリム指示 ---
-Kling生成尺: 5s
-use 0.5s–2.75s（等速素材として2.25s分を切り出す）
-編集(trim_and_concat.sh)側で setpts=1.111*PTS を適用し 0.9x に変換
-→ 変換後の尺 2.5s をタイムラインに配置（3秒ホールドの体感を作る）
+[TRIM]
+Kling生成尺: 5s（冒頭0.5sは生成不安定のため破棄）
+速度変更あり: 0.9x
+生成トリム尺: use 0.5s–2.75s(2.25s切り出し)
+速度適用後の最終尺: 2.25s ÷ 0.9 = 2.5s（§4指定尺と一致。3秒ホールドの体感を作る）
 出力: 05_edit/cut12.mp4

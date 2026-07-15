@@ -1,0 +1,22 @@
+[MODE] Image-to-Video
+
+[INPUT] 01_source_photos/exterior.jpg（仮置き）
+（§5に本カットのプロンプト記載なし。§4表(外観(実写)|建物正面、フック文字表示|前進ドリーイン、アイレベル|1.2x)の内容から生成）
+
+[PROMPT]
+Animate this photo of the building's front facade with a slow forward
+dolly-in movement, eye-level camera height. Preserve the building's
+appearance exactly as photographed: exterior color, window layout,
+entrance, surroundings — no structural or architectural changes. Clear
+daylight, realistic, no people, no text overlay, 9:16 vertical.
+
+[CAMERA]
+Zoom: +4（Push In / 前進ドリーイン, Medium intensity）, Pan: 0, Tilt: 0, Roll: 0（アイレベル固定）
+※フック文字「ベッドの横で、まだ仕事してるの?」はsubtitles.srtで別途重畳(本プロンプトには含めない)
+
+[TRIM]
+Kling生成尺: 5s（冒頭0.5sは生成不安定のため破棄）
+速度変更あり: 1.2x（等速再生より速い）
+生成トリム尺: use 0.5s–4.1s(3.6s切り出し)
+速度適用後の最終尺: 3.6s ÷ 1.2 = 3.0s（§4指定尺と一致）
+出力: 05_edit/cut01.mp4

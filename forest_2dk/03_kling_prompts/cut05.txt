@@ -1,13 +1,17 @@
-Cut 05 — 北室・働く後ろ姿（AI生成）
-タイムライン: 0:10–0:12（尺 2.0s）／再生速度 1.0x
+[MODE] Text-to-Video
 
---- Kling Text-to-Video プロンプト ---
+[PROMPT]
+（§5より転記）
+
 A Japanese man in his late 20s, plain sweatshirt, working at a desk facing
 a window, seen from behind, soft north daylight, small Japanese apartment
-room, slow push-in, shallow depth of field, cinematic, realistic, 9:16
-vertical.
+room, slow push-in, shallow depth of field, cinematic, realistic, 9:16.
 
---- トリム指示 ---
-Kling生成尺: 5s
-use 0.5s–2.5s（トリム後 2.0s、再生速度そのまま 1.0x）
+[CAMERA]
+Zoom: +2（静止気味プッシュイン, Low intensity）, Pan: 0, Tilt: 0
+
+[TRIM]
+Kling生成尺: 5s（冒頭0.5sは生成不安定のため破棄）
+速度変更なし(1.0x)
+use 0.5s–2.5s → 最終尺 2.0s
 出力: 05_edit/cut05.mp4

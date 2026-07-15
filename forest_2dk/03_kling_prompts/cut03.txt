@@ -1,8 +1,11 @@
-Cut 03 — DKステージング（コーヒーを淹れる手元）
-タイムライン: 0:05.5–0:07.5（尺 2.0s）／再生速度 1.0x
-入力写真: 01_source_photos/photo6.jpg
+[MODE] Image-to-Video
 
---- Step 1: ステージング画像プロンプト（画像生成） ---
+[INPUT] 02_staged_images/cut03.png
+（元写真: 01_source_photos/photo6.jpg を §5共通制約プロンプトでステージング生成した画像）
+
+[PROMPT]
+（§5より転記）
+
 Preserve the original room exactly: wall color, flooring, window position and size,
 ceiling, lighting direction, room proportions. Do not widen the room or brighten
 beyond the original photo. Add furniture only. Furniture scale must fit a
@@ -13,17 +16,11 @@ wall opposite the kitchen counter, one pendant light above it, a small shelf
 with a coffee dripper and mugs. Keep the white kitchen exactly as photographed.
 9:16 vertical crop.
 
-出力: 02_staged_images/cut03_staged.png
+[CAMERA]
+Zoom: 0, Pan: 0, Tilt: 0, Roll: 0（Static / Fixed — クローズアップ50mmはプロンプト内の画角指定で対応、カメラコントロールは動かさない）
 
---- Step 2: Kling Image-to-Video プロンプト ---
-入力画像: 02_staged_images/cut03_staged.png
-
-Close-up of hands pouring hot water over a coffee dripper on the small shelf
-of the staged dining kitchen, steam rising gently, 50mm shallow depth of
-field, natural morning light, no face visible, calm realistic motion, 9:16
-vertical.
-
---- トリム指示 ---
-Kling生成尺: 5s
-use 0.5s–2.5s（トリム後 2.0s、再生速度そのまま 1.0x）
+[TRIM]
+Kling生成尺: 5s（冒頭0.5sは生成不安定のため破棄）
+速度変更なし(1.0x)
+use 0.5s–2.5s → 最終尺 2.0s
 出力: 05_edit/cut03.mp4

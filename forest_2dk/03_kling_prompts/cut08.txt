@@ -1,13 +1,18 @@
-Cut 08 — ドアを閉める「退勤」（AI生成）
-タイムライン: 0:16.5–0:18.5（尺 2.0s）／再生速度 1.0x
+[MODE] Text-to-Video
 
---- Kling Text-to-Video プロンプト ---
+[PROMPT]
+（§5より転記）
+
 POV shot: a hand closes a white interior door of a Japanese apartment room
 from the hallway side, gentle motion, evening warm light spilling from the
-dining kitchen, realistic, 9:16 vertical.
+dining kitchen, realistic, 9:16.
 
---- トリム指示 ---
-Kling生成尺: 5s
-use 0.5s–2.5s（トリム後 2.0s、再生速度そのまま 1.0x）
-※本カットはドアの動き（motion cut）でCut09へ繋ぐ
+[CAMERA]
+Zoom: 0, Pan: 0, Tilt: 0（Static — POVの動きは被写体側の動作で表現、カメラ自体は動かさない）
+
+[TRIM]
+Kling生成尺: 5s（冒頭0.5sは生成不安定のため破棄）
+速度変更なし(1.0x)
+use 0.5s–2.5s → 最終尺 2.0s
+※本カットはドアの動き(motion cut)でCut09へ繋ぐ
 出力: 05_edit/cut08.mp4

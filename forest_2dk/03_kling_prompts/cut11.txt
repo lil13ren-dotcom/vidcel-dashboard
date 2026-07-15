@@ -1,23 +1,20 @@
-Cut 11 — 浴室（実写・改変最小／スローモーション）
-タイムライン: 0:23.5–0:26（尺 2.5s）／再生速度 0.8x（スロー）
-入力写真: 01_source_photos/photo3.jpg
+[MODE] Image-to-Video
 
-パッケージ本文の指示（原文引用）:
-「浴室(実写写真3+湯気を軽く加える程度に留める。改変最小)」
-→ 部屋の広さ・明るさ・眺望の加工は禁止（本文11章の宅建業法上の注意に該当）。
-  湯気の付加のみを目的とした最小限のImage-to-Videoとする。
+[INPUT] 01_source_photos/bathroom.jpg（仮置き。パッケージ本文の「写真3」に相当）
+（ステージング加工なし。§5には見出しのみ記載「浴室(実写写真3+湯気を軽く加える程度に留める。改変最小)」で本文プロンプトが無いため、§4表(浴室(実写)|窓付き風呂、湯気。スローモーション|静止|0.8x)の内容から生成）
 
---- Kling Image-to-Video プロンプト ---
-入力画像: 01_source_photos/photo3.jpg（そのまま使用、ステージング加工なし）
-
+[PROMPT]
 Keep this bathroom photo exactly as captured: window position, tile color,
 fixtures, lighting, room size and proportions must remain unchanged. Add only
 a subtle rising steam/mist effect near the bathtub, very light and natural,
 no other change, no people, photorealistic, minimal motion, 9:16 vertical.
 
---- トリム指示 ---
-Kling生成尺: 5s
-use 0.5s–2.5s（等速素材として2.0s分を切り出す）
-編集(trim_and_concat.sh)側で setpts=1.25*PTS を適用し 0.8x スローに変換
-→ 変換後の尺 2.5s をタイムラインに配置
+[CAMERA]
+Zoom: 0, Pan: 0, Tilt: 0（Static — §4「静止」指定、カメラ移動なし）
+
+[TRIM]
+Kling生成尺: 5s（冒頭0.5sは生成不安定のため破棄）
+速度変更あり: 0.8x（スローモーション）
+生成トリム尺: use 0.5s–2.5s(2.0s切り出し)
+速度適用後の最終尺: 2.0s ÷ 0.8 = 2.5s（§4指定尺と一致）
 出力: 05_edit/cut11.mp4

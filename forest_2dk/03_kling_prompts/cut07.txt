@@ -1,14 +1,17 @@
-Cut 07 — 北室・PCを閉じる（AI生成／スローモーション）
-タイムライン: 0:14.5–0:16.5（尺 2.0s）／再生速度 0.8x（スロー）
+[MODE] Text-to-Video
 
---- Kling Text-to-Video プロンプト ---
+[PROMPT]
+（§5より転記。スロー表現の語句は除き通常速度で生成し、trim_and_concat.sh側で0.8x化する）
+
 Extreme close-up: hands slowly closing a laptop lid at dusk, warm side light,
-shallow depth of field, quiet emotional tone, realistic, 9:16 vertical.
-（Klingへの生成指示にスロー表現を含めず、通常速度で生成し編集側で0.8x化する）
+shallow depth of field, quiet emotional tone, realistic, 9:16.
 
---- トリム指示 ---
-Kling生成尺: 5s
-use 0.5s–2.1s（等速素材として1.6s分を切り出す）
-編集(trim_and_concat.sh)側で setpts=1.25*PTS を適用し 0.8x スローに変換
-→ 変換後の尺 2.0s をタイムラインに配置
+[CAMERA]
+Zoom: 0, Pan: 0, Tilt: 0（Static / Fixed close-up）
+
+[TRIM]
+Kling生成尺: 5s（冒頭0.5sは生成不安定のため破棄）
+速度変更あり: 0.8x（スローモーション）
+生成トリム尺: use 0.5s–2.1s(1.6s切り出し)
+速度適用後の最終尺: 1.6s ÷ 0.8 = 2.0s（§4指定尺と一致）
 出力: 05_edit/cut07.mp4

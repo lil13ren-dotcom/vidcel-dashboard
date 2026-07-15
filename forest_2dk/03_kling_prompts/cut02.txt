@@ -1,8 +1,12 @@
-Cut 02 — 南室ステージング（朝）
-タイムライン: 0:03–0:05.5（尺 2.5s）／再生速度 1.0x
-入力写真: 01_source_photos/photo5.jpg
+[MODE] Image-to-Video
 
---- Step 1: ステージング画像プロンプト（画像生成） ---
+[INPUT] 02_staged_images/cut02.png
+（元写真: 01_source_photos/photo5.jpg を §5共通制約プロンプトでステージング生成した画像）
+
+[PROMPT]
+（§5より転記 — ステージング画像生成プロンプト。Kling I2Vの入力画像はこのプロンプトで
+先に静止画生成しておき、Kling側にはこの画像+同文をシーン記述として投入する）
+
 Preserve the original room exactly: wall color, flooring, window position and size,
 ceiling, lighting direction, room proportions. Do not widen the room or brighten
 beyond the original photo. Add furniture only. Furniture scale must fit a
@@ -13,17 +17,11 @@ a small round low table, a floor lamp with warm bulb near the balcony window,
 sheer white curtain half open, morning sunlight through the balcony door.
 Minimal, calm, single-person lifestyle. 9:16 vertical crop.
 
-出力: 02_staged_images/cut02_staged.png
+[CAMERA]
+Horizontal: +3（横スライド 0.4m/s相当、Low intensity）, Vertical: 0, Zoom: 0, Tilt: 0
 
---- Step 2: Kling Image-to-Video プロンプト ---
-入力画像: 02_staged_images/cut02_staged.png
-
-Slow lateral slide across the staged south room, camera movement 0.4m/s,
-morning sunlight through sheer curtains, curtain fabric moves gently in the
-breeze, static camera height, no people, subtle ambient motion only,
-photorealistic, cinematic, 9:16 vertical.
-
---- トリム指示 ---
-Kling生成尺: 5s
-use 0.5s–3.0s（トリム後 2.5s、再生速度そのまま 1.0x）
+[TRIM]
+Kling生成尺: 5s（冒頭0.5sは生成不安定のため破棄）
+速度変更なし(1.0x)
+use 0.5s–3.0s → 最終尺 2.5s
 出力: 05_edit/cut02.mp4

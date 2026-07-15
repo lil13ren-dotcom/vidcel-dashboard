@@ -1,12 +1,17 @@
-Cut 10 — 周辺・夜のコンビニ帰りPOV（AI生成）
-タイムライン: 0:21–0:23.5（尺 2.5s）／再生速度 1.0x
+[MODE] Text-to-Video
 
---- Kling Text-to-Video プロンプト ---
+[PROMPT]
+（§5より転記）
+
 Walking POV at night on a quiet suburban Japanese street, holding a convenience
 store bag, streetlights, apartment building appearing ahead, natural walking
-rhythm, realistic, 9:16 vertical.
+rhythm, realistic, 9:16.
 
---- トリム指示 ---
-Kling生成尺: 5s
-use 0.5s–3.0s（トリム後 2.5s、再生速度そのまま 1.0x）
+[CAMERA]
+Zoom: +3（Push In / ウォーキングPOVの前進感, Medium intensity）, Pan: 0, Tilt: 0
+
+[TRIM]
+Kling生成尺: 5s（冒頭0.5sは生成不安定のため破棄）
+速度変更なし(1.0x)
+use 0.5s–3.0s → 最終尺 2.5s
 出力: 05_edit/cut10.mp4
