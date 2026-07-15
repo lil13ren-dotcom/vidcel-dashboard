@@ -1,0 +1,29 @@
+Cut 04 — 北室ステージング（「出勤」でドアを開ける）
+タイムライン: 0:07.5–0:10（尺 2.5s）／再生速度 1.0x
+入力写真: 01_source_photos/photo2.jpg
+
+--- Step 1: ステージング画像プロンプト（画像生成） ---
+Preserve the original room exactly: wall color, flooring, window position and size,
+ceiling, lighting direction, room proportions. Do not widen the room or brighten
+beyond the original photo. Add furniture only. Furniture scale must fit a
+6-tatami (9.7 sqm) Japanese room. Photorealistic, no stock-photo look.
+
+Add to this room: a 120cm wooden desk under the window, an external monitor,
+laptop, desk chair, a tall bookshelf on the east wall, a small rug.
+Home office for one person. Natural north window light, cool and focused mood.
+Keep white flooring and wall exactly as photographed. 9:16 vertical crop.
+
+出力: 02_staged_images/cut04_staged.png
+
+--- Step 2: Kling Image-to-Video プロンプト ---
+入力画像: 02_staged_images/cut04_staged.png
+
+POV shot walking through the doorway into the staged north room, desk and
+monitor coming into view ahead, natural walking motion (door-in), cool north
+daylight, focused quiet mood, no visible face, photorealistic, 9:16 vertical.
+
+--- トリム指示 ---
+Kling生成尺: 5s
+use 0.5s–3.0s（トリム後 2.5s、再生速度そのまま 1.0x）
+※本カットはドアの動き（motion cut）でCut05へ繋ぐ
+出力: 05_edit/cut04.mp4

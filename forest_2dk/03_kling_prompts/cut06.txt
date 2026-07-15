@@ -1,0 +1,12 @@
+Cut 06 — DK・ランチ（AI生成）
+タイムライン: 0:12–0:14.5（尺 2.5s）／再生速度 1.0x
+
+--- Kling Text-to-Video プロンプト ---
+Close-up of hands cooking a simple one-pan lunch on a compact white kitchen
+counter in a Japanese apartment, steam rising, natural daylight, handheld
+feel, 85mm shallow depth of field, realistic, 9:16 vertical.
+
+--- トリム指示 ---
+Kling生成尺: 5s
+use 0.5s–3.0s（トリム後 2.5s、再生速度そのまま 1.0x）
+出力: 05_edit/cut06.mp4

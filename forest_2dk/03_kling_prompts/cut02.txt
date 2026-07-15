@@ -1,0 +1,29 @@
+Cut 02 — 南室ステージング（朝）
+タイムライン: 0:03–0:05.5（尺 2.5s）／再生速度 1.0x
+入力写真: 01_source_photos/photo5.jpg
+
+--- Step 1: ステージング画像プロンプト（画像生成） ---
+Preserve the original room exactly: wall color, flooring, window position and size,
+ceiling, lighting direction, room proportions. Do not widen the room or brighten
+beyond the original photo. Add furniture only. Furniture scale must fit a
+6-tatami (9.7 sqm) Japanese room. Photorealistic, no stock-photo look.
+
+Add to this room: a low double bed with light grey linen along the west wall,
+a small round low table, a floor lamp with warm bulb near the balcony window,
+sheer white curtain half open, morning sunlight through the balcony door.
+Minimal, calm, single-person lifestyle. 9:16 vertical crop.
+
+出力: 02_staged_images/cut02_staged.png
+
+--- Step 2: Kling Image-to-Video プロンプト ---
+入力画像: 02_staged_images/cut02_staged.png
+
+Slow lateral slide across the staged south room, camera movement 0.4m/s,
+morning sunlight through sheer curtains, curtain fabric moves gently in the
+breeze, static camera height, no people, subtle ambient motion only,
+photorealistic, cinematic, 9:16 vertical.
+
+--- トリム指示 ---
+Kling生成尺: 5s
+use 0.5s–3.0s（トリム後 2.5s、再生速度そのまま 1.0x）
+出力: 05_edit/cut02.mp4

@@ -1,0 +1,23 @@
+Cut 11 — 浴室（実写・改変最小／スローモーション）
+タイムライン: 0:23.5–0:26（尺 2.5s）／再生速度 0.8x（スロー）
+入力写真: 01_source_photos/photo3.jpg
+
+パッケージ本文の指示（原文引用）:
+「浴室(実写写真3+湯気を軽く加える程度に留める。改変最小)」
+→ 部屋の広さ・明るさ・眺望の加工は禁止（本文11章の宅建業法上の注意に該当）。
+  湯気の付加のみを目的とした最小限のImage-to-Videoとする。
+
+--- Kling Image-to-Video プロンプト ---
+入力画像: 01_source_photos/photo3.jpg（そのまま使用、ステージング加工なし）
+
+Keep this bathroom photo exactly as captured: window position, tile color,
+fixtures, lighting, room size and proportions must remain unchanged. Add only
+a subtle rising steam/mist effect near the bathtub, very light and natural,
+no other change, no people, photorealistic, minimal motion, 9:16 vertical.
+
+--- トリム指示 ---
+Kling生成尺: 5s
+use 0.5s–2.5s（等速素材として2.0s分を切り出す）
+編集(trim_and_concat.sh)側で setpts=1.25*PTS を適用し 0.8x スローに変換
+→ 変換後の尺 2.5s をタイムラインに配置
+出力: 05_edit/cut11.mp4

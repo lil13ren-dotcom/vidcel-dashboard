@@ -1,0 +1,23 @@
+Cut 12 — 南室ステージング・夜バージョン（3秒ホールド）
+タイムライン: 0:26–0:28.5（尺 2.5s）／再生速度 0.9x
+入力: 02_staged_images/cut02_staged.png（Cut 02の生成結果を元に再生成）
+
+--- Step 1: ステージング画像プロンプト（画像生成） ---
+Same staged room at night: floor lamp on, warm 2700K light, balcony door
+curtain closed, cozy and quiet atmosphere. No people. 9:16 vertical.
+
+出力: 02_staged_images/cut12_staged.png
+
+--- Step 2: Kling Image-to-Video プロンプト ---
+入力画像: 02_staged_images/cut12_staged.png
+
+Static tripod hold of the staged south room at night, warm floor lamp glow,
+curtain closed, very subtle ambient motion only (light flicker, faint curtain
+movement), calm and quiet mood, no people, photorealistic, 9:16 vertical.
+
+--- トリム指示 ---
+Kling生成尺: 5s
+use 0.5s–2.75s（等速素材として2.25s分を切り出す）
+編集(trim_and_concat.sh)側で setpts=1.111*PTS を適用し 0.9x に変換
+→ 変換後の尺 2.5s をタイムラインに配置（3秒ホールドの体感を作る）
+出力: 05_edit/cut12.mp4

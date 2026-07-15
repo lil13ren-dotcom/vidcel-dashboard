@@ -1,0 +1,12 @@
+Cut 09 — 南室・夜のくつろぎ（AI生成）
+タイムライン: 0:18.5–0:21（尺 2.5s）／再生速度 1.0x
+
+--- Kling Text-to-Video プロンプト ---
+A young Japanese man reading on a low bed with a floor lamp, small tidy
+apartment room at night, warm 2700K lighting, slight handheld sway,
+cozy realistic mood, no exaggerated happiness, 9:16 vertical.
+
+--- トリム指示 ---
+Kling生成尺: 5s
+use 0.5s–3.0s（トリム後 2.5s、再生速度そのまま 1.0x）
+出力: 05_edit/cut09.mp4

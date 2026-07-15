@@ -1,0 +1,29 @@
+Cut 03 — DKステージング（コーヒーを淹れる手元）
+タイムライン: 0:05.5–0:07.5（尺 2.0s）／再生速度 1.0x
+入力写真: 01_source_photos/photo6.jpg
+
+--- Step 1: ステージング画像プロンプト（画像生成） ---
+Preserve the original room exactly: wall color, flooring, window position and size,
+ceiling, lighting direction, room proportions. Do not widen the room or brighten
+beyond the original photo. Add furniture only. Furniture scale must fit a
+6-tatami (9.7 sqm) Japanese room. Photorealistic, no stock-photo look.
+
+Add to this dining kitchen: a compact 2-seat wooden dining table against the
+wall opposite the kitchen counter, one pendant light above it, a small shelf
+with a coffee dripper and mugs. Keep the white kitchen exactly as photographed.
+9:16 vertical crop.
+
+出力: 02_staged_images/cut03_staged.png
+
+--- Step 2: Kling Image-to-Video プロンプト ---
+入力画像: 02_staged_images/cut03_staged.png
+
+Close-up of hands pouring hot water over a coffee dripper on the small shelf
+of the staged dining kitchen, steam rising gently, 50mm shallow depth of
+field, natural morning light, no face visible, calm realistic motion, 9:16
+vertical.
+
+--- トリム指示 ---
+Kling生成尺: 5s
+use 0.5s–2.5s（トリム後 2.0s、再生速度そのまま 1.0x）
+出力: 05_edit/cut03.mp4
