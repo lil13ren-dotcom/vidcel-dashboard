@@ -1,14 +1,16 @@
 # Architecture — 店舗IT担当 business, as verified 2026-07-25
 
-**⚠️ 2026-07-25 update (G1-06): the "Confirmed production architecture"
-section below (from PM-003) is now disputed.** The project owner stated the
-intended post-payment flow is "Stripe Payment Link → Vidcel onboarding page
-→ Resend workflow" — not Google Form, and re-involving Resend, which PM-003
-had deferred. Not resolved yet; see `Decision_Log.md`'s G1-06 entry and
-`Backlog.md` item 0. The evidence below (Apps Script `Logs`) is still
-factually accurate for what that system does — it just may not be *the*
-production path going forward. Treat the table row for "Customer onboarding"
-and the confirmed-architecture diagram as **provisional**, not settled.
+**⚠️ 2026-07-25 update (G1-06C): the "Confirmed production architecture"
+diagram below (from PM-003) is now superseded on the entry point.** Finalized
+architecture: **Stripe Payment Link → Vidcel onboarding page (replaces
+Google Form) → Google Sheets + existing Apps Script (backend, unchanged)**.
+The backend portion of PM-003's decision stands as originally reasoned; only
+the entry point changed. The evidence below (Apps Script `Logs`) is still
+factually accurate for what the *backend* does — it just doesn't
+automatically prove anything about the not-yet-built onboarding page. See
+`Decision_Log.md`'s G1-06C entry, and PM OS `04_Gates`/`03_MasterTask`
+(new task G1-09) for what's still open: the onboarding-page → Sheet
+integration mechanism, and whether Resend has any role in the new page.
 
 Cross-repo inventory produced by PM-002 (repository search for the 店舗IT担当
 production implementation). Verified by cloning and inspecting each repo
@@ -19,7 +21,8 @@ directly — not inferred from names or memory.
 | Concern | Location | Status |
 |---|---|---|
 | PM management (roadmap, tasks, gates, KPI) | Google Sheets `店舗IT担当_PM_OS_マスタープラン_v3` | Live, this is the SSOT |
-| Customer onboarding / task automation | Google Sheets `店舗IT担当_オンボーディング管理_v1` + bound Apps Script | Live — real trigger/log history exists (form submit, daily 7am, edit triggers) |
+| Customer onboarding backend | Google Sheets `店舗IT担当_オンボーディング管理_v1` + bound Apps Script | Live and proven (form submit, daily 7am, edit triggers — see `Logs`). **Confirmed as the permanent backend (G1-06C)**; its input is changing from the native Google Form to a new "Vidcel onboarding page" whose data-delivery mechanism isn't decided yet (G1-09) |
+| Customer onboarding entry point | "Vidcel onboarding page" (not yet located/built — name only, per G1-06C) | **Not found in any of the 7 repos inventoried by PM-002.** May not exist yet, or may live in a repo/branch not yet in this session's scope |
 | Marketing LP | `vidcel-web` (`apps/lp`), deployed to Vercel (`vidcel-lp.vercel.app`) | Live but **frozen** (not migrated to Cloudflare) |
 | Duplicate/earlier LP | `vidcel-lp` (standalone repo) | Appears to mirror `apps/lp`; not the deploy target of record |
 | Per-industry demo sites | `vidcel-web` (`apps/restaurant`, `apps/beauty`, `apps/clinic`) | Built, `wrangler.jsonc` present but explicitly **not configured for production** (no custom domain, no external services) — sales-demo assets, not the customer-facing subscription product |
@@ -38,18 +41,23 @@ directly — not inferred from names or memory.
 Cloudflare/Stripe/Resend/onboarding-form references. See PM-002 conversation
 record for the full per-repo grep output.
 
-## Confirmed production architecture (PM-003, 2026-07-25)
-
-The open question below was resolved by the project owner. The initial
-production flow is:
+## Confirmed production architecture (PM-003 2026-07-25, entry point updated by G1-06C 2026-07-25)
 
 ```
 Stripe Payment Link
-  → Google Form
-  → Google Spreadsheet (店舗IT担当_オンボーディング管理_v1)
-  → existing Google Apps Script (bound to that spreadsheet)
+  → Vidcel onboarding page   ← entry point, replaces the Google Form (G1-06C)
+  → Google Spreadsheet (店舗IT担当_オンボーディング管理_v1)   ← integration mechanism TBD, see G1-09
+  → existing Google Apps Script (bound to that spreadsheet)   ← backend, unchanged (PM-003)
   → customer registration, payment confirmation, task generation, customer emails
 ```
+
+The backend (Sheets + Apps Script) is unchanged from PM-003's original
+decision. Only the entry point changed. The step from "Vidcel onboarding
+page" to "Google Spreadsheet" is **not yet a real, working link** — it's a
+placeholder for whatever `03_MasterTask`'s G1-09 decides (embed the real
+Form under the hood / new Apps Script Web App endpoint / direct Sheets API
+calls). Until G1-09 is resolved, treat this diagram as the *target*, not
+something already functioning end-to-end.
 
 Deliberately **not** part of the initial release (see `Backlog.md` and
 `08_DecisionLog` in the PM OS for the full reasoning): a custom Cloudflare

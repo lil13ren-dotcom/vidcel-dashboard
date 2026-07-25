@@ -151,3 +151,42 @@ are possible and need the project owner to pick one:
    Apps Script side, and this Resend work is genuinely new/additive scope.
 
 See `Backlog.md` for this as an open item.
+
+## 2026-07-25 — G1-06C: onboarding entry point finalized, backend preserved
+
+Project owner finalized the architecture: **replace the Google Form entry
+point with the Vidcel onboarding page; preserve Google Sheets + the existing
+Apps Script as the backend workflow (unchanged).**
+
+This resolves the PM-003/G1-06 conflict logged above **in favor of PM-003's
+original reasoning** — the backend is confirmed to stay Apps Script, not
+Resend. It does not resolve whether Resend plays any role *within* the new
+onboarding page itself (e.g., its own confirmation email); the instruction
+didn't mention Resend at all, so that stays an open item in `Backlog.md`
+rather than assumed either way.
+
+**Important consequence, not stated explicitly by the owner but necessary
+for honesty:** the Google Form's proven behavior (required fields, legal
+consent, delivery to the spreadsheet) was evidence *for the Google Form
+specifically*. Replacing the entry point with a different page means that
+evidence no longer automatically applies — a new page is a new artifact
+until proven otherwise. Rather than silently carrying forward "Completed" on
+`04_Gates` items 3–4 (required fields/consent; form→spreadsheet delivery),
+they were reset to **Not Started**, with the original Google Form evidence
+kept in the cell (not deleted) and explicitly labeled as pre-dating the
+entry-point change. This is a judgment call in the spirit of "do not infer
+completion without direct evidence" from prior tasks, not something the
+owner asked for directly — flagging it here in case that reset is not what
+was intended.
+
+Also newly surfaced: **how** the onboarding page actually gets data into the
+existing Google Sheet was never specified (embed the real Form? a new Apps
+Script Web App endpoint? direct Sheets API calls?). This is real, undecided
+technical scope, not paperwork — added as a new task, **G1-09**, in
+`03_MasterTask`/`02_Gantt` (Not Started, blocks Gate 1 items 3–4). Nothing
+was implemented; only the task and its open design question were recorded.
+
+Gate 1 evidence count dropped from 11/15 to 9/15 Completed as a direct
+result of the honest reset above — this is not new bad news, it's the same
+underlying gap (the onboarding page doesn't exist yet) being counted
+correctly instead of inheriting the old Form's credit.
