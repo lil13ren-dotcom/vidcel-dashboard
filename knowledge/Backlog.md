@@ -204,3 +204,25 @@ rule: nothing here may be implemented without an approved Task ID.
    solved locally by pointing at `ai-lead-os`, which this workflow cannot
    currently replicate without adding a second, credentialed checkout
    step (out of scope for PM-AUTO-04).
+
+18. **⚠️ AI Lead OS is NOT production-ready** (AI-OPS-01, 2026-07-25) —
+   `knowledge/production_readiness_report.md`, 10 Critical blockers found
+   across lead-collection correctness, outreach channel coverage, and
+   operational automation (see `Decision_Log.md`'s AI-OPS-01 entry for
+   the top-10 list). This is not a PM OS blocker for 店舗IT担当 directly —
+   `ai-lead-os` is used there only as a reused tool for G2 lead-list
+   tasks, not the product itself — but if any future 店舗IT担当 task
+   assumes `ai-lead-os` can run daily/at-volume/multi-channel unattended,
+   that assumption is now known to be false. **Needs an owner decision**:
+   whether/when to invest in the report's recommended Phase 1-3 roadmap,
+   which is `ai-lead-os`'s own roadmap decision, not something this
+   session can prioritize unilaterally.
+
+19. **The `production_readiness_report.md` deliverable was placed in
+   `vidcel-dashboard`'s `knowledge/`, not in `ai-lead-os` itself** —
+   flagged as a judgment call in `Decision_Log.md`'s AI-OPS-01 entry.
+   This session only has read-only access to `ai-lead-os`; if the intent
+   was for this report to live in `ai-lead-os`'s own `knowledge/`/`docs/`
+   folder (which already has an extensive self-documentation convention
+   of its own), it will need to be copied there once/if write access is
+   granted.

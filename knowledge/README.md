@@ -23,6 +23,13 @@ exists here only because it is the branch the PM OS work is tracked on.
   `CHECKLIST_G1-12_Source_Access.md` — what's needed before the Apps
   Script Web App endpoint can be implemented), same referencing convention
   as `ADD_*.md`/`SPEC_*.md`.
+- `production_readiness_report.md` (AI-OPS-01) — a standalone, read-only
+  production-readiness audit of `ai-lead-os`, a *different* repository
+  (a reused sales-intelligence tool, not part of the 店舗IT担当 product).
+  Placed here rather than in `ai-lead-os` itself because this session only
+  has read-only access to that repo — see `Decision_Log.md`'s AI-OPS-01
+  entry for the full placement reasoning, flagged there as a judgment
+  call in case it should eventually move.
 
 The repo also has `../automation/` (PM-AUTO-01) — a local tooling layer
 (completion report / review package / next-task draft generators) that

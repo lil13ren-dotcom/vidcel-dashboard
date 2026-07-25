@@ -797,3 +797,95 @@ merge the PR; did not claim any GitHub Actions run evidence (none exists
 (`Backlog.md` item 16) is **not resolved** by this task — it's now staged
 for the project owner's decision via PR #1, which is exactly what this
 task's scope asked for.
+
+## 2026-07-25 — AI-OPS-01: AI Lead OS production readiness audit — **NOT READY**
+
+First task in this project scoped entirely around `ai-lead-os` rather than
+店舗IT担当 — a full 10-area production-readiness audit, read-only per
+explicit instruction ("Do NOT implement fixes. Do NOT refactor. Do NOT
+change behavior. Only inspect, verify, and document"). No file in
+`ai-lead-os` was touched; its working tree was confirmed clean before and
+after.
+
+**Judgment call, flagged per this project's standing practice: where the
+deliverable lives.** The task named a single deliverable file
+(`production_readiness_report.md`) and closed with the same "update the
+knowledge folder" instruction used throughout this whole engagement, but
+`ai-lead-os` is a separate product with its own roadmap — `Architecture.md`
+already describes it as "not part of the 店舗IT担当 product itself." This
+session has only read-only access to `ai-lead-os` (confirmed again this
+task — clean clone, no push attempted), so the report could not live
+there even if that were the more natural home. Placed it at
+`knowledge/production_readiness_report.md` in **this** repo
+(`vidcel-dashboard`), matching both the literal requested filename and
+the folder this project's "update the knowledge folder" instruction has
+always referred to. Flagging this in case the intent was for the report
+to eventually live in `ai-lead-os` itself once/if this session gets write
+access there.
+
+**Method: 5 parallel research agents, each covering 2 of the 10 scope
+areas**, given explicit repository-evidence-only instructions ("cite a
+real file path/line or real command output; if you cannot verify
+something, say so explicitly rather than guessing") and told to
+cross-reference — but never simply trust — the project's own extensive
+self-documentation (`ai-lead-os/knowledge/Current_Status.md` at 78KB,
+`Decision_Log.md` at 388KB, `Backlog.md`, `Master_Roadmap.md`, `docs/`).
+This was necessary given scale: ~33K lines of source, ~26K lines of
+tests, 10 independently-scoped audit areas. Each agent ran real commands
+(`pytest --cov`, `ruff`, `mypy`, `alembic history`/`check`, live CLI
+invocations with deliberately-bad arguments to observe real error
+behavior) rather than inferring behavior from code alone wherever
+feasible.
+
+**Overall verdict: NOT READY**, per the report's Executive Summary. Not a
+close call — 10 Critical blockers were found (see the report's Critical
+Blockers section for full evidence), spanning core lead-collection
+correctness, outreach channel coverage, and operational automation:
+
+1. Google Places collection never stores a lead's real business
+   name/address (placeholder string, by design, with no automated
+   backfill).
+2. Only 1 of 8 requested outreach channels (Email) has any real send
+   implementation; the other 7 are `NotImplementedError` stubs or absent
+   from the delivery layer entirely.
+3. No scheduler/cron/daemon exists anywhere — every run is manual.
+4. The core pipeline CLI is hard-capped at 10 leads/invocation with no
+   batch wrapper, and has never actually been run at real volume (17
+   entities total in the live DB).
+5. No monitoring/alerting/health-check exists anywhere.
+6. A real, exploitable SSRF gap (DNS-rebinding TOCTOU) in the website
+   crawler's URL validation.
+7. AI-assisted draft generation is a defined interface that always raises
+   `RuntimeError` — never implemented.
+8. No automatic learning/feedback loop from outcomes back into scoring or
+   personalization (the project's own Backlog admits this, item B3).
+9. The primary CSV lead-ingestion command crashes with a raw Python
+   traceback on a common bad-path input.
+10. "Review Intelligence" does not exist as a real capability under any
+    name in the codebase; the nearest feature references a review-summary
+    field that no code ever populates.
+
+**What is genuinely solid, stated for balance (not diplomacy — the report
+itself is blunt):** deterministic lead scoring and contact-route
+classification, a real bounded/SSRF-hardened/robots-compliant website
+crawler (aside from finding #6), real checkpoint/resume job recovery
+(independently verified via a direct test run, not just reading the
+model), a real suppression/opt-out pipeline wired end-to-end from
+provider webhooks to database state, mandatory human-approval gates and a
+hard-coded 5-sends/day canary limit on the one working send path, 1006
+passing tests at 91.08% coverage, and clean `ruff`/`mypy`/`alembic`
+output — all independently re-run and confirmed during this audit, not
+just cited from the project's own claims.
+
+**Roadmap recommended** (full detail in the report): Phase 1 fixes the
+business-identity gap, the CLI crash, the SSRF gap, the 10-lead cap, and
+adds a minimal scheduler+health-check; Phase 2 adds real channel
+adapters beyond Email and resolves the AI-draft and Review-Intelligence
+gaps; Phase 3 builds the learning loop, production deployment tooling,
+and closes remaining coverage/config gaps. Rough estimate: 8-14 weeks of
+focused engineering across all three phases (explicitly caveated in the
+report as order-of-magnitude only).
+
+**Not done, per explicit instruction:** no code was written, no fix was
+implemented, no file in `ai-lead-os` was modified. This is a
+documentation-only deliverable.

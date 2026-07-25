@@ -29,7 +29,7 @@ directly — not inferred from names or memory.
 | Stripe billing | Stripe Payment Link (hosted, no custom integration) | **Confirmed as the intended mechanism (PM-003)** — a custom Stripe API backend is deliberately deferred, see below |
 | Resend transactional email | Not used — Apps Script (`GmailApp`) sends confirmation emails instead | **Deliberately deferred (PM-003)** — Apps Script already has working send evidence in `Logs` |
 | Cloudflare Worker (production) | Not used for the initial release | **Deliberately deferred (PM-003)** — `wrangler.jsonc` exists only for `vidcel-web`'s 3 demo sites, unrelated to this decision |
-| Sales/lead generation tooling | `ai-lead-os` | Real, mature, separate roadmap (Phase A–E sales intelligence). Used by 店舗IT担当's G2 tasks only as a reused tool for lead-list creation/diagnosis — not part of the 店舗IT担当 product itself |
+| Sales/lead generation tooling | `ai-lead-os` | Real, mature, separate roadmap (Phase A–E sales intelligence). Used by 店舗IT担当's G2 tasks only as a reused tool for lead-list creation/diagnosis — not part of the 店舗IT担当 product itself. **2026-07-25 (AI-OPS-01): production-readiness audited — verdict NOT READY**, see `production_readiness_report.md` below |
 | AI video generation pipeline | `vidcel-generation-lab`, `vidcel-pipeline`, `vidcel-assets` | Unrelated to 店舗IT担当; Vidcel's separate video-production business |
 | Internal ops dashboard | `vidcel-dashboard` (this repo) | Unrelated to 店舗IT担当; Vidcel's own ops tracking |
 
@@ -207,3 +207,28 @@ procedure, and the four post-merge validation scenarios. Left as a draft
 and unmerged, per explicit instruction — merging `main` remains the
 project owner's decision. Full evidence in `Decision_Log.md`'s
 PM-AUTO-04A entry.
+
+## AI Lead OS production readiness (AI-OPS-01, 2026-07-25)
+
+[`production_readiness_report.md`](./production_readiness_report.md) is a
+full 10-area, read-only production-readiness audit of `ai-lead-os` itself
+— not the 店舗IT担当 business, but the separate "reused tool" referenced
+in the table above. Placed here (not in `ai-lead-os`) because this
+session only has read-only access to that repo; see `Decision_Log.md`'s
+AI-OPS-01 entry for the placement reasoning, flagged as a judgment call.
+
+**Verdict: NOT READY**, with 10 Critical blockers spanning lead-collection
+correctness (Google Places collection never stores a real business
+name/address), outreach coverage (only 1 of 8 requested channels has a
+working send path), and operational automation (no scheduler, no
+monitoring, a 10-lead-per-invocation hard cap, never run at real volume) —
+plus one real, exploitable SSRF gap (DNS-rebinding TOCTOU) in the website
+crawler. Full findings, evidence, and a 3-phase remediation roadmap are in
+the report itself.
+
+This does not change anything about `ai-lead-os`'s status as a tool
+occasionally reused by 店舗IT担当's G2 tasks (unaffected either way, since
+it's used there only for lead-list creation/diagnosis, not as the
+店舗IT担当 product) — it's recorded here because `ai-lead-os` doesn't have
+its own PM OS tracking in this session's scope, and the audit was
+requested through this project.
