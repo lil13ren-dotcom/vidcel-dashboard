@@ -1,0 +1,14 @@
+# knowledge/
+
+Tracks the PM OS project (店舗IT担当 PM管理体制の構築) that lives on the
+`claude/pm-os-spreadsheet-n5a4ga` branch of this repo. This repo itself
+(`vidcel-dashboard`) is unrelated to the 店舗IT担当 service — this folder
+exists here only because it is the branch the PM OS work is tracked on.
+
+- `Decision_Log.md` — append-only log of decisions made while building/
+  maintaining the PM OS.
+- `Architecture.md` — where things actually live: which repo/spreadsheet
+  contains which part of the 店舗IT担当 business, as verified by direct
+  inspection (not assumption).
+- `Backlog.md` — open questions and follow-up work surfaced during PM OS
+  tasks, not yet assigned a Task ID.
