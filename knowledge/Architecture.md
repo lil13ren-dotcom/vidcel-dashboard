@@ -101,6 +101,15 @@ Paying Customer".
   already-live bug**: `00_Dashboard`'s MRR formula assumes every customer
   pays ¥2,980 — a USD customer would silently corrupt that figure today.
   Not implemented; see the spec's §4 for the recommended build order.
+- [`SPEC_G1-11_Multicurrency_KPI_Model.md`](./SPEC_G1-11_Multicurrency_KPI_Model.md)
+  — full KPI impact analysis for the MRR bug above: **12 formulas across
+  `00_Dashboard`/`Cost_Model`/`05_KPI`** are affected (not just the one MRR
+  cell — the same single-currency assumption propagates into gross profit,
+  margin %, LTV, and CAC). Proposes `Currency` + `Billing Amount` fields, a
+  `GOOGLEFINANCE`-based FX reference (no new vendor/credential), and
+  recommends showing **both** separate per-currency totals and one clearly-
+  labeled converted consolidated figure rather than picking one. Not
+  implemented — formulas are unchanged.
 
 ## Superseded: original open question (resolved above)
 

@@ -269,3 +269,45 @@ add language/currency branching → build the onboarding page UI → wire page
 to endpoint → replace Stripe self-attestation with real verification →
 independent E2E validation per market. Full reasoning for the ordering is
 in the spec's §4.
+
+## 2026-07-25 — G1-11: multi-currency KPI model designed
+
+Produced `SPEC_G1-11_Multicurrency_KPI_Model.md`. Documentation only — no
+formula, sheet, or PM OS workbook changes, per instruction (this task
+explicitly said "do not modify formulas / spreadsheets," unlike G1-06/
+G1-06C which did include PM OS updates).
+
+**Full impact analysis, cell-by-cell (not estimated):** 12 formulas across
+`00_Dashboard`, `Cost_Model`, and `05_KPI` assume a single ¥2,980 price —
+not just the one MRR cell flagged in G1-09, but everything downstream of
+it: gross profit, gross margin %, LTV, and CAC all inherit the error.
+Additionally found a **second, distinct** currency problem: `Cost_Model`'s
+fixed costs (固定費/月, AI費, メール費) are plain JPY numbers with no
+currency dimension at all, so even a currency-aware revenue figure would
+still be netted against costs with an implicit, unstated currency
+assumption. Confirmed currency-safe: all count-based and ratio-based KPIs
+(Active Contracts, reply rate, close rate, churn rate) — these need no
+change.
+
+**Model recommended:** add `Billing Amount` alongside `SPEC_G1-09`'s
+already-proposed `Currency` field (Currency alone can't fix MRR; both are
+needed together — this was a gap in the G1-09 spec, closed here). FX
+handled via Google Sheets' native `GOOGLEFINANCE` function — deliberately
+avoids introducing a new vendor, API key, or credential, matching this
+project's stated low-maintenance/low-cost priority.
+
+**Reporting recommendation:** show both separate per-currency totals
+(authoritative, no FX noise, accounting-appropriate) and one clearly-
+labeled converted consolidated figure (executive at-a-glance), rather than
+choosing one — reasoning and trade-offs are in the spec's §3.
+
+**Explicitly flagged, not assessed:** Stripe's fee rate may differ between
+JPY and USD transactions (`Cost_Model!B6`'s 3.6% is currently assumed
+uniform, unverified against Stripe); tax/accounting treatment of
+multi-currency revenue needs accounting/legal input, same category as
+G1-09's flagged need for legal review of non-JP consent.
+
+**Recommended gate, independent of the rest of the onboarding-page work:**
+validate the corrected model with a synthetic USD customer row *before* the
+first real US customer is onboarded — this can and should happen on its
+own timeline, not blocked on `ADD_G1-06D`'s data-bridge work.

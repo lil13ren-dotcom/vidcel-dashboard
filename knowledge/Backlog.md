@@ -89,13 +89,19 @@ rule: nothing here may be implemented without an approved Task ID.
    maintained separately. Not urgent, but worth resolving before any LP
    work is scoped as a Task ID.
 
-7. **⚠️ Live bug: `00_Dashboard`'s MRR formula assumes ¥2,980 for every
-   customer.** Surfaced by `SPEC_G1-09_Onboarding_Data_Model.md`. Not
-   hypothetical — a confirmed US Payment Link (G1-06) means the first USD
-   customer will silently corrupt the reported MRR unless this is fixed.
-   Small, independent fix; doesn't need to wait for the rest of the
-   onboarding-page work, but does need its own Task ID (PM OS formula
-   change).
+7. ~~Live bug: `00_Dashboard`'s MRR formula assumes ¥2,980 for every
+   customer.~~ **Full model designed by G1-11 (2026-07-25) — not yet
+   implemented, not yet a Task ID.** See
+   `SPEC_G1-11_Multicurrency_KPI_Model.md`: 12 formulas affected (not just
+   MRR — gross profit, margin %, LTV, CAC all inherit it), plus a second,
+   distinct problem where `Cost_Model`'s fixed costs have no currency
+   dimension at all. Recommends `Billing Amount` + `Currency` fields (the
+   G1-09 spec proposed `Currency` alone, which isn't sufficient by itself —
+   closed here), a `GOOGLEFINANCE`-based FX rate (no new vendor), and
+   showing both separate per-currency totals and one labeled converted
+   total. **Recommended gate: validate with a synthetic USD customer row
+   before the first real US customer is onboarded** — independent timing
+   from the rest of the onboarding-page work.
 
 8. **Legal consent checkboxes aren't copied from the raw Form response log
    into the processed `Customers` table.** Pre-existing gap, found while
@@ -107,3 +113,13 @@ rule: nothing here may be implemented without an approved Task ID.
    requirements** before the Legal Consent Set field in
    `SPEC_G1-09_Onboarding_Data_Model.md` can be finalized. Explicitly not
    something to guess at in an engineering spec.
+
+10. **Does Stripe charge a different fee rate for USD vs. JPY
+   transactions?** `Cost_Model!B6` (3.6%) is currently assumed uniform
+   across currencies — found while building `SPEC_G1-11_Multicurrency_KPI_Model.md`,
+   not verified against Stripe's actual per-currency/region fee schedule.
+
+11. **Tax/accounting treatment of multi-currency revenue** — needs
+   accounting/legal input before real USD revenue is used in any reporting
+   shown outside the team (investors, tax filings, etc.). Same category as
+   item 9; flagged by `SPEC_G1-11`, not assessed there.
