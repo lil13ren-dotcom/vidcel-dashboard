@@ -190,3 +190,44 @@ Gate 1 evidence count dropped from 11/15 to 9/15 Completed as a direct
 result of the honest reset above — this is not new bad news, it's the same
 underlying gap (the onboarding page doesn't exist yet) being counted
 correctly instead of inheriting the old Form's credit.
+
+## 2026-07-25 — G1-06D: Architecture Decision Document for the data bridge (G1-09)
+
+Produced `ADD_G1-06D_Onboarding_Data_Bridge.md` — documentation only, no
+code changed, no Stripe/Apps Script configuration touched.
+
+**Key finding that shaped the whole document:** the existing registration
+automation is wired to Google Forms' `onFormSubmit` event specifically.
+That event cannot be triggered by any non-Form data source — not the
+Sheets API, not a Cloudflare Worker, nothing. Every architecture option
+therefore requires the same underlying fix regardless of which is chosen:
+decoupling the registration logic from that trigger into a directly-callable
+function. This isn't optional scope creep, it's a hard constraint the ADD
+had to work around, not just recommend around.
+
+**Options evaluated:** (A) Apps Script Web App calling the existing logic
+directly, (B) direct Google Sheets API calls from the onboarding page's own
+backend, (C) a Cloudflare Worker proxy, (D) embed/redirect to the real
+Google Form as a lower-effort fallback.
+
+**Recommended: Option A.** Reasoning: only option requiring no new vendor,
+no new hosting, no new credential class, and it reuses the proven
+registration logic by direct function call instead of duplicating it.
+Option B doesn't solve the trigger problem on its own. **Option C would
+reintroduce a custom Cloudflare Worker — the third time this specific
+component has resurfaced after PM-003 explicitly deferred it** (see the
+PM-003 entry and the G1-06 conflict entry above). Option D is viable only
+if the business drops the custom-UX goal behind building the onboarding
+page at all, which is a product call, not this document's to make.
+
+**Explicitly stated in the ADD (per instruction):** none of the Google
+Form's existing validation evidence transfers to whatever replaces it.
+Building the Option-A Web App will need its own independent E2E validation
+before PM OS `04_Gates` items 3–4 can honestly move back to Completed.
+
+**Not done:** no code, no Apps Script changes, no Stripe changes, no PM OS
+workbook changes (this task's deliverables were documentation-only and
+did not include PM OS updates, unlike G1-06/G1-06C). Six concrete follow-up
+implementation items are listed in the ADD's §6, none started, none
+assigned a Task ID yet — including the Apps Script refactor itself, which
+will need explicit authorization given it touches production automation.

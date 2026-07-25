@@ -53,11 +53,22 @@ Stripe Payment Link
 
 The backend (Sheets + Apps Script) is unchanged from PM-003's original
 decision. Only the entry point changed. The step from "Vidcel onboarding
-page" to "Google Spreadsheet" is **not yet a real, working link** — it's a
-placeholder for whatever `03_MasterTask`'s G1-09 decides (embed the real
-Form under the hood / new Apps Script Web App endpoint / direct Sheets API
-calls). Until G1-09 is resolved, treat this diagram as the *target*, not
-something already functioning end-to-end.
+page" to "Google Spreadsheet" is **not yet a real, working link**.
+
+**2026-07-25 (G1-06D): that link now has a recommended design.** See
+[`ADD_G1-06D_Onboarding_Data_Bridge.md`](./ADD_G1-06D_Onboarding_Data_Bridge.md)
+for the full Architecture Decision Document. Summary: an Apps Script
+**Web App** (`doPost`) added to the *same* script project already bound to
+the spreadsheet, calling the existing registration logic directly (not via
+the Form-only `onFormSubmit` trigger, which cannot be invoked by any
+non-Form data source — this is a hard technical constraint, not a
+preference). Rejected: direct Google Sheets API calls and a Cloudflare
+Worker proxy (the latter would re-reverse PM-003's Worker-deferral decision
+for the third time — see the G1-06 conflict entry in `Decision_Log.md`).
+**Nothing has been implemented** — the ADD is a recommendation pending
+its own authorization and Task ID (see the ADD's §6 for the itemized
+follow-up work). Until then, this diagram remains the *target*, not
+something functioning end-to-end.
 
 Deliberately **not** part of the initial release (see `Backlog.md` and
 `08_DecisionLog` in the PM OS for the full reasoning): a custom Cloudflare
@@ -76,6 +87,12 @@ the Stripe Payment Link itself is currently active and redirects correctly
 no production/test data separation or documented cancellation procedure yet.
 Full per-item status: PM OS `04_Gates`, "Gate 1 — Ready to Accept First
 Paying Customer".
+
+## Architecture Decision Documents
+
+- [`ADD_G1-06D_Onboarding_Data_Bridge.md`](./ADD_G1-06D_Onboarding_Data_Bridge.md)
+  — how the Vidcel Onboarding Page delivers data to the existing spreadsheet/
+  Apps Script backend. Recommends an Apps Script Web App. Not implemented.
 
 ## Superseded: original open question (resolved above)
 

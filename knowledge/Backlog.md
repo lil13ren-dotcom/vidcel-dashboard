@@ -38,15 +38,17 @@ rule: nothing here may be implemented without an approved Task ID.
    no point designing the Sheet-integration mechanism against a page that
    doesn't exist yet.
 
-2. **G1-09 — How does the Vidcel onboarding page actually deliver data into
-   the existing Google Sheet?** Three candidate mechanisms identified, none
-   chosen: (a) the page submits through the real Google Form under the hood
-   (embed/prefill), (b) a new Apps Script Web App endpoint the page calls,
-   (c) direct Sheets API calls from the page. Whichever is chosen must
-   preserve the existing required-field/consent capture and duplicate-
-   customer prevention that the Google Form provably had (see PM OS
-   `04_Gates` items 3–4, reset to Not Started because that evidence was for
-   the old entry point, not proven for the new one). Blocks Gate 1.
+2. ~~G1-09 — How does the Vidcel onboarding page actually deliver data into
+   the existing Google Sheet?~~ **Design recommended by G1-06D (2026-07-25)
+   — not yet implemented, not yet a Task ID.** See
+   `ADD_G1-06D_Onboarding_Data_Bridge.md`: an Apps Script Web App calling
+   the existing registration logic directly. Rejected: direct Sheets API
+   calls (doesn't solve the trigger problem alone) and a Cloudflare Worker
+   proxy (would re-reverse PM-003's Worker deferral a third time). Six
+   follow-up implementation items are listed in the ADD's §6 and still need
+   Task IDs, starting with decoupling the registration logic from
+   `onFormSubmit`. Still blocks Gate 1 items 3–4 until built and
+   independently validated (no inherited Form evidence, per the ADD).
 
 3. **G1-06 — Is the Stripe Payment Link actually live?** Owner confirmed a
    JP and a US Payment Link exist; still unverified: active status, product

@@ -12,3 +12,6 @@ exists here only because it is the branch the PM OS work is tracked on.
   inspection (not assumption).
 - `Backlog.md` — open questions and follow-up work surfaced during PM OS
   tasks, not yet assigned a Task ID.
+- `ADD_*.md` — standalone Architecture Decision Documents for individual
+  design questions (e.g. `ADD_G1-06D_Onboarding_Data_Bridge.md`), referenced
+  from `Architecture.md` and `Decision_Log.md` rather than inlined there.
