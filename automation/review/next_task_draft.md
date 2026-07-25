@@ -1,25 +1,25 @@
 # Next Task Draft
 
-- **Generated:** 2026-07-25T07:20:47+00:00
-- **Derived from:** PM-AUTO-04 (status: BLOCKED)
+- **Generated:** 2026-07-25T07:35:06+00:00
+- **Derived from:** PM-AUTO-04A (status: PASS)
 - **Status:** DRAFT — not an approved Task ID. Requires explicit human
   approval before Claude Code acts on this. Nothing in this automation
   layer executes this file automatically.
 
 ## Title
-UNBLOCK: PM-AUTO-04
+(unassigned — human to pick a Task ID)
 
 ## Objective
-Resolve the blocker(s) preventing PM-AUTO-04 from completing.
+Project owner reviews and decides whether to merge PR #1. If merged: dispatch the four validation scenarios for real (fixtures already committed under automation/tests/fixtures/) and close out PM-AUTO-04's runtime-evidence gap. If not merged: formally accept local/static validation as sufficient, or close PR #1.
 
 ## Scope
-Real GitHub Actions runtime evidence for all 4 scenarios could not be obtained in this session. Cause: workflow_dispatch only recognizes a workflow once its YAML file exists on the repository's default branch (main) -- dispatching automation/../.github/workflows/pm-pipeline.yml against this feature branch returned 404, and it does not appear in the repo's registered workflow list. This session's branch policy explicitly prohibits pushing to a different branch (including main) without explicit permission, and the user, when asked, chose the BLOCKED fallback over merging to main or a temporary push-trigger workaround. To unblock: either (a) merge .github/workflows/pm-pipeline.yml to main (a normal PR, not a force-push or anything destructive) so workflow_dispatch can register and dispatch it, or (b) accept local/static validation as sufficient and formally close this out without live-run evidence.
+Not yet scoped by this automation — PM to define based on the objective above and current Backlog/Gate priorities.
 
 ## Deliverables
-Whatever removes the blocker(s) in Scope. Do not resume PM-AUTO-04 until this is done.
+TBD — to be defined when this draft is turned into a real Task ID.
 
 ## Validation requirements
-Re-run PM-AUTO-04's original validation once unblocked.
+TBD — define alongside deliverables.
 
 ## Stop conditions
 Halt and require human approval before proceeding if any of these apply:

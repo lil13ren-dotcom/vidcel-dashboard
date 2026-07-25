@@ -196,3 +196,14 @@ didn't have — per the task's own explicit fallback, the user chose to
 mark this BLOCKED (`flags: ["EVIDENCE_MISSING"]`) rather than merge to
 `main` or use a workaround trigger. Full evidence in `Decision_Log.md`'s
 PM-AUTO-04 entry.
+
+**2026-07-25 (PM-AUTO-04A): PR staged for the merge decision, not
+merged.** [PR #1](https://github.com/lil13ren-dotcom/vidcel-dashboard/pull/1)
+(draft, `claude/pm-os-spreadsheet-n5a4ga` → `main`) packages PM-AUTO-04's
+implementation with a full pre-merge checklist (permissions, secrets,
+path validation, `if: always()` coverage, no-deployment confirmation —
+all re-verified, nothing changed), the exit-code contract, a rollback
+procedure, and the four post-merge validation scenarios. Left as a draft
+and unmerged, per explicit instruction — merging `main` remains the
+project owner's decision. Full evidence in `Decision_Log.md`'s
+PM-AUTO-04A entry.

@@ -183,13 +183,18 @@ rule: nothing here may be implemented without an approved Task ID.
    fine on this repo otherwise (164 real runs of an existing scheduled
    workflow). All validation is local: 37 unit tests
    (`automation/tests/test_ci_helpers.py`) plus a full local dry-run of
-   all 4 PASS/BLOCKED/FAIL/ERROR scenarios, both passing. When asked, the
-   project owner chose to accept this as BLOCKED for now rather than
-   merge the workflow file to `main` or use a temporary push-trigger
-   workaround. **Needs an owner decision** (merge to `main` via a normal
-   PR, or formally accept local/static validation as sufficient) before
-   this can be marked resolved. See `Decision_Log.md`'s PM-AUTO-04 entry
-   and `automation/CI_INTEGRATION.md`.
+   all 4 PASS/BLOCKED/FAIL/ERROR scenarios, both passing. **PM-AUTO-04A
+   (2026-07-25) staged the decision**: opened
+   [PR #1](https://github.com/lil13ren-dotcom/vidcel-dashboard/pull/1)
+   (draft, `claude/pm-os-spreadsheet-n5a4ga` → `main`) with the full
+   pre-merge checklist, exit-code contract, rollback procedure, and the
+   post-merge validation plan (dispatch the 4 fixtures under
+   `automation/tests/fixtures/`) — but did **not** merge it, per explicit
+   instruction. **Still needs an owner decision**: merge PR #1 (which
+   registers the workflow and unblocks real dispatch), or close it and
+   formally accept local/static validation as sufficient. See
+   `Decision_Log.md`'s PM-AUTO-04 and PM-AUTO-04A entries and
+   `automation/CI_INTEGRATION.md`.
 
 17. **PM-AUTO-04's FAIL-path validation used `status_override` rather
    than a real failing quality check**, and its `target_root` input can

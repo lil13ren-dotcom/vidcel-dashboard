@@ -736,3 +736,64 @@ than a real failing quality check for the same reason; no
 (a normal PR, not a destructive operation) so `workflow_dispatch` can
 register and dispatch it for real, or formally accept local/static
 validation as sufficient for this workflow going forward.
+
+## 2026-07-25 — PM-AUTO-04A: PR prepared for main-branch activation, not merged
+
+Directly follows PM-AUTO-04's own `remaining_blockers` and `suggested_next_task`
+("either merge... to main... or accept local/static validation as
+sufficient"). This task did neither of those things itself — its explicit
+scope was to *prepare* the decision, not make it: confirm the branch is
+complete, run every available pre-merge check, and open a documented PR,
+without pushing to `main` or merging.
+
+**No code changed.** `pm-pipeline.yml`, `validate_ci_inputs.py`,
+`ci_summary.py`, and the test suite are unchanged from PM-AUTO-04 — this
+task only re-verified them and packaged the result for review.
+
+**Pre-merge checks performed, all local:**
+- `yaml.safe_load()` — parses correctly.
+- `python3 -m unittest discover -s automation/tests` — all 37 tests still
+  pass, unchanged.
+- `yamllint` (installed via `pip install yamllint` for this check only —
+  not added as a project dependency) — 2 GitHub-Actions-convention false
+  positives from a generic YAML linter that doesn't understand the bare
+  `on:` key (parsed as boolean by YAML 1.1) or GH Actions' lack of a
+  `---` document-start convention, plus 2 cosmetic line-length warnings
+  (lines 107/133) — no functional issues, nothing changed as a result.
+- `grep` checks confirming: no `write` permission anywhere in the
+  workflow, no `secrets.*` reference, no `deploy`/`production` reference,
+  `next_task_draft.md`/`NEXT_TASK_DRAFT.md` appear only inside the
+  artifact `path:` list (never executed — also covered by a dedicated
+  unit test from PM-AUTO-04), and `inputs.task_meta_path`/
+  `inputs.target_root` are each used exactly once, as quoted arguments to
+  `validate_ci_inputs.py` — every later step uses the *validated*
+  `steps.validate.outputs.*` instead of the raw input, so nothing
+  downstream can be shell-injected even if validation were somehow
+  bypassed.
+- No dedicated GitHub Actions linter (`actionlint`) was available or
+  installed in this session; the project's own 37-test suite (which
+  includes structural assertions on the workflow YAML itself) and
+  `yamllint` served as the available substitute, both run and both
+  passing/clean of functional issues.
+
+**Pull request opened as a draft, not merged:**
+[`#1`](https://github.com/lil13ren-dotcom/vidcel-dashboard/pull/1) —
+`claude/pm-os-spreadsheet-n5a4ga` → `main`, title "PM-AUTO-04: activate PM
+pipeline GitHub Actions workflow". Body includes: purpose, why `main`
+placement is required, the exit-code contract and the documented
+BLOCKED-must-not-appear-as-PASS policy, permissions used, artifact
+behavior, an explicit no-deployment/no-auto-execution statement, the
+full pre-merge checklist above, the four scenarios still requiring
+post-merge dispatch (with fixture paths), and a rollback procedure
+(revert/remove the single workflow file — no scheduled trigger, no other
+file/secret/setting depends on it, since the workflow only reads the
+repo and uploads artifacts, never writes anywhere). Opened as a **draft**
+specifically so it cannot be accidentally merged by anyone else's
+auto-merge settings, on top of not calling any merge tool myself.
+
+**Explicitly not done, per instruction:** did not push to `main`; did not
+merge the PR; did not claim any GitHub Actions run evidence (none exists
+— the PR body says so explicitly). PM-AUTO-04's underlying blocker
+(`Backlog.md` item 16) is **not resolved** by this task — it's now staged
+for the project owner's decision via PR #1, which is exactly what this
+task's scope asked for.

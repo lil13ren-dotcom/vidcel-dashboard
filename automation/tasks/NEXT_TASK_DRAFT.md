@@ -1,19 +1,19 @@
 # Next Task Draft
 
-- **Generated:** 2026-07-25T06:43:26+00:00
+- **Generated:** 2026-07-25T07:35:06+00:00
 - **Status:** DRAFT — not an approved Task ID. Requires explicit human
   approval before Claude Code acts on this. Nothing in this automation
   layer executes this file automatically.
 
-## From previous task: PM-AUTO-03
+## From previous task: PM-AUTO-04A
 
 **Suggested next task (as written in the previous completion report):**
 
-PM-AUTO-04: wire review_decision.json / run_pm_pipeline.py's exit code into an actual GitHub Actions workflow step, so a real CI run gates on PASS/FAIL/BLOCKED automatically.
+Project owner reviews and decides whether to merge PR #1. If merged: dispatch the four validation scenarios for real (fixtures already committed under automation/tests/fixtures/) and close out PM-AUTO-04's runtime-evidence gap. If not merged: formally accept local/static validation as sufficient, or close PR #1.
 
 **Previous task's remaining blockers (for context):**
 
-_(none noted)_
+PR #1 (https://github.com/lil13ren-dotcom/vidcel-dashboard/pull/1) is open as a draft, per explicit instruction not to merge it. Merging main-branch changes requires the project owner's explicit approval, which is outside this task's scope. Until merged, workflow_dispatch remains unregistered and PM-AUTO-04's real-runtime-evidence gap (see its own remaining_blockers, still tracked in Backlog.md item 16) stays open.
 
 ## Open Backlog items (best-effort extract from knowledge/Backlog.md)
 
