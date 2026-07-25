@@ -1,4 +1,4 @@
-# PM Automation Layer (PM-AUTO-01 / 02 / 03)
+# PM Automation Layer (PM-AUTO-01 / 02 / 03 / 04)
 
 Reduces manual copy-paste between the PM (ChatGPT/human) and Claude Code by
 standardizing completion reports, auto-collecting review material, and
@@ -6,7 +6,10 @@ drafting the next task. **This is not autonomous development.** Nothing
 here writes product code, touches Stripe, touches the production Apps
 Script, or approves its own next step. Every implementation still requires
 explicit human approval, per PM OS rule ("No implementation without Task
-ID").
+ID"). Runs both locally (`run_pm_pipeline.py`) and in GitHub Actions via
+`.github/workflows/pm-pipeline.yml` — see
+[`CI_INTEGRATION.md`](./CI_INTEGRATION.md) for the workflow's triggers,
+inputs, exit-code policy, and security posture.
 
 ## Flow
 
