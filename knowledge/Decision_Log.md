@@ -356,3 +356,55 @@ complete because an earlier one (or a design document) exists.
 
 **No code was written for G1-12.** Not a partial implementation, not a
 draft — nothing, per instruction.
+
+## 2026-07-25 — PM-AUTO-01: PM automation layer built and smoke-tested
+
+Unlike every prior task in this project, this one's deliverable *was*
+implementation — local tooling, not product/production code, so the usual
+"do not implement" caution didn't apply. Built `automation/` (four Python
+scripts, stdlib-only, no new dependency): `generate_completion_report.py`,
+`generate_review_package.py`, `generate_next_task.py`, and an orchestrator
+`run_pm_pipeline.py`. Full design and usage in `automation/README.md`.
+
+**Explicitly out of scope, by design:** writing/editing product code,
+touching Stripe, the production Apps Script, or Google Sheets, deciding
+PASS/FAIL/BLOCKED, or auto-approving/executing the next-task draft. The
+task's own instruction ("Human approval remains mandatory... No
+implementation begins until the user explicitly approves") is enforced
+structurally — nothing in this layer calls out to Claude Code or any
+other execution path; it only writes markdown/JSON files for a human to
+act on.
+
+**Auto Stop / Auto Continue implementation choice:** rather than
+text-scanning the risks/blockers prose for the eight stop keywords
+(`BLOCKED`, `EVIDENCE_MISSING`, `PRODUCTION_CHANGE`, `ARCHITECTURE_CHANGE`,
+`PAYMENT_CHANGE`, `LEGAL_DECISION`, `SECRET_REQUIRED`,
+`DEPLOYMENT_REQUIRED` — which would be unreliable in both directions),
+`task_meta.json` requires them to be set **explicitly** in a `flags`
+array. The category field (`Documentation`/`Tests`/etc.) is recorded but
+doesn't itself gate anything — only `flags` does. This is a deliberate
+deviation from a literal "detect these categories automatically" reading
+of the instructions, in favor of an honest, explicit signal over a guessed
+one — flagged here in case that trade-off should go the other way.
+
+**Actually run, not just written:** smoke-tested twice against this repo —
+once with no flags (completed all three stages, real output committed:
+`automation/reports/latest_report.md`, `automation/review/review_request.md`,
+`automation/tasks/NEXT_TASK_DRAFT.md`), once with `flags: ["BLOCKED"]`
+(halted correctly at stage 1, exit code 2, stages 2–3 did not run). Neither
+pytest, mypy, ruff, nor an npm build is configured in this repo, so the
+"tool found and actually ran" code path is **not yet exercised** — only
+the "not configured, correctly skipped, not silently omitted" path is.
+Recorded as the suggested next task: run this pipeline against `ai-lead-os`
+(which has real pytest/mypy/ruff config) to validate that path for real.
+
+**Design choice on folder structure:** the task's "Required Folder
+Structure" listed `automation/`, `reports/`, `review/`, `tasks/`,
+`knowledge/` without clear nesting. Interpreted as `automation/{reports,
+review,tasks}/` (matching the architecture diagram exactly) plus reuse of
+the project's *existing* top-level `knowledge/` folder rather than a
+duplicate `automation/knowledge/` — the task's own final instruction
+("update **the** knowledge folder") refers to a single, already-existing
+folder throughout this project. Flagged here in case a separate
+`automation/knowledge/` (e.g. for automation-run logs) was actually
+intended.

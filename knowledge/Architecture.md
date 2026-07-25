@@ -130,3 +130,14 @@ No repo implements the "申込〜決済〜登録〜通知" flow as a custom back
 and per the decision above, none needs to for the initial release. The
 previous framing of this as "which repo should build it" no longer applies;
 the answer is "none, by design — the existing Apps Script already does it."
+
+## PM process tooling (PM-AUTO-01, 2026-07-25)
+
+`../automation/` is a local report/review/next-task tooling layer for the
+Claude Code ↔ PM (ChatGPT/human) handoff itself — not part of the
+店舗IT担当 business architecture above. Does not touch Stripe, the
+production Apps Script, or Google Sheets; operates entirely on this git
+repo (diffs, test output, markdown/json generation). Reads
+`knowledge/Backlog.md` for context when drafting the next task, but does
+not write to `knowledge/` itself. See `../automation/README.md` for the
+full flow and stop/continue rules.

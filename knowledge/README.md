@@ -23,3 +23,8 @@ exists here only because it is the branch the PM OS work is tracked on.
   `CHECKLIST_G1-12_Source_Access.md` — what's needed before the Apps
   Script Web App endpoint can be implemented), same referencing convention
   as `ADD_*.md`/`SPEC_*.md`.
+
+The repo also has `../automation/` (PM-AUTO-01) — a local tooling layer
+(completion report / review package / next-task draft generators) that
+*reads* this `knowledge/` folder for context (e.g. open Backlog items) but
+does not duplicate or replace it. See `../automation/README.md`.

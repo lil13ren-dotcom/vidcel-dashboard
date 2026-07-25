@@ -137,3 +137,18 @@ rule: nothing here may be implemented without an approved Task ID.
    accounting/legal input before real USD revenue is used in any reporting
    shown outside the team (investors, tax filings, etc.). Same category as
    item 9; flagged by `SPEC_G1-11`, not assessed there.
+
+12. **PM-AUTO-01's pytest/mypy/ruff/npm-build detection is unverified
+   against a repo that actually has them configured.** Smoke-tested only
+   against `vidcel-dashboard`, which has none of them — so only the
+   "correctly skipped" path is proven, not the "tool found and actually
+   ran" path. Suggested test target: `ai-lead-os` (real pytest/mypy/ruff
+   config per its `pyproject.toml`). See `automation/tasks/NEXT_TASK_DRAFT.md`.
+
+13. **Confirm folder-structure interpretation for `automation/`.**
+   PM-AUTO-01's instructions listed `automation/`, `reports/`, `review/`,
+   `tasks/`, `knowledge/` without clear nesting; built as
+   `automation/{reports,review,tasks}/` reusing the existing top-level
+   `knowledge/` rather than a new `automation/knowledge/`. Flagged in
+   `Decision_Log.md` in case a separate nested one (e.g. for automation-run
+   logs) was actually intended.

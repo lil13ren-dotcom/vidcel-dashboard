@@ -1,0 +1,23 @@
+{
+  "task_id": "PM-EXAMPLE-01",
+  "objective": "One or two sentences describing what this task set out to do.",
+  "category": "Documentation",
+  "_category_options": [
+    "Documentation", "Tests", "Refactoring", "Lint", "Formatting",
+    "Knowledge updates", "PM OS updates", "Task generation", "Implementation"
+  ],
+  "files_modified": [],
+  "_files_modified_note": "Optional. If omitted, auto-derived from `git diff`/`git status` at generation time. Provide explicitly when the auto-detected file list would include unrelated local changes.",
+  "tests_executed": [],
+  "test_results": "",
+  "risks": "",
+  "remaining_blockers": "",
+  "evidence": "",
+  "suggested_next_task": "",
+  "flags": [],
+  "_flags_options": [
+    "BLOCKED", "EVIDENCE_MISSING", "PRODUCTION_CHANGE", "ARCHITECTURE_CHANGE",
+    "PAYMENT_CHANGE", "LEGAL_DECISION", "SECRET_REQUIRED", "DEPLOYMENT_REQUIRED"
+  ],
+  "_flags_note": "Any flag present here halts the automation pipeline before the review package or next-task draft are generated. Set explicitly and honestly -- do not omit a flag that applies just to keep the pipeline running."
+}
