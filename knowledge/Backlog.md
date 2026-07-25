@@ -38,17 +38,33 @@ rule: nothing here may be implemented without an approved Task ID.
    no point designing the Sheet-integration mechanism against a page that
    doesn't exist yet.
 
-2. ~~G1-09 — How does the Vidcel onboarding page actually deliver data into
-   the existing Google Sheet?~~ **Design recommended by G1-06D (2026-07-25)
-   — not yet implemented, not yet a Task ID.** See
+2. ~~G1-09 (bridge mechanism) — How does the Vidcel onboarding page actually
+   deliver data into the existing Google Sheet?~~ **Design recommended by
+   G1-06D (2026-07-25) — not yet implemented, not yet a Task ID.** See
    `ADD_G1-06D_Onboarding_Data_Bridge.md`: an Apps Script Web App calling
    the existing registration logic directly. Rejected: direct Sheets API
    calls (doesn't solve the trigger problem alone) and a Cloudflare Worker
-   proxy (would re-reverse PM-003's Worker deferral a third time). Six
-   follow-up implementation items are listed in the ADD's §6 and still need
-   Task IDs, starting with decoupling the registration logic from
-   `onFormSubmit`. Still blocks Gate 1 items 3–4 until built and
-   independently validated (no inherited Form evidence, per the ADD).
+   proxy (would re-reverse PM-003's Worker deferral a third time). Still
+   blocks Gate 1 items 3–4 until built and independently validated (no
+   inherited Form evidence, per the ADD).
+
+   ⚠️ **Naming collision:** `03_MasterTask`'s `G1-09` row (added by G1-06C)
+   is this bridge-mechanism task. The task that produced
+   `SPEC_G1-09_Onboarding_Data_Model.md` (field set / data model — item 2a
+   below) was *also* labeled "G1-09" by the project owner, but is a
+   different scope. Flagged, not resolved — the PM OS workbook wasn't in
+   scope for either doc-only task. Recommend the owner either renumber one
+   (e.g. the field-model task becomes G1-09B) or explicitly merge them
+   before either gets a real implementation Task ID.
+
+2a. **G1-09 (data model) — What fields does the onboarding page collect,
+   and where do they go?** Specified by the task above:
+   `SPEC_G1-09_Onboarding_Data_Model.md`. 18 fields reused as-is from the
+   current Form/`Customers` schema, 6 new fields justified by the confirmed
+   JP+US Payment Links (Country, Preferred Language, Currency, WhatsApp,
+   Time Zone, a Country-conditional Legal Consent Set). Not implemented.
+   Surfaced a **live bug**: `00_Dashboard`'s MRR formula assumes ¥2,980 for
+   every customer — see item 7 below.
 
 3. **G1-06 — Is the Stripe Payment Link actually live?** Owner confirmed a
    JP and a US Payment Link exist; still unverified: active status, product
@@ -72,3 +88,22 @@ rule: nothing here may be implemented without an approved Task ID.
    whether standalone `vidcel-lp` is stale/superseded or actively
    maintained separately. Not urgent, but worth resolving before any LP
    work is scoped as a Task ID.
+
+7. **⚠️ Live bug: `00_Dashboard`'s MRR formula assumes ¥2,980 for every
+   customer.** Surfaced by `SPEC_G1-09_Onboarding_Data_Model.md`. Not
+   hypothetical — a confirmed US Payment Link (G1-06) means the first USD
+   customer will silently corrupt the reported MRR unless this is fixed.
+   Small, independent fix; doesn't need to wait for the rest of the
+   onboarding-page work, but does need its own Task ID (PM OS formula
+   change).
+
+8. **Legal consent checkboxes aren't copied from the raw Form response log
+   into the processed `Customers` table.** Pre-existing gap, found while
+   building the G1-09 data-model spec; unrelated to the multi-market
+   question but means the canonical customer record has no consent audit
+   trail today.
+
+9. **Legal review needed for non-Japan (starting with US) consent
+   requirements** before the Legal Consent Set field in
+   `SPEC_G1-09_Onboarding_Data_Model.md` can be finalized. Explicitly not
+   something to guess at in an engineering spec.

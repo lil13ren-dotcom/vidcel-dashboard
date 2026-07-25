@@ -231,3 +231,41 @@ did not include PM OS updates, unlike G1-06/G1-06C). Six concrete follow-up
 implementation items are listed in the ADD's §6, none started, none
 assigned a Task ID yet — including the Apps Script refactor itself, which
 will need explicit authorization given it touches production automation.
+
+## 2026-07-25 — G1-09: onboarding data model specified
+
+Produced `SPEC_G1-09_Onboarding_Data_Model.md`. Documentation only — no
+Stripe, Apps Script, or Google Sheets changes made, per instruction.
+
+**Fields:** 18 reused (verified directly against the live Google Form
+response header and `Customers` sheet schema in
+`店舗IT担当_オンボーディング管理_v1` — not assumed from the task's example
+list) + 6 new (Country, Preferred Language, Currency, WhatsApp, Time Zone,
+a Country-conditional Legal Consent Set). The new fields are justified by
+G1-06's confirmed evidence of both a JP and a US Stripe Payment Link — not
+invented, per instruction.
+
+**Most consequential finding:** the PM OS's own `00_Dashboard!B12` MRR
+formula (`=契約数*2980`) hardcodes a ¥2,980 price for every customer. With a
+USD Payment Link now confirmed to exist, the first US customer would
+silently corrupt the MRR figure — this is a live latent bug, surfaced by
+building this spec, not a hypothetical risk. Recorded as Gap 4 / build-order
+item 3 in the spec; **not fixed here**, since this task is documentation
+only and a formula change would need its own Task ID even though it's
+small.
+
+**Other gaps found:** legal consent checkboxes are captured in the raw Form
+response log but never copied into the processed `Customers` table (a
+pre-existing gap, unrelated to the multi-market question); Stripe payment
+status is still customer self-attested, not verified (same gap G1-06
+already flagged); no language/currency branching exists anywhere in the
+Apps Script logic inspected; legal requirements for non-Japan consent are
+explicitly left to legal review, not guessed at.
+
+**Recommended build order** (10 steps, none started, none assigned Task
+IDs): legal review → add the new Sheet columns → fix the MRR currency bug →
+persist consent to `Customers` → build the G1-06D data-bridge Web App →
+add language/currency branching → build the onboarding page UI → wire page
+to endpoint → replace Stripe self-attestation with real verification →
+independent E2E validation per market. Full reasoning for the ordering is
+in the spec's §4.

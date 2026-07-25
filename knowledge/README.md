@@ -15,3 +15,6 @@ exists here only because it is the branch the PM OS work is tracked on.
 - `ADD_*.md` — standalone Architecture Decision Documents for individual
   design questions (e.g. `ADD_G1-06D_Onboarding_Data_Bridge.md`), referenced
   from `Architecture.md` and `Decision_Log.md` rather than inlined there.
+- `SPEC_*.md` — standalone specifications (e.g.
+  `SPEC_G1-09_Onboarding_Data_Model.md` — field-level data model), same
+  referencing convention as `ADD_*.md`.

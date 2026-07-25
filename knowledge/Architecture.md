@@ -88,11 +88,19 @@ no production/test data separation or documented cancellation procedure yet.
 Full per-item status: PM OS `04_Gates`, "Gate 1 — Ready to Accept First
 Paying Customer".
 
-## Architecture Decision Documents
+## Architecture Decision Documents & Specifications
 
 - [`ADD_G1-06D_Onboarding_Data_Bridge.md`](./ADD_G1-06D_Onboarding_Data_Bridge.md)
   — how the Vidcel Onboarding Page delivers data to the existing spreadsheet/
   Apps Script backend. Recommends an Apps Script Web App. Not implemented.
+- [`SPEC_G1-09_Onboarding_Data_Model.md`](./SPEC_G1-09_Onboarding_Data_Model.md)
+  — the onboarding field set itself: 18 reused fields (verified against the
+  live Form/`Customers` schema) + 6 new fields (Country, Preferred Language,
+  Currency, WhatsApp, Time Zone, Legal Consent Set), justified by the
+  confirmed JP + US Stripe Payment Links (G1-06). **Surfaces a real,
+  already-live bug**: `00_Dashboard`'s MRR formula assumes every customer
+  pays ¥2,980 — a USD customer would silently corrupt that figure today.
+  Not implemented; see the spec's §4 for the recommended build order.
 
 ## Superseded: original open question (resolved above)
 
