@@ -1,5 +1,15 @@
 # Architecture — 店舗IT担当 business, as verified 2026-07-25
 
+**⚠️ 2026-07-25 update (G1-06): the "Confirmed production architecture"
+section below (from PM-003) is now disputed.** The project owner stated the
+intended post-payment flow is "Stripe Payment Link → Vidcel onboarding page
+→ Resend workflow" — not Google Form, and re-involving Resend, which PM-003
+had deferred. Not resolved yet; see `Decision_Log.md`'s G1-06 entry and
+`Backlog.md` item 0. The evidence below (Apps Script `Logs`) is still
+factually accurate for what that system does — it just may not be *the*
+production path going forward. Treat the table row for "Customer onboarding"
+and the confirmed-architecture diagram as **provisional**, not settled.
+
 Cross-repo inventory produced by PM-002 (repository search for the 店舗IT担当
 production implementation). Verified by cloning and inspecting each repo
 directly — not inferred from names or memory.

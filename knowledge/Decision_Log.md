@@ -100,3 +100,54 @@ redirect verification) — it is the highest-value unblock, requires the
 project owner (not Claude Code, which has no Stripe access), and both
 Not Started items (G1-07, G1-08) are lower-risk paperwork/process work that
 can proceed in parallel or after.
+
+## 2026-07-25 — G1-06: partial evidence received; redirect assumption corrected; **conflicts with PM-003**
+
+Project owner supplied partial evidence for G1-06 and, in the same message,
+corrected the assumed post-payment redirect target:
+
+- **Confirmed by owner:** a Japan Stripe Payment Link exists; a US Stripe
+  Payment Link exists.
+- **Still not evidenced:** active status, exact product names, exact
+  recurring prices, live vs. test mode, the actual Payment Link URLs,
+  post-payment redirect configuration, whether the production LP's CTA
+  matches the Stripe Payment Link URL, and end-to-end payment→onboarding
+  completion.
+- **Architecture correction:** the intended flow is no longer "Stripe
+  Payment Link → Google Form." It is **"Stripe Payment Link → Vidcel
+  onboarding page → Resend workflow."** The Resend onboarding flow is
+  explicitly confirmed **incomplete** by the owner, so the redirect and
+  full E2E cannot yet be validated either way.
+
+G1-06 recorded as **部分完了/証跡待ち (PARTIALLY COMPLETE / EVIDENCE
+PENDING)** — a new status value, distinct from Completed/Blocked/Not
+Started, added to `03_MasterTask` and `02_Gantt`'s dropdowns. `04_Gates`
+Gate 1 checklist item 2's wording changed from "...reaches the correct
+Google Form" to "...reaches the correct destination" (no destination
+assumed). Gate 1 remains **Release不可 (NO-GO)** — this correction, if
+anything, adds an unresolved item (the Resend workflow) rather than
+resolving one.
+
+**⚠️ This directly conflicts with PM-003's decision (immediately above),
+which explicitly moved Resend to `07_Parking` as "not required for the
+initial release" on the grounds that the existing Apps Script (`GmailApp`)
+already had working send evidence.** That evidence is still accurate — the
+Apps Script's `Logs` sheet genuinely shows working confirmation/payment
+emails — but it now appears to describe a *different* pipeline (Google
+Form → Spreadsheet → Apps Script) than the one the owner says is actually
+intended for production (Stripe → Vidcel onboarding page → Resend). Per
+this task's explicit scope ("update the task documentation only"), this
+was **not resolved** — `07_Parking`'s Resend entry and PM-003's Google-Form
+framing were deliberately left as-is rather than guessed at. Two readings
+are possible and need the project owner to pick one:
+
+1. The Google Form + Apps Script system (proven working) is being replaced
+   by a new Payment Link → onboarding page → Resend system (in progress,
+   incomplete) — in which case PM-003's Resend-deferral reasoning no longer
+   holds and should be reversed.
+2. Both systems coexist for different purposes (e.g., Apps Script for
+   internal task/ops tracking, Resend for the customer-facing onboarding
+   sequence) — in which case PM-003's reasoning still holds for the
+   Apps Script side, and this Resend work is genuinely new/additive scope.
+
+See `Backlog.md` for this as an open item.
