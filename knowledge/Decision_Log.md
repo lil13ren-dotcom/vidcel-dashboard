@@ -56,3 +56,47 @@ AI Chat/E2E all-checked → Release) remains unverifiable as PASS — the
 underlying production components do not exist in code yet. This is a
 business decision (build vs. reuse vs. re-scope), not something to resolve
 by further searching.
+
+## 2026-07-25 — PM-003: initial production architecture confirmed; PM OS corrected
+
+Project owner confirmed the initial production flow: **Stripe Payment Link →
+Google Form → Google Spreadsheet → existing Apps Script** (customer
+registration, payment confirmation, task generation, customer emails). A
+custom Cloudflare Worker, custom Stripe API backend, Resend, a custom
+database, a custom admin dashboard, and direct `ai-lead-os` integration are
+explicitly **not required** for the initial release.
+
+PM OS corrected accordingly (workbook only; the working onboarding Apps
+Script itself was not touched, per instruction):
+
+- `03_MasterTask` / `02_Gantt`: G1-01 (Cloudflare auth), G1-02 (Worker
+  deploy), G1-03 (Resend) marked **Obsolete** (new status value added to
+  both sheets' dropdowns) rather than deleted, with a note pointing to this
+  entry and to `07_Parking`. G1-04 (E2E test) re-scoped to the confirmed
+  architecture and moved to In Progress based on real evidence (see below).
+  Three new tasks added — G1-06 (Stripe Payment Link + redirect
+  verification, **Blocked**: no Stripe dashboard access this session),
+  G1-07 (prod/test data separation, **Not Started**: no mechanism exists),
+  G1-08 (cancellation/failed-payment procedure documentation, **Not
+  Started**: only ad hoc manual edits exist, no written procedure).
+- `04_Gates`: the old generic 6-item checklist (Cloudflare/Worker/Stripe/LP/
+  AI Chat/E2E) — which assumed the wrong architecture — was removed and
+  replaced with **"Gate 1 — Ready to Accept First Paying Customer"**, 15
+  evidence-based checks. Status source: `店舗IT担当_オンボーディング管理_v1`'s
+  Apps Script `Logs` sheet, read directly (not inferred from documentation).
+  Result: **11 Completed, 3 Not Started, 1 Blocked → Gate 1 = Release不可**.
+  The Blocked and Not Started items (Stripe Payment Link liveness/redirect,
+  prod/test separation, cancellation procedure) are the only things standing
+  between this and a real first paying customer.
+- `07_Parking`: added the three deferred backend components (custom Worker,
+  Resend, custom Stripe backend) with re-evaluation conditions, so they are
+  not lost, just correctly deprioritized.
+- `06_Backlog`: noted that these components were considered and deferred by
+  decision, not simply unaddressed — re-proposing them requires going
+  through Backlog again, per the PM OS's own rules.
+
+Recommended next Task ID: **G1-06** (Stripe Payment Link liveness +
+redirect verification) — it is the highest-value unblock, requires the
+project owner (not Claude Code, which has no Stripe access), and both
+Not Started items (G1-07, G1-08) are lower-risk paperwork/process work that
+can proceed in parallel or after.
