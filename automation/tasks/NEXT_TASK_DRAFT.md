@@ -1,19 +1,19 @@
 # Next Task Draft
 
-- **Generated:** 2026-07-25T05:14:27+00:00
+- **Generated:** 2026-07-25T06:19:09+00:00
 - **Status:** DRAFT — not an approved Task ID. Requires explicit human
   approval before Claude Code acts on this. Nothing in this automation
   layer executes this file automatically.
 
-## From previous task: PM-AUTO-01
+## From previous task: PM-AUTO-02
 
 **Suggested next task (as written in the previous completion report):**
 
-Run this pipeline against ai-lead-os (which has real pytest/mypy/ruff config) to validate the tool-detection logic against a repo where those tools are actually configured, not just gracefully skipped.
+PM-AUTO-03: wire the automation into the actual Claude Code <-> ChatGPT PM handoff for a real upcoming task (e.g. the next Gate 1 item), replacing the manual copy-paste flow for the first time on a live task rather than a validation run.
 
 **Previous task's remaining blockers (for context):**
 
-None for this task itself. The pipeline's test/build detection (pytest/mypy/ruff/npm) is untested against a repo that actually has those configured -- ai-lead-os would be a good next real-world test since it has pytest/mypy/ruff configured for real.
+_(none noted)_
 
 ## Open Backlog items (best-effort extract from knowledge/Backlog.md)
 
@@ -24,6 +24,7 @@ _Text-parsed from Backlog.md's 'Awaiting project-owner decision' section — not
 - G1-06 — Is the Stripe Payment Link actually live?
 - `vidcel-lp` vs. `vidcel-web/apps/lp` — which is the repo of record?
 - Tax/accounting treatment of multi-currency revenue
+- Confirm folder-structure interpretation for `automation/`.
 
 ## Human review checklist before approving this as a real task
 

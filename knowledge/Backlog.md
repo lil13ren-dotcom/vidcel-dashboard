@@ -138,12 +138,18 @@ rule: nothing here may be implemented without an approved Task ID.
    shown outside the team (investors, tax filings, etc.). Same category as
    item 9; flagged by `SPEC_G1-11`, not assessed there.
 
-12. **PM-AUTO-01's pytest/mypy/ruff/npm-build detection is unverified
-   against a repo that actually has them configured.** Smoke-tested only
-   against `vidcel-dashboard`, which has none of them — so only the
-   "correctly skipped" path is proven, not the "tool found and actually
-   ran" path. Suggested test target: `ai-lead-os` (real pytest/mypy/ruff
-   config per its `pyproject.toml`). See `automation/tasks/NEXT_TASK_DRAFT.md`.
+12. ~~PM-AUTO-01's pytest/mypy/ruff/npm-build detection is unverified
+   against a repo that actually has them configured.~~ **Resolved by
+   PM-AUTO-02 (2026-07-25).** Validated against `ai-lead-os`'s real
+   pytest/mypy/ruff/Alembic config: all 6 checks (Ruff check, Ruff format
+   check, mypy strict, Alembic upgrade+check, pytest+coverage) correctly
+   discovered and executed, output matching a manual baseline exactly; a
+   deliberately-injected Ruff violation was correctly detected as FAIL
+   (no false PASS) and reverted. npm-build detection remains untested
+   against a repo with a real `package.json`/build script — `ai-lead-os`
+   is a pure Python repo, so this specific sub-path is still only
+   smoke-tested against the "no package.json" skip path. See
+   `Decision_Log.md`'s PM-AUTO-02 entry.
 
 13. **Confirm folder-structure interpretation for `automation/`.**
    PM-AUTO-01's instructions listed `automation/`, `reports/`, `review/`,

@@ -136,8 +136,21 @@ the answer is "none, by design — the existing Apps Script already does it."
 `../automation/` is a local report/review/next-task tooling layer for the
 Claude Code ↔ PM (ChatGPT/human) handoff itself — not part of the
 店舗IT担当 business architecture above. Does not touch Stripe, the
-production Apps Script, or Google Sheets; operates entirely on this git
-repo (diffs, test output, markdown/json generation). Reads
-`knowledge/Backlog.md` for context when drafting the next task, but does
-not write to `knowledge/` itself. See `../automation/README.md` for the
-full flow and stop/continue rules.
+production Apps Script, or Google Sheets. Reads `knowledge/Backlog.md` for
+context when drafting the next task, but does not write to `knowledge/`
+itself. See `../automation/README.md` for the full flow and stop/continue
+rules.
+
+**2026-07-25 (PM-AUTO-02): quality-check execution validated against a
+real repo with real tooling.** `generate_review_package.py` now accepts
+`--root <path>` and can run Ruff check, Ruff format check, mypy (strict),
+pytest+coverage, and Alembic upgrade+check against *any* target repo —
+not just this one — by reading that repo's own `pyproject.toml`/
+`alembic.ini` (via `tomllib`) rather than hardcoding commands. Validated
+against `ai-lead-os` (read-only access in this session; nothing was
+committed there): a clean run correctly discovered and executed all 6
+checks with output matching a manually-run baseline exactly, and an
+injected throwaway Ruff violation was correctly detected as a failure
+(no false PASS) and then fully reverted. `run_pm_pipeline.py` now
+forwards `--root` through to the review-package step. Full evidence in
+`Decision_Log.md`'s PM-AUTO-02 entry.

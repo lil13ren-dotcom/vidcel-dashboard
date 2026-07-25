@@ -408,3 +408,114 @@ duplicate `automation/knowledge/` — the task's own final instruction
 folder throughout this project. Flagged here in case a separate
 `automation/knowledge/` (e.g. for automation-run logs) was actually
 intended.
+
+## 2026-07-25 — PM-AUTO-02: automation validated against real ai-lead-os tooling
+
+Directly closes the gap PM-AUTO-01 left open: the "tool found and actually
+ran" code path (as opposed to "not configured, correctly skipped") had
+never been exercised against a repo with real pytest/mypy/ruff/Alembic
+config. `ai-lead-os` was used as the real target, read-only (no push
+access in this session — nothing was ever going to be committed there).
+
+**Ground truth established first, deliberately, before trusting the
+automation's own output:** ran every real command from `ai-lead-os`'s
+`CONTRIBUTING.md` by hand — `uv run ruff check .`, `uv run ruff format
+--check .`, `uv run mypy src`, `uv run alembic upgrade head` +
+`uv run alembic check`, `uv run pytest --cov=ai_lead_os
+--cov-report=term-missing` — before running the automation once. All
+clean: ruff/ruff-format/mypy pass, Alembic reports no drift, 1006 tests
+pass, 91.07% coverage (≥90% threshold in `pyproject.toml`).
+
+**`generate_review_package.py` rewritten** to make this validation
+possible at all: the PM-AUTO-01 version hardcoded generic `pytest`/
+`mypy .`/`ruff check .` invocations against this repo (`vidcel-dashboard`)
+only, with no way to point it at another repo's tooling. Added:
+- `--root <path>` so the script can run checks against an arbitrary
+  target repo while still writing its own reports/review output under
+  this repo's `automation/`.
+- A `Runner` that detects `uv`-based invocation via `uv.lock` presence
+  (`ai-lead-os` uses `uv` exclusively per its own docs) and falls back to
+  a bare tool call, or `SKIPPED` with a stated reason, otherwise.
+- Real config discovery via `tomllib` against the target's
+  `pyproject.toml` — `[tool.ruff]`, `[tool.mypy]` (+ `strict` flag),
+  `[tool.pytest.ini_options]`, `[tool.coverage.run].source` — rather than
+  assuming ai-lead-os-specific commands. This was a deliberate choice:
+  generic detection logic that happens to reproduce ai-lead-os's exact
+  documented commands is stronger evidence than a script special-cased to
+  match one repo.
+- Separate Ruff-check and Ruff-format-check steps (previously conflated),
+  and a new Alembic upgrade-head + check step, gated on `alembic.ini`
+  being present.
+- A `quality_checks.json` machine-readable output (`name`, `command`,
+  `status`, `exit_code`, `reason` per check) alongside the existing
+  markdown, and an explicit "Overall: PASS/FAIL (n passed, n failed, n
+  skipped)" line plus a per-check status table in `review_request.md`.
+
+**Bug fixed during this task (not a functional bug, but a real one):**
+`run_pytest_with_coverage()`'s skip-guard was written as two ANDed
+conditions, the first of which (`"pytest" not in
+pyproject["tool"]["pytest"]["ini_options"]`) checks for the literal
+string `"pytest"` as a *key inside* `ini_options`, which is structurally
+meaningless — it evaluates true almost unconditionally, so the guard's
+actual behavior reduced to just the second, correct clause
+(`"ini_options" not in pyproject["tool"]["pytest"]`). Simplified to the
+single correct condition and re-ran against `ai-lead-os` to confirm
+identical (correct) behavior before and after.
+
+**Also fixed: `run_pm_pipeline.py` didn't forward `--root`** to
+`generate_review_package.py` at all — a gap from when `--root` was added
+mid-session. Added `--root` as a pipeline-level argument, forwarded
+alongside the existing `--base`.
+
+**Scenario 1 (successful run, `flags: []`) — verified against real
+captured output, not inference:** ran the full pipeline
+(`run_pm_pipeline.py automation/reports/task_meta.json --root
+/workspace/ai-lead-os`) with a `task_meta.json` written for this task.
+All 6 checks (Ruff check, Ruff format check, mypy (strict), Alembic
+upgrade head, Alembic check, pytest with coverage) were discovered from
+`ai-lead-os`'s real config and actually executed via `uv run`; every
+result matched the manual baseline byte-for-byte in substance: "All
+checks passed!", "314 files already formatted", "Success: no issues
+found in 195 source files", "No new upgrade operations detected.", "1006
+passed in 190.87s", 91.07% coverage. `latest_report.md`/`.json`,
+`review_request.md`, `quality_checks.json`, and
+`tasks/NEXT_TASK_DRAFT.md` were all generated. A minimal, harmless,
+doc-only change (one HTML comment appended to `ai-lead-os/README.md`) was
+made beforehand so the git-diff/git-status detection had a real non-empty
+diff to report on — confirmed present verbatim in `reports/git_diff.md`
+and `git status --short` in `review_request.md`. No business logic in
+`ai-lead-os` was touched.
+
+**Scenario 2 (controlled failure) — verified detection, not just
+absence of a crash:** added a throwaway file
+(`scratch_pm_auto02_tmp/__pmauto02_ruff_violation.py`, two unused imports
++ one unused variable — a Ruff violation only, chosen as the safest of
+the three suggested options since it can't affect mypy/pytest/coverage
+results) inside `ai-lead-os`. Re-running `generate_review_package.py
+--root /workspace/ai-lead-os` correctly reported `Overall: FAIL (5
+passed, 1 failed, 0 skipped)`, script exit code 1, `Ruff check` status
+`FAIL` with the real `F401`/`F841` Ruff output captured verbatim in
+`test_results.md`, while the other 5 checks still correctly reported
+PASS — no false PASS on the failing check, no false FAIL bleeding into
+unrelated ones. `review_request.md`'s summary table and git-status
+section both reflected the failure clearly.
+
+**Restoration confirmed, not assumed:** deleted the scratch file/
+directory, ran `git checkout -- README.md`, and confirmed `git status
+--short` returned empty in `ai-lead-os`. Re-ran the review package once
+more and got `Overall: PASS (6 passed, 0 failed, 0 skipped)` again,
+confirming the repo was genuinely back to its clean, passing baseline —
+not just that the working tree looked clean. `.venv/` and `data/*.db`
+(created by `uv sync --frozen` / `alembic upgrade head` earlier in this
+task) are properly gitignored in `ai-lead-os` and never appeared in `git
+status` at any point.
+
+**Result: PM-AUTO-01's previously-unverified code path is now verified.**
+The automation correctly discovers project-specific tooling from a
+target repo's own config, executes real commands, captures real output,
+distinguishes PASS from FAIL from SKIPPED correctly, and does not
+silently swallow or misreport a failure. No product/business code was
+changed in `ai-lead-os` (read-only session access; nothing was committed
+there) or in `店舗IT担当`'s Stripe/Apps Script/Sheets systems. Changed
+files in this repo: `automation/generate_review_package.py`,
+`automation/run_pm_pipeline.py`.

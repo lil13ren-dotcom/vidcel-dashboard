@@ -55,6 +55,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("meta_path", nargs="?", default=None)
     parser.add_argument("--base", default=None)
+    parser.add_argument("--root", default=None, help="Target repo to run quality checks against (default: vidcel-dashboard)")
     args = parser.parse_args()
 
     report_args = [args.meta_path] if args.meta_path else []
@@ -75,7 +76,11 @@ def main():
         print("=" * 60)
         return 2
 
-    review_args = ["--base", args.base] if args.base else []
+    review_args = []
+    if args.base:
+        review_args += ["--base", args.base]
+    if args.root:
+        review_args += ["--root", args.root]
     run_script("generate_review_package.py", review_args)
     run_script("generate_next_task.py", [])
 

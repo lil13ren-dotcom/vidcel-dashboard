@@ -1,0 +1,48 @@
+{
+  "root": "/workspace/ai-lead-os",
+  "use_uv": true,
+  "checks": [
+    {
+      "name": "Ruff check",
+      "command": "uv run ruff check .",
+      "status": "PASS",
+      "exit_code": 0,
+      "reason": ""
+    },
+    {
+      "name": "Ruff format check",
+      "command": "uv run ruff format --check .",
+      "status": "PASS",
+      "exit_code": 0,
+      "reason": ""
+    },
+    {
+      "name": "mypy (strict)",
+      "command": "uv run mypy src",
+      "status": "PASS",
+      "exit_code": 0,
+      "reason": ""
+    },
+    {
+      "name": "Alembic upgrade head",
+      "command": "uv run alembic upgrade head",
+      "status": "PASS",
+      "exit_code": 0,
+      "reason": ""
+    },
+    {
+      "name": "Alembic check (no model drift)",
+      "command": "uv run alembic check",
+      "status": "PASS",
+      "exit_code": 0,
+      "reason": ""
+    },
+    {
+      "name": "pytest with coverage",
+      "command": "uv run pytest --cov=ai_lead_os --cov-report=term-missing",
+      "status": "PASS",
+      "exit_code": 0,
+      "reason": ""
+    }
+  ]
+}

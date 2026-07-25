@@ -59,7 +59,9 @@ automation/
     latest_report.md               output — human-readable
     latest_report.json             output — machine-readable
     git_diff.md                    output — from the review stage
-    test_results.md                output — pytest/mypy/ruff, from the review stage
+    test_results.md                output — Ruff/mypy/Alembic/pytest, from the review stage
+    quality_checks.json            output — machine-readable per-check status/exit code,
+                                    from the review stage
   review/
     review_request.md              output — the review package
     screenshots/                   optional — drop images here before running;
@@ -86,7 +88,12 @@ location for context.
    python3 automation/run_pm_pipeline.py automation/reports/task_meta.json
    ```
    Optionally add `--base origin/main` to also diff against a base branch,
-   not just uncommitted changes.
+   not just uncommitted changes. Optionally add `--root /path/to/other/repo`
+   to run the quality checks (Ruff/mypy/pytest/Alembic) against a different
+   repo than this one — the report/review output still lands under this
+   repo's `automation/`. Quality-check discovery reads the target repo's own
+   `pyproject.toml`/`alembic.ini`, so this works against any repo without
+   per-repo hardcoding.
 3. If it halts (exit code 2), the reason is printed and in
    `latest_report.md` — resolve it like any other PM OS blocker (see
    `knowledge/Decision_Log.md`'s pattern for prior blockers, e.g. G1-12) and
@@ -170,11 +177,17 @@ pipeline halts regardless of what `category` says.
 - Dropping screenshots into `automation/review/screenshots/` before running,
   if visual evidence is relevant — nothing captures them automatically.
 
-## Not yet validated
+## Validated (PM-AUTO-02, 2026-07-25)
 
-This was smoke-tested only against `vidcel-dashboard` itself, which has no
-pytest/mypy/ruff/npm build configured — so the "tool found and actually ran
-it" path is unverified, only the "tool not configured, correctly skipped"
-path is. `ai-lead-os` (this account's Python project with real pytest/
-mypy/ruff config, per its `pyproject.toml`) would be a good next real-world
-test — see `automation/tasks/NEXT_TASK_DRAFT.md`.
+The "tool found and actually ran it" path — not just "tool not configured,
+correctly skipped" — is now verified against `ai-lead-os`'s real pytest/
+mypy/ruff/Alembic config via `--root`: all 6 checks (Ruff check, Ruff
+format check, mypy strict, Alembic upgrade+check, pytest+coverage) were
+discovered and executed for real, with output matching a manually-run
+baseline exactly (see `knowledge/Decision_Log.md`'s PM-AUTO-02 entry for
+the full evidence). A deliberately-injected Ruff violation was also
+correctly detected and reported as a failure (no false PASS), then
+reverted. **Still not validated:** npm-build detection against a repo
+with a real `package.json`/build script — `ai-lead-os` is pure Python, so
+only the "no package.json, correctly skipped" path has been exercised for
+that check specifically.
