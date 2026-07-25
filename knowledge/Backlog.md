@@ -39,14 +39,28 @@ rule: nothing here may be implemented without an approved Task ID.
    doesn't exist yet.
 
 2. ~~G1-09 (bridge mechanism) — How does the Vidcel onboarding page actually
-   deliver data into the existing Google Sheet?~~ **Design recommended by
-   G1-06D (2026-07-25) — not yet implemented, not yet a Task ID.** See
-   `ADD_G1-06D_Onboarding_Data_Bridge.md`: an Apps Script Web App calling
-   the existing registration logic directly. Rejected: direct Sheets API
-   calls (doesn't solve the trigger problem alone) and a Cloudflare Worker
-   proxy (would re-reverse PM-003's Worker deferral a third time). Still
-   blocks Gate 1 items 3–4 until built and independently validated (no
-   inherited Form evidence, per the ADD).
+   deliver data into the existing Google Sheet?~~ **Design resolved by
+   G1-06D (2026-07-25).** See `ADD_G1-06D_Onboarding_Data_Bridge.md`: an
+   Apps Script Web App calling the existing registration logic directly.
+   Rejected: direct Sheets API calls (doesn't solve the trigger problem
+   alone) and a Cloudflare Worker proxy (would re-reverse PM-003's Worker
+   deferral a third time). **Implementation is G1-12 — now BLOCKED**, see
+   item 0a below. Still blocks Gate 1 items 3–4 until built and
+   independently validated (no inherited Form evidence, per the ADD).
+
+0a. **⚠️ G1-12 BLOCKED — implementing the Web App endpoint requires
+   the real Apps Script source, which was never obtained.** Everything
+   documented about `handleFormSubmit` etc. across G1-06 through G1-11 was
+   inferred from `Logs` messages and sheet headers, never read from actual
+   code — this only became a blocking problem once implementation (not
+   design/analysis) was requested. Also: this session has no Apps Script
+   deployment/execution access at all, so nothing could be tested even
+   with the source. See `CHECKLIST_G1-12_Source_Access.md` for the exact
+   files/config needed and the five-phase breakdown (source review →
+   implementation → deployment → runtime testing → E2E evidence). No code
+   was written. Top blocker on Gate 1 items 3–4, ahead of item 3 (Stripe
+   Payment Link verification) in practical urgency since nothing else in
+   the onboarding-page work can proceed without it.
 
    ⚠️ **Naming collision:** `03_MasterTask`'s `G1-09` row (added by G1-06C)
    is this bridge-mechanism task. The task that produced

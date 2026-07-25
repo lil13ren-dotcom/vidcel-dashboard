@@ -92,7 +92,9 @@ Paying Customer".
 
 - [`ADD_G1-06D_Onboarding_Data_Bridge.md`](./ADD_G1-06D_Onboarding_Data_Bridge.md)
   — how the Vidcel Onboarding Page delivers data to the existing spreadsheet/
-  Apps Script backend. Recommends an Apps Script Web App. Not implemented.
+  Apps Script backend. Recommends an Apps Script Web App. **Design only —
+  implementation is G1-12, currently BLOCKED**, see
+  [`CHECKLIST_G1-12_Source_Access.md`](./CHECKLIST_G1-12_Source_Access.md).
 - [`SPEC_G1-09_Onboarding_Data_Model.md`](./SPEC_G1-09_Onboarding_Data_Model.md)
   — the onboarding field set itself: 18 reused fields (verified against the
   live Form/`Customers` schema) + 6 new fields (Country, Preferred Language,
@@ -110,6 +112,17 @@ Paying Customer".
   recommends showing **both** separate per-currency totals and one clearly-
   labeled converted consolidated figure rather than picking one. Not
   implemented — formulas are unchanged.
+- [`CHECKLIST_G1-12_Source_Access.md`](./CHECKLIST_G1-12_Source_Access.md)
+  — **G1-12 (implementing `ADD_G1-06D`'s recommended Web App) is BLOCKED.**
+  Two capability gaps, not a design problem: (1) the actual bound Apps
+  Script source was never obtained — everything documented about
+  `handleFormSubmit` etc. is inferred from `Logs` messages and sheet
+  headers, not read from real code; (2) this session has no Apps Script
+  deployment/execution access, so nothing can actually be deployed or
+  tested. No implementation code was written. Lists exactly what's needed
+  to unblock and separates source review / implementation / deployment /
+  runtime testing / E2E evidence into five distinct phases, none
+  completable by the existence of a design document alone.
 
 ## Superseded: original open question (resolved above)
 

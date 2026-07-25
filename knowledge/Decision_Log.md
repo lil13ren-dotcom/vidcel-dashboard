@@ -311,3 +311,48 @@ G1-09's flagged need for legal review of non-JP consent.
 validate the corrected model with a synthetic USD customer row *before* the
 first real US customer is onboarded — this can and should happen on its
 own timeline, not blocked on `ADD_G1-06D`'s data-bridge work.
+
+## 2026-07-25 — G1-12: BLOCKED, not implemented
+
+G1-12 asked for the actual `doPost` Web App endpoint implementation
+recommended by `ADD_G1-06D`. Before writing any code, checked for the two
+things that determine whether an honest implementation is even possible:
+
+1. **The actual bound Apps Script source code.** Attempted to locate it via
+   Drive search (`mimeType = 'application/vnd.google-apps.script'`,
+   `fullText contains 'handleFormSubmit'`). Found two Apps Script projects
+   in the account — neither is the one bound to
+   `店舗IT担当_オンボーディング管理_v1`; one is a Gantt-chart backup script,
+   the other a Google Places API scraper. Everything documented so far
+   about the onboarding automation's actual functions
+   (`handleFormSubmit`, `generateInitialTasks`, etc.) was inferred from
+   `Logs` sheet message strings and sheet column headers across G1-06
+   through G1-11 — never from reading real source code. This was true the
+   whole time; it just hadn't mattered until an implementation task
+   required it.
+2. **An Apps Script deployment/execution environment.** This session has
+   Drive-level tools only. No Apps Script API access exists to deploy a
+   Web App, assign it a real URL, or execute code to produce genuine test
+   results.
+
+**Decision, per explicit instruction: do not implement based on inferred
+behavior.** G1-12 is recorded as **BLOCKED** in the PM OS
+(`03_MasterTask`, `02_Gantt`) rather than marked with any design/code
+deliverable standing in for progress. `04_Gates` items 3–4 now reference
+G1-12 (implementation, blocked) downstream of G1-09 (design, complete via
+`ADD_G1-06D`) — the two are explicitly not conflated. The existing Google
+Form's `Logs` evidence continues to **not** count as evidence for the new
+endpoint, per instruction, restated here for emphasis since it would be an
+easy mistake to reach for that evidence out of habit.
+
+Produced `CHECKLIST_G1-12_Source_Access.md`: an itemized list of exactly
+what's needed to unblock (the real `.gs` files, `appsscript.json`, trigger
+configuration, script properties, and a decision on how deployment/testing
+will actually happen — likely the owner running a manual deploy/test loop,
+since no Apps Script API tool is provisioned in this session). Also
+formally separates five phases — source review, implementation,
+deployment, runtime testing, E2E evidence — none of which may be assumed
+complete because an earlier one (or a design document) exists.
+
+**No code was written for G1-12.** Not a partial implementation, not a
+draft — nothing, per instruction.

@@ -18,3 +18,8 @@ exists here only because it is the branch the PM OS work is tracked on.
 - `SPEC_*.md` — standalone specifications (e.g.
   `SPEC_G1-09_Onboarding_Data_Model.md` — field-level data model), same
   referencing convention as `ADD_*.md`.
+- `CHECKLIST_*.md` — acquisition/unblocking checklists for tasks that are
+  BLOCKED on external input (e.g.
+  `CHECKLIST_G1-12_Source_Access.md` — what's needed before the Apps
+  Script Web App endpoint can be implemented), same referencing convention
+  as `ADD_*.md`/`SPEC_*.md`.
