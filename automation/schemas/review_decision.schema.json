@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://vidcel-dashboard/automation/schemas/review_decision.schema.json",
+  "title": "PM Review Decision",
+  "description": "Machine-readable outcome of a single Claude Code task, written by automation/generate_decision_package.py to automation/review/review_decision.json. Every field has a single fixed meaning and is derived from structured inputs (task_meta.json fields, quality_checks.json check results) -- never from parsing free-form prose. Intended to be consumable by a CI system (e.g. GitHub Actions) with no human-in-the-loop text interpretation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task_id",
+    "status",
+    "risk",
+    "blocked",
+    "next_task",
+    "requires_human_approval",
+    "generated_at",
+    "reason"
+  ],
+  "properties": {
+    "task_id": {
+      "type": "string",
+      "description": "The Task ID this decision applies to, copied verbatim from task_meta.json."
+    },
+    "status": {
+      "type": "string",
+      "enum": ["PASS", "FAIL", "BLOCKED"],
+      "description": "PASS: no auto-stop flags were set and every executed quality check passed (skips do not count as failures). FAIL: no auto-stop flags were set but at least one quality check failed. BLOCKED: task_meta.json's `flags` array was non-empty (an Auto-Stop condition fired), OR `status_override` was explicitly set to BLOCKED. `status_override` in task_meta.json, if set, always wins over the derived value."
+    },
+    "risk": {
+      "type": "string",
+      "enum": ["LOW", "MEDIUM", "HIGH"],
+      "description": "Copied verbatim from task_meta.json's `risk` field. A human/Claude judgment call, never inferred (e.g. not derived from diff size or file count). Defaults to MEDIUM if task_meta.json omits it. Does not currently gate the pipeline -- it is informational, for a human or a future CI policy to act on."
+    },
+    "blocked": {
+      "type": "boolean",
+      "description": "True if and only if status == \"BLOCKED\". Provided as a separate boolean (rather than requiring a consumer to string-compare status) for simple CI gating."
+    },
+    "next_task": {
+      "type": ["string", "null"],
+      "description": "PASS: task_meta.json's `next_task_id` field verbatim, or null if that field was not set (never guessed from the free-text `suggested_next_task`). FAIL: always the fixed pattern \"REWORK-<task_id>\", regardless of what next_task_id said -- a failed task's next step is fixing itself, not moving forward. BLOCKED: always null -- no next task can be determined until the blocker is resolved."
+    },
+    "requires_human_approval": {
+      "type": "boolean",
+      "const": true,
+      "description": "Always true. Fixed per PM OS rule: no implementation begins without explicit human approval, regardless of status. This automation layer never sets this to false and never acts on next_task_draft.md itself."
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when this decision was generated."
+    },
+    "reason": {
+      "type": "string",
+      "description": "One-line, deterministic explanation of how `status` was derived (e.g. which flags were present, which checks failed, or that status_override was used). For audit/traceability, not for parsing -- treat as a human-readable log line, not a structured field."
+    }
+  }
+}

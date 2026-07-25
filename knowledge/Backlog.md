@@ -158,3 +158,19 @@ rule: nothing here may be implemented without an approved Task ID.
    `knowledge/` rather than a new `automation/knowledge/`. Flagged in
    `Decision_Log.md` in case a separate nested one (e.g. for automation-run
    logs) was actually intended.
+
+14. **PM-AUTO-03's `risk` field (LOW/MEDIUM/HIGH) doesn't gate anything
+   yet.** It's captured in `review_decision.json` and defaults to MEDIUM
+   if omitted, but a `HIGH` risk `PASS` is currently treated identically to
+   a `LOW` risk `PASS` — no extra approval step, no different exit code.
+   Worth a decision on whether e.g. HIGH risk should force a distinct exit
+   code or a mandatory `status_override` before the pipeline will report
+   PASS, once there's a real case where risk should have changed the
+   outcome and didn't.
+
+15. **No actual GitHub Actions workflow consumes
+   `run_pm_pipeline.py`'s exit code yet.** PM-AUTO-03 made the exit code
+   CI-shaped (0/2/3/1) specifically for this, per its own explicit "must be
+   suitable for future GitHub Actions integration" requirement, but no
+   `.github/workflows/*.yml` file exists. This is the suggested next task
+   (PM-AUTO-04) — see `automation/review/next_task_draft.md`.

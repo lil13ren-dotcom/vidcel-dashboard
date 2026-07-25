@@ -1,4 +1,4 @@
-# PM Automation Layer (PM-AUTO-01)
+# PM Automation Layer (PM-AUTO-01 / 02 / 03)
 
 Reduces manual copy-paste between the PM (ChatGPT/human) and Claude Code by
 standardizing completion reports, auto-collecting review material, and
@@ -25,32 +25,51 @@ generate_completion_report.py  -->  reports/latest_report.{md,json}
  yes                         no
   |                           |
   v                           v
-HALT. Print reason.    generate_review_package.py --> review/review_request.md
-Exit code 2.                  |
-Human review required.        v
-                        generate_next_task.py --> tasks/NEXT_TASK_DRAFT.md
-                               |
-                               v
-                        Human (or ChatGPT PM) reviews review_request.md,
-                        returns PASS / FAIL / BLOCKED, and explicitly
-                        approves (or rewrites) NEXT_TASK_DRAFT.md before
-                        it becomes a real Task ID. This automation layer
-                        never does that step itself.
+generate_decision_       generate_review_package.py --> review/review_request.md,
+package.py                                              reports/quality_checks.json
+(status: BLOCKED)               |
+  |                             v
+  v                      generate_decision_package.py --> review/review_decision.json,
+HALT. Exit code 2.       review/review_summary.md, review/next_task_draft.md
+Human review required.   (status: PASS or FAIL)
+                                 |
+                                 v
+                          generate_next_task.py --> tasks/NEXT_TASK_DRAFT.md
+                          (freeform, Backlog-aware -- separate from the
+                           deterministic next_task_draft.md above)
+                                 |
+                                 v
+                          Human (or ChatGPT PM) reads review_decision.json
+                          (or review_summary.md), returns PASS / FAIL / BLOCKED,
+                          and explicitly approves (or rewrites) a next task
+                          before it becomes a real Task ID. This automation
+                          layer never does that step itself.
 ```
 
-`run_pm_pipeline.py` runs all three stages in order and stops itself the
-moment a stop-flag appears — this is the "Task Runner" in the architecture
-diagram.
+`run_pm_pipeline.py` runs every stage in order and stops itself the moment
+a stop-flag appears — this is the "Task Runner" in the architecture diagram.
+Its own exit code mirrors the decision (0 = PASS, 2 = BLOCKED, 3 = FAIL, 1 =
+invalid `task_meta.json`), so it's directly usable as a CI gate. See
+[`DECISION_PACKAGE.md`](./DECISION_PACKAGE.md) for the full design of the
+structured decision layer (PM-AUTO-03) — status/risk derivation rules, the
+JSON schema, and worked examples.
 
 ## Folder structure
 
 ```
 automation/
   README.md                       this file
+  DECISION_PACKAGE.md             design doc for the structured decision layer (PM-AUTO-03)
   generate_completion_report.py   stage 1
-  generate_review_package.py      stage 2 (skipped on auto-stop)
-  generate_next_task.py           stage 3 (skipped on auto-stop)
+  generate_review_package.py      stage 2a (skipped on auto-stop) -- quality checks
+  generate_decision_package.py    stage 2b -- deterministic PASS/FAIL/BLOCKED decision
+  generate_next_task.py           stage 3 (skipped on auto-stop) -- freeform, Backlog-aware
   run_pm_pipeline.py              orchestrator
+  schemas/
+    review_decision.schema.json    JSON Schema (draft-07) for review_decision.json
+  examples/
+    pass/, fail/, blocked/          real, generated example decision packages, each with
+                                     the task_meta.json fixture that produced it
   reports/
     task_meta.json                 input you write per task (overwritten/committed
                                     each run — history lives in git log, not in
@@ -63,11 +82,14 @@ automation/
     quality_checks.json            output — machine-readable per-check status/exit code,
                                     from the review stage
   review/
-    review_request.md              output — the review package
+    review_request.md              output — the quality-check review package (stage 2a)
+    review_decision.json           output — fixed-schema PASS/FAIL/BLOCKED decision (stage 2b)
+    review_summary.md              output — human-readable summary (stage 2b)
+    next_task_draft.md             output — structured, status-driven next-task draft (stage 2b)
     screenshots/                   optional — drop images here before running;
                                     they'll be listed (never generated) in the package
   tasks/
-    NEXT_TASK_DRAFT.md              output — draft only, never auto-approved
+    NEXT_TASK_DRAFT.md              output — freeform, Backlog-aware draft (stage 3), never auto-approved
 ```
 
 The project's existing top-level `knowledge/` folder (`Decision_Log.md`,
@@ -94,17 +116,21 @@ location for context.
    repo's `automation/`. Quality-check discovery reads the target repo's own
    `pyproject.toml`/`alembic.ini`, so this works against any repo without
    per-repo hardcoding.
-3. If it halts (exit code 2), the reason is printed and in
-   `latest_report.md` — resolve it like any other PM OS blocker (see
-   `knowledge/Decision_Log.md`'s pattern for prior blockers, e.g. G1-12) and
-   don't just remove the flag to make the pipeline continue.
-4. If it completes (exit code 0), hand `automation/review/review_request.md`
-   to the PM (ChatGPT or a human) for PASS / FAIL / BLOCKED.
-5. On PASS, review `automation/tasks/NEXT_TASK_DRAFT.md`, edit it as
-   needed, assign it a real Task ID, and get explicit approval before it
-   goes to Claude Code. The draft is intentionally not polished enough to
-   send as-is — it's a starting point built from whatever the previous
-   report's `suggested_next_task` said, plus open Backlog items.
+3. If it halts (exit code 2), `automation/review/review_decision.json` still
+   has `status: "BLOCKED"` and a `reason` — resolve it like any other PM OS
+   blocker (see `knowledge/Decision_Log.md`'s pattern for prior blockers,
+   e.g. G1-12) and don't just remove the flag to make the pipeline continue.
+4. Otherwise, hand `automation/review/review_decision.json` (or the
+   human-readable `review_summary.md`) to the PM (ChatGPT or a human) for
+   PASS / FAIL / BLOCKED. Exit code 3 means the decision is already FAIL —
+   see `automation/review/next_task_draft.md`, which will be titled
+   `REWORK: <task_id>`. `review/review_request.md` has the full per-check
+   detail (commands, exit codes, captured output) behind the decision.
+5. On PASS, review `automation/review/next_task_draft.md` (structured,
+   status-aware) and/or `automation/tasks/NEXT_TASK_DRAFT.md` (freeform,
+   Backlog-aware), edit as needed, assign a real Task ID, and get explicit
+   approval before it goes to Claude Code. Neither draft is polished enough
+   to send as-is.
 
 ## Example workflow
 
@@ -158,22 +184,29 @@ pipeline halts regardless of what `category` says.
 
 - Does not write, edit, or deploy product code.
 - Does not touch Stripe, the production Apps Script, or Google Sheets.
-- Does not decide PASS/FAIL/BLOCKED — that's the PM's call, human or
-  ChatGPT, reading `review_request.md`.
-- Does not approve or execute `NEXT_TASK_DRAFT.md` — that requires an
-  explicit human action outside this tooling.
+- Does not decide anything a human should decide — `review_decision.json`'s
+  `status`/`risk` are *derived and reported*, not a substitute for the PM
+  actually reading `review_summary.md`/`review_request.md` and choosing
+  what happens next. `requires_human_approval` is always `true`.
+- Does not approve or execute `next_task_draft.md` / `NEXT_TASK_DRAFT.md` —
+  that requires an explicit human action outside this tooling.
 - Does not install any dependency. pytest/mypy/ruff/npm are only invoked
   if already present in the environment *and* configured in the repo;
   otherwise each is reported as skipped, not silently ignored.
+- Does not parse free-form prose (risks/blockers/evidence text) to decide
+  status or risk — see `DECISION_PACKAGE.md` for exactly which fields are
+  explicit input versus derived.
 
 ## Remaining manual steps
 
 - Writing `task_meta.json`'s narrative fields (objective, risks, evidence,
-  suggested next task) — this is deliberately not automated; it's the
-  actual PM judgment.
-- Reading `review_request.md` and deciding PASS/FAIL/BLOCKED.
-- Reviewing and approving (or rewriting) `NEXT_TASK_DRAFT.md` before it
-  becomes a real Task ID.
+  suggested next task) and its explicit `risk`/`next_task_id` fields — this
+  is deliberately not automated; it's the actual PM judgment.
+- Reading `review_decision.json`/`review_summary.md` and deciding what
+  happens next (the automation reports PASS/FAIL/BLOCKED, it doesn't act
+  on it).
+- Reviewing and approving (or rewriting) `next_task_draft.md` or
+  `NEXT_TASK_DRAFT.md` before either becomes a real Task ID.
 - Dropping screenshots into `automation/review/screenshots/` before running,
   if visual evidence is relevant — nothing captures them automatically.
 
@@ -191,3 +224,15 @@ reverted. **Still not validated:** npm-build detection against a repo
 with a real `package.json`/build script — `ai-lead-os` is pure Python, so
 only the "no package.json, correctly skipped" path has been exercised for
 that check specifically.
+
+## Validated (PM-AUTO-03, 2026-07-25)
+
+All three decision-package scenarios were run for real and validated
+against the JSON Schema (see `automation/examples/{pass,fail,blocked}/`):
+a clean run (no flags, no failing checks) → `status: PASS`; a run with
+`flags: ["SECRET_REQUIRED"]` → `status: BLOCKED`, quality checks and the
+freeform next-task generator correctly skipped, `review_decision.json`
+still generated with `requires_human_approval: true`; a run against
+`ai-lead-os` with a deliberately-injected, reverted Ruff violation →
+`status: FAIL`, `next_task: "REWORK-<task_id>"`. Full evidence in
+`knowledge/Decision_Log.md`'s PM-AUTO-03 entry.

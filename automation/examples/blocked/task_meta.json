@@ -1,0 +1,16 @@
+{
+  "task_id": "PM-AUTO-03-EXAMPLE-BLOCKED",
+  "objective": "Example fixture demonstrating a BLOCKED decision package: an auto-stop flag is present, so the pipeline halts before running quality checks.",
+  "category": "Implementation",
+  "files_modified": [],
+  "tests_executed": [],
+  "test_results": "Not run -- pipeline halts on the auto-stop flag before the quality-check stage.",
+  "risks": "Would require a real secret/credential to proceed.",
+  "remaining_blockers": "Needs a production API key that this session does not have access to.",
+  "evidence": "None yet -- blocked before any implementation work started.",
+  "suggested_next_task": "",
+  "next_task_id": null,
+  "risk": "HIGH",
+  "status_override": null,
+  "flags": ["SECRET_REQUIRED"]
+}

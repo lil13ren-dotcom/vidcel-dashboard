@@ -1,0 +1,10 @@
+{
+  "task_id": "PM-AUTO-03-EXAMPLE-BLOCKED",
+  "status": "BLOCKED",
+  "risk": "HIGH",
+  "blocked": true,
+  "next_task": null,
+  "requires_human_approval": true,
+  "generated_at": "2026-07-25T06:37:58+00:00",
+  "reason": "auto-stop flag(s) present: SECRET_REQUIRED"
+}

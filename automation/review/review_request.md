@@ -1,21 +1,39 @@
 # Review Package
 
-Root: `/workspace/ai-lead-os`
+Root: `/home/user/vidcel-dashboard`
 
-## Overall: PASS (6 passed, 0 failed, 0 skipped)
+## Overall: PASS (with skips) (0 passed, 0 failed, 5 skipped)
 
 | Check | Status | Exit code |
 |---|---|---|
-| Ruff check | PASS | 0 |
-| Ruff format check | PASS | 0 |
-| mypy (strict) | PASS | 0 |
-| Alembic upgrade head | PASS | 0 |
-| Alembic check (no model drift) | PASS | 0 |
-| pytest with coverage | PASS | 0 |
+| Ruff check | SKIPPED | - |
+| Ruff format check | SKIPPED | - |
+| mypy | SKIPPED | - |
+| Alembic check | SKIPPED | - |
+| pytest | SKIPPED | - |
 
 ## Git status
 ```
-(clean working tree)
+M automation/README.md
+ M automation/generate_completion_report.py
+ M automation/generate_review_package.py
+ M automation/reports/git_diff.md
+ M automation/reports/latest_report.json
+ M automation/reports/latest_report.md
+ M automation/reports/quality_checks.json
+ M automation/reports/task_meta.example.json
+ M automation/reports/task_meta.json
+ M automation/reports/test_results.md
+ M automation/review/review_request.md
+ M automation/run_pm_pipeline.py
+ M automation/tasks/NEXT_TASK_DRAFT.md
+?? automation/DECISION_PACKAGE.md
+?? automation/examples/
+?? automation/generate_decision_package.py
+?? automation/review/next_task_draft.md
+?? automation/review/review_decision.json
+?? automation/review/review_summary.md
+?? automation/schemas/
 ```
 
 ### Build — SKIPPED

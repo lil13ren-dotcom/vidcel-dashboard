@@ -32,6 +32,8 @@ CONTINUE_CATEGORIES = {
     "Documentation", "Tests", "Refactoring", "Lint", "Formatting",
     "Knowledge updates", "PM OS updates", "Task generation",
 }
+RISK_LEVELS = {"LOW", "MEDIUM", "HIGH"}
+STATUS_VALUES = {"PASS", "FAIL", "BLOCKED"}
 
 
 def run(cmd):
@@ -83,6 +85,14 @@ def validate_meta(meta: dict) -> list[str]:
     bad_flags = set(meta.get("flags", [])) - STOP_FLAGS
     if bad_flags:
         errors.append(f"unrecognized flags: {sorted(bad_flags)} — expected one of {sorted(STOP_FLAGS)}")
+    risk = meta.get("risk")
+    if risk is not None and risk not in RISK_LEVELS:
+        errors.append(f"unrecognized risk {risk!r} — expected one of {sorted(RISK_LEVELS)}")
+    status_override = meta.get("status_override")
+    if status_override is not None and status_override not in STATUS_VALUES:
+        errors.append(
+            f"unrecognized status_override {status_override!r} — expected one of {sorted(STATUS_VALUES)}"
+        )
     return errors
 
 
@@ -105,6 +115,9 @@ def build_report(meta: dict) -> tuple[str, dict]:
         "remaining_blockers": meta.get("remaining_blockers", ""),
         "evidence": meta.get("evidence", ""),
         "suggested_next_task": meta.get("suggested_next_task", ""),
+        "next_task_id": meta.get("next_task_id") or None,
+        "risk": meta.get("risk") or "MEDIUM",
+        "status_override": meta.get("status_override") or None,
         "flags": flags,
         "should_stop": should_stop,
     }
@@ -114,6 +127,8 @@ def build_report(meta: dict) -> tuple[str, dict]:
         "",
         f"- **Generated:** {data['generated_at']}",
         f"- **Category:** {data['category']}",
+        f"- **Risk:** {data['risk']}",
+        f"- **Status override:** {data['status_override'] or '_(none — status will be derived automatically)_'}",
         f"- **Auto-stop triggered:** {'YES — ' + ', '.join(flags) if should_stop else 'no'}",
         "",
         "## Objective",

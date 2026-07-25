@@ -154,3 +154,21 @@ injected throwaway Ruff violation was correctly detected as a failure
 (no false PASS) and then fully reverted. `run_pm_pipeline.py` now
 forwards `--root` through to the review-package step. Full evidence in
 `Decision_Log.md`'s PM-AUTO-02 entry.
+
+**2026-07-25 (PM-AUTO-03): deterministic PASS/FAIL/BLOCKED decision
+layer added.** `generate_decision_package.py` converts the review into a
+fixed-schema `review/review_decision.json` (`status`, `risk`, `blocked`,
+`next_task`, `requires_human_approval`, `reason`) plus
+`review/review_summary.md` and `review/next_task_draft.md` — every field
+either copied from an explicit `task_meta.json` field or derived by a
+fixed rule over `quality_checks.json`'s structured check results, never
+by parsing risks/blockers/evidence prose. `run_pm_pipeline.py`'s own exit
+code now mirrors the decision (0 PASS / 2 BLOCKED / 3 FAIL / 1 invalid
+input) for direct CI consumption. Schema:
+[`../automation/schemas/review_decision.schema.json`](../automation/schemas/review_decision.schema.json);
+full design and worked examples:
+[`../automation/DECISION_PACKAGE.md`](../automation/DECISION_PACKAGE.md).
+All three PASS/FAIL/BLOCKED scenarios were run for real (the FAIL one
+against `ai-lead-os` with a reverted throwaway Ruff violation) and
+validated against the JSON Schema. Full evidence in `Decision_Log.md`'s
+PM-AUTO-03 entry.

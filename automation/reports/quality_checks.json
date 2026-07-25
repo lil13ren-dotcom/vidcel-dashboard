@@ -1,48 +1,46 @@
 {
-  "root": "/workspace/ai-lead-os",
-  "use_uv": true,
+  "root": "/home/user/vidcel-dashboard",
+  "use_uv": false,
+  "generated_at": "2026-07-25T06:43:26+00:00",
+  "overall": "PASS (with skips)",
+  "n_pass": 0,
+  "n_fail": 0,
+  "n_skip": 5,
   "checks": [
     {
       "name": "Ruff check",
-      "command": "uv run ruff check .",
-      "status": "PASS",
-      "exit_code": 0,
-      "reason": ""
+      "command": "(not run)",
+      "status": "SKIPPED",
+      "exit_code": null,
+      "reason": "no [tool.ruff] in pyproject.toml"
     },
     {
       "name": "Ruff format check",
-      "command": "uv run ruff format --check .",
-      "status": "PASS",
-      "exit_code": 0,
-      "reason": ""
+      "command": "(not run)",
+      "status": "SKIPPED",
+      "exit_code": null,
+      "reason": "no [tool.ruff] in pyproject.toml"
     },
     {
-      "name": "mypy (strict)",
-      "command": "uv run mypy src",
-      "status": "PASS",
-      "exit_code": 0,
-      "reason": ""
+      "name": "mypy",
+      "command": "(not run)",
+      "status": "SKIPPED",
+      "exit_code": null,
+      "reason": "no [tool.mypy] in pyproject.toml"
     },
     {
-      "name": "Alembic upgrade head",
-      "command": "uv run alembic upgrade head",
-      "status": "PASS",
-      "exit_code": 0,
-      "reason": ""
+      "name": "Alembic check",
+      "command": "(not run)",
+      "status": "SKIPPED",
+      "exit_code": null,
+      "reason": "no alembic.ini in this repo"
     },
     {
-      "name": "Alembic check (no model drift)",
-      "command": "uv run alembic check",
-      "status": "PASS",
-      "exit_code": 0,
-      "reason": ""
-    },
-    {
-      "name": "pytest with coverage",
-      "command": "uv run pytest --cov=ai_lead_os --cov-report=term-missing",
-      "status": "PASS",
-      "exit_code": 0,
-      "reason": ""
+      "name": "pytest",
+      "command": "(not run)",
+      "status": "SKIPPED",
+      "exit_code": null,
+      "reason": "no [tool.pytest.ini_options] in pyproject.toml"
     }
   ]
 }

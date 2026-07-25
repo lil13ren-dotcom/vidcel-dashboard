@@ -31,6 +31,7 @@ Usage:
     python3 automation/generate_review_package.py [--root <path>] [--base <branch>]
 """
 import argparse
+import datetime
 import json
 import shutil
 import subprocess
@@ -260,9 +261,19 @@ def main():
         encoding="utf-8",
     )
 
+    n_pass = sum(1 for c in checks if c.status == "PASS")
+    n_fail = sum(1 for c in checks if c.status == "FAIL")
+    n_skip = sum(1 for c in checks if c.status == "SKIPPED")
+    overall = "FAIL" if n_fail else ("PASS (with skips)" if n_skip else "PASS")
+
     quality_checks_json = {
         "root": str(root),
         "use_uv": runner.use_uv,
+        "generated_at": datetime.datetime.now().astimezone().isoformat(timespec="seconds"),
+        "overall": overall,
+        "n_pass": n_pass,
+        "n_fail": n_fail,
+        "n_skip": n_skip,
         "checks": [
             {
                 "name": c.name, "command": c.command, "status": c.status,
@@ -274,11 +285,6 @@ def main():
     (REPORTS_DIR / "quality_checks.json").write_text(
         json.dumps(quality_checks_json, indent=2, ensure_ascii=False), encoding="utf-8"
     )
-
-    n_pass = sum(1 for c in checks if c.status == "PASS")
-    n_fail = sum(1 for c in checks if c.status == "FAIL")
-    n_skip = sum(1 for c in checks if c.status == "SKIPPED")
-    overall = "FAIL" if n_fail else ("PASS (with skips)" if n_skip else "PASS")
 
     summary_table = "\n".join(
         f"| {c.name} | {c.status} | {c.exit_code if c.exit_code is not None else '-'} |"

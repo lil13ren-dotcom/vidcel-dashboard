@@ -1,15 +1,15 @@
 # Next Task Draft
 
-- **Generated:** 2026-07-25T06:19:09+00:00
+- **Generated:** 2026-07-25T06:43:26+00:00
 - **Status:** DRAFT — not an approved Task ID. Requires explicit human
   approval before Claude Code acts on this. Nothing in this automation
   layer executes this file automatically.
 
-## From previous task: PM-AUTO-02
+## From previous task: PM-AUTO-03
 
 **Suggested next task (as written in the previous completion report):**
 
-PM-AUTO-03: wire the automation into the actual Claude Code <-> ChatGPT PM handoff for a real upcoming task (e.g. the next Gate 1 item), replacing the manual copy-paste flow for the first time on a live task rather than a validation run.
+PM-AUTO-04: wire review_decision.json / run_pm_pipeline.py's exit code into an actual GitHub Actions workflow step, so a real CI run gates on PASS/FAIL/BLOCKED automatically.
 
 **Previous task's remaining blockers (for context):**
 

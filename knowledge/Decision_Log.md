@@ -519,3 +519,102 @@ changed in `ai-lead-os` (read-only session access; nothing was committed
 there) or in `店舗IT担当`'s Stripe/Apps Script/Sheets systems. Changed
 files in this repo: `automation/generate_review_package.py`,
 `automation/run_pm_pipeline.py`.
+
+## 2026-07-25 — PM-AUTO-03: structured, deterministic PM decision package
+
+Built a second, more structured layer on top of PM-AUTO-01/02's existing
+review package: `automation/generate_decision_package.py`, producing
+`review/review_summary.md`, `review/review_decision.json`, and
+`review/next_task_draft.md`. Full design in `automation/DECISION_PACKAGE.md`.
+
+**Central design constraint, taken directly from the task instructions
+("Do not parse free-form text. Every field must have a fixed meaning"):**
+`review_decision.json` never reads `risks`/`remaining_blockers`/`evidence`/
+`suggested_next_task` prose to decide anything. Every field is either
+copied verbatim from an explicit, new `task_meta.json` field (`risk`,
+`next_task_id`, `status_override` — all three added to the schema this
+task, documented in `task_meta.example.json`) or derived by a fixed rule
+over other structured data:
+
+- **`status`**: `status_override` if set (always wins) → else any
+  auto-stop flag present → `BLOCKED` → else any `FAIL` in this cycle's
+  `quality_checks.json` → `FAIL` → else `PASS`. "This cycle's" means
+  `quality_checks.json`'s own `generated_at` is not older than
+  `latest_report.json`'s — added `generated_at`/`overall`/`n_pass`/
+  `n_fail`/`n_skip` fields to `quality_checks.json` (in
+  `generate_review_package.py`) specifically to make this freshness check
+  possible, so a stale leftover from an unrelated earlier run is never
+  mistaken for this task's result.
+- **`next_task`**: PASS → `next_task_id` verbatim or `null`. FAIL → always
+  the fixed pattern `REWORK-<task_id>`, overriding whatever
+  `next_task_id`/`suggested_next_task` said — a failed task's next step is
+  fixing itself, not whatever was planned next. BLOCKED → always `null`.
+- **`requires_human_approval`**: always `true` — fixed, per PM OS rule.
+- **`risk`**: copied from `task_meta.json`, defaults to `MEDIUM` if
+  omitted (a conservative default, not a guess). Does not currently gate
+  anything — informational only, flagged as a limitation.
+
+**`run_pm_pipeline.py` re-wired**, not just extended: on an auto-stop
+flag, it now runs `generate_decision_package.py` *before* halting (so a
+`BLOCKED` `review_decision.json` is always produced) and explicitly skips
+both the quality-check stage and the freeform next-task generator — matching
+the task's "no automatic continuation" requirement precisely, not just
+avoiding a crash. On the non-blocked path, `generate_decision_package.py`
+now runs after `generate_review_package.py` so it can see this cycle's
+real check results. **Also fixed a gap for CI usability**, since the task
+explicitly asked for GitHub-Actions suitability: the orchestrator's own
+exit code previously stayed `0` even when the decision was `FAIL` (nothing
+downstream checked `generate_review_package.py`'s own exit code). Now
+`run_pm_pipeline.py` reads its own `review_decision.json` at the end and
+returns exit code `3` for FAIL, `2` for BLOCKED (unchanged), `0` for PASS,
+`1` for an invalid `task_meta.json` (unchanged) — a CI step can gate on
+exit code alone with no output parsing.
+
+**Deliverables, all actually produced (not just described):**
+`automation/schemas/review_decision.schema.json` (JSON Schema draft-07,
+one `description` per field), `automation/DECISION_PACKAGE.md` (prose:
+derivation rules, field reference, usage, limitations), and three example
+packages under `automation/examples/{pass,fail,blocked}/`, each containing
+the `task_meta.json` fixture that produced it alongside the three real
+generated output files.
+
+**Scenario 1 (PASS)** — ran with no flags, no configured Python tooling in
+this repo (all 5 quality checks correctly `SKIPPED`, `n_fail=0`) →
+`status=PASS`, `next_task='PM-AUTO-04'` (from the fixture's explicit
+`next_task_id`, not parsed from `suggested_next_task`), exit code 0.
+
+**Scenario 2 (BLOCKED)** — ran with `flags: ["SECRET_REQUIRED"]` →
+`status=BLOCKED`, `blocked=true`, `next_task=null`, quality-check stage
+and freeform next-task generator both **did not run** (confirmed by
+absence of a fresh `test_results.md`/`NEXT_TASK_DRAFT.md` write in that
+run's output), `requires_human_approval=true` regardless, exit code 2.
+
+**Scenario 3 (FAIL)** — same throwaway-Ruff-violation technique as
+PM-AUTO-02: added a scratch file with 2 unused imports + 1 unused variable
+to `ai-lead-os`, ran the pipeline with `--root /workspace/ai-lead-os` →
+1 quality check FAILed → `status=FAIL`,
+`next_task='REWORK-PM-AUTO-03-EXAMPLE-FAIL'` (the fixture's
+`suggested_next_task` text was present but deliberately **not** used, per
+the fixed FAIL rule), `review_summary.md`'s Recommendation section updated
+to "do not proceed... rework required", exit code 3. Scratch file deleted
+and `ai-lead-os`'s `git status --short` confirmed empty immediately after
+capturing the example — nothing left behind.
+
+**Validation beyond the three scenarios:** all three example
+`review_decision.json` files (plus this task's own real run's output) were
+validated against `schemas/review_decision.schema.json` using the
+`jsonschema` Python library (`jsonschema.validate()`), not just eyeballed
+against the schema prose.
+
+**This task's own real evidence**: a `task_meta.json` was written for
+PM-AUTO-03 itself (`risk: LOW`, `next_task_id: PM-AUTO-04`, no flags) and
+run through the real pipeline — `status=PASS`, exit code 0 — committed
+as `automation/review/review_decision.json` etc. alongside the code, same
+pattern as PM-AUTO-01/02's self-referential smoke tests.
+
+**Explicitly not done, flagged as limitations in `DECISION_PACKAGE.md`:**
+`risk` doesn't gate the pipeline (informational only); no actual
+`.github/workflows/*.yml` file was created (only the exit-code contract
+that such a workflow could consume); `next_task_id` has no format
+validation. No business logic was touched anywhere — `ai-lead-os` remains
+read-only, nothing committed there; Stripe/Apps Script/Sheets untouched.
