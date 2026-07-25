@@ -1,51 +1,41 @@
-# Review Summary — PM-AUTO-03
+# Review Summary — PM-AUTO-04
 
-- **Generated:** 2026-07-25T06:43:26+00:00
-- **Status:** PASS
-- **Risk:** LOW
+- **Generated:** 2026-07-25T07:20:47+00:00
+- **Status:** BLOCKED
+- **Risk:** MEDIUM
 
 ## Objective
-Implement a structured PM decision package (review_summary.md, review_decision.json, next_task_draft.md) that converts the PM review into machine-readable, deterministic files, eliminating manual interpretation of review comments for the next development cycle.
+Integrate the PM automation pipeline with a real GitHub Actions workflow: preserve the PASS/BLOCKED/FAIL exit-code contract, upload all generated review artifacts, write a GitHub Actions Summary, and prevent false success -- without enabling automatic execution of the next Claude Code task.
 
 ## Files changed
-- `automation/generate_decision_package.py`
-- `automation/generate_completion_report.py`
-- `automation/generate_review_package.py`
-- `automation/run_pm_pipeline.py`
-- `automation/schemas/review_decision.schema.json`
-- `automation/DECISION_PACKAGE.md`
+- `.github/workflows/pm-pipeline.yml`
+- `automation/validate_ci_inputs.py`
+- `automation/ci_summary.py`
+- `automation/tests/test_ci_helpers.py`
+- `automation/tests/fixtures/ci_pass_task_meta.json`
+- `automation/tests/fixtures/ci_blocked_task_meta.json`
+- `automation/tests/fixtures/ci_fail_task_meta.json`
+- `automation/CI_INTEGRATION.md`
 - `automation/README.md`
-- `automation/reports/task_meta.example.json`
-- `automation/examples/pass/task_meta.json`
-- `automation/examples/pass/review_decision.json`
-- `automation/examples/pass/review_summary.md`
-- `automation/examples/pass/next_task_draft.md`
-- `automation/examples/fail/task_meta.json`
-- `automation/examples/fail/review_decision.json`
-- `automation/examples/fail/review_summary.md`
-- `automation/examples/fail/next_task_draft.md`
-- `automation/examples/blocked/task_meta.json`
-- `automation/examples/blocked/review_decision.json`
-- `automation/examples/blocked/review_summary.md`
-- `automation/examples/blocked/next_task_draft.md`
+- `.gitignore`
 
 ## Tests executed
-- python3 automation/run_pm_pipeline.py automation/examples/pass/task_meta.json (Scenario 1)
-- python3 automation/run_pm_pipeline.py automation/examples/blocked/task_meta.json (Scenario 2)
-- python3 automation/run_pm_pipeline.py automation/examples/fail/task_meta.json --root /workspace/ai-lead-os (Scenario 3, with an injected Ruff violation)
-- jsonschema.validate() of all 3 example review_decision.json files against schemas/review_decision.schema.json
+- python3 -m unittest discover -s automation/tests -v (37 tests: exit-code classification, path validation, summary generation, missing/malformed review_decision.json, missing quality_checks.json, stale-data-on-ERROR regression, static workflow YAML shape)
+- Full local dry-run simulation of all 4 scenarios (PASS/BLOCKED/FAIL/ERROR), replicating pm-pipeline.yml's exact step sequence (validate -> run_pm_pipeline.py -> ci_summary.py -> gate) with temp files standing in for $GITHUB_OUTPUT/$GITHUB_STEP_SUMMARY
+- mcp__github__actions_list (list_workflows) to confirm GitHub Actions is genuinely active on this repo (164 real runs of an existing workflow)
+- mcp__github__actions_run_trigger (run_workflow) attempted against ref=claude/pm-os-spreadsheet-n5a4ga -- 404, workflow not registered (GitHub requires workflow_dispatch workflows to exist on the default branch to be dispatchable via API/UI)
 
 ## Results
-Scenario 1 (PASS): no flags, no failing checks (ran against vidcel-dashboard, which has no Python tooling configured -- all checks SKIPPED, 0 FAIL) -> status=PASS, next_task='PM-AUTO-04' (from next_task_id), review/review_decision.json + review_summary.md + next_task_draft.md all generated, exit code 0. Scenario 2 (BLOCKED): flags=['SECRET_REQUIRED'] -> status=BLOCKED, quality-check stage and freeform next-task generator both correctly skipped, review_decision.json still generated (blocked=true, next_task=null, requires_human_approval=true), exit code 2. Scenario 3 (FAIL): no flags, a throwaway Ruff-violating file was added to ai-lead-os -> 1 quality check FAILed -> status=FAIL, next_task='REWORK-PM-AUTO-03-EXAMPLE-FAIL' (ignoring the fixture's suggested_next_task text), recommendation updated to 'do not proceed', exit code 3; ai-lead-os fully reverted afterward (git status --short empty). All 3 review_decision.json outputs validated successfully against schemas/review_decision.schema.json via the jsonschema library.
+All 37 unit tests pass. The full local dry-run correctly produced: PASS (exit 0, all checks skipped since vidcel-dashboard has no Python tooling, job would pass); BLOCKED (exit 2, flags=['SECRET_REQUIRED'], quality-check stage and freeform next-task generator both skipped, job would fail per the documented BLOCKED-must-not-appear-as-PASS policy); FAIL (exit 3, via status_override='FAIL' since this repo has no real tooling to fail against, next_task correctly became REWORK-<task_id>, job would fail); ERROR (invalid target_root='../../../etc' correctly rejected by validate_ci_inputs.py before the pipeline ran, exit 1, job would fail, diagnostics captured). A real bug was caught and fixed during this dry-run: on ERROR, stale committed review_decision.json/latest_report.json/quality_checks.json content was being displayed as if it described the current run -- now suppressed whenever classify() can't confirm the decision file belongs to this run. Real GitHub Actions execution could not be obtained: workflow_dispatch requires the workflow file to be registered on the default branch (main), and this task's branch policy explicitly forbids pushing to main without permission. Presented the user with three options (mark BLOCKED per the task's own explicit fallback / temporary push-trigger workaround / merge to main); user chose to mark runtime validation BLOCKED.
 
 ## Risks
-risk field does not currently gate the pipeline (informational only, documented as a known limitation in DECISION_PACKAGE.md). The quality_checks.json freshness check compares ISO timestamp strings, which is correct given both files use the same isoformat/timezone convention but is not a fully general-purpose timestamp comparison -- also documented as a limitation.
+This workflow has never executed inside a real GitHub Actions runner. All logic is validated by unit tests and a faithful local simulation of the same step sequence, but real-runner specifics (exact $GITHUB_OUTPUT/$GITHUB_STEP_SUMMARY file-append semantics, actions/upload-artifact@v4's actual behavior with if-no-files-found: ignore, PIPESTATUS under the runner's actual bash, the fromJSON() expression for artifact_retention_days) are unverified. Inherited from PM-AUTO-03: risk field still doesn't gate anything.
 
 ## Remaining blockers
-_(none noted)_
+Real GitHub Actions runtime evidence for all 4 scenarios could not be obtained in this session. Cause: workflow_dispatch only recognizes a workflow once its YAML file exists on the repository's default branch (main) -- dispatching automation/../.github/workflows/pm-pipeline.yml against this feature branch returned 404, and it does not appear in the repo's registered workflow list. This session's branch policy explicitly prohibits pushing to a different branch (including main) without explicit permission, and the user, when asked, chose the BLOCKED fallback over merging to main or a temporary push-trigger workaround. To unblock: either (a) merge .github/workflows/pm-pipeline.yml to main (a normal PR, not a force-push or anything destructive) so workflow_dispatch can register and dispatch it, or (b) accept local/static validation as sufficient and formally close this out without live-run evidence.
 
 ## Evidence summary
-See automation/review/review_decision.json (this task's own real run, appended below), automation/examples/{pass,fail,blocked}/ for the three validated scenario packages, and knowledge/Decision_Log.md's PM-AUTO-03 entry for full narrative evidence.
+See automation/review/review_decision.json (this task's own real run, appended below), the 37 passing unit tests in automation/tests/test_ci_helpers.py, and knowledge/Decision_Log.md's PM-AUTO-04 entry for the full local dry-run transcript of all 4 scenarios including the stale-data bug found and fixed.
 
 ## Recommendation
-PASS — approved to proceed. Requires explicit human sign-off before next_task_draft.md is turned into a real Task ID.
+BLOCKED — do not proceed. Resolve the blocker(s) on PM-AUTO-04 listed below before any further action.

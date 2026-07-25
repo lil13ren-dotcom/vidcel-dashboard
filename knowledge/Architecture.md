@@ -172,3 +172,27 @@ All three PASS/FAIL/BLOCKED scenarios were run for real (the FAIL one
 against `ai-lead-os` with a reverted throwaway Ruff violation) and
 validated against the JSON Schema. Full evidence in `Decision_Log.md`'s
 PM-AUTO-03 entry.
+
+**2026-07-25 (PM-AUTO-04): GitHub Actions integration built, locally
+validated, runtime-validation BLOCKED.** `.github/workflows/pm-pipeline.yml`
+(`workflow_dispatch` only) runs the pipeline in CI, preserves the
+0/2/3/1 PASS/BLOCKED/FAIL/ERROR exit-code contract, uploads a fixed
+artifact list on every outcome, and writes a `$GITHUB_STEP_SUMMARY`. Two
+new stdlib-only helper scripts:
+[`../automation/validate_ci_inputs.py`](../automation/validate_ci_inputs.py)
+(rejects any path input that escapes the checked-out workspace) and
+[`../automation/ci_summary.py`](../automation/ci_summary.py) (classifies
+PASS/BLOCKED/FAIL/ERROR by cross-checking exit code against
+`review_decision.json`, never fabricating a decision from stale or
+missing files). Chosen policy — BLOCKED and FAIL both fail the job since
+GitHub Actions has no neutral job state, distinguished only in the
+summary — documented in
+[`../automation/CI_INTEGRATION.md`](../automation/CI_INTEGRATION.md).
+37 unit tests and a full local dry-run of all 4 scenarios pass. **No live
+GitHub Actions run of this workflow exists**: `workflow_dispatch` requires
+the workflow file on the default branch to register, this branch isn't
+`main`, and pushing to `main` requires explicit permission this task
+didn't have — per the task's own explicit fallback, the user chose to
+mark this BLOCKED (`flags: ["EVIDENCE_MISSING"]`) rather than merge to
+`main` or use a workaround trigger. Full evidence in `Decision_Log.md`'s
+PM-AUTO-04 entry.

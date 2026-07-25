@@ -168,9 +168,34 @@ rule: nothing here may be implemented without an approved Task ID.
    PASS, once there's a real case where risk should have changed the
    outcome and didn't.
 
-15. **No actual GitHub Actions workflow consumes
-   `run_pm_pipeline.py`'s exit code yet.** PM-AUTO-03 made the exit code
-   CI-shaped (0/2/3/1) specifically for this, per its own explicit "must be
-   suitable for future GitHub Actions integration" requirement, but no
-   `.github/workflows/*.yml` file exists. This is the suggested next task
-   (PM-AUTO-04) — see `automation/review/next_task_draft.md`.
+15. ~~No actual GitHub Actions workflow consumes
+   `run_pm_pipeline.py`'s exit code yet.~~ **Built by PM-AUTO-04
+   (2026-07-25)**: `.github/workflows/pm-pipeline.yml`. **Not fully
+   resolved** — see item 16, its runtime behavior in a real GitHub Actions
+   runner has never been observed.
+
+16. **⚠️ `.github/workflows/pm-pipeline.yml` has never actually run in
+   GitHub Actions.** `workflow_dispatch` only registers a workflow once
+   its file exists on the repository's default branch (`main`); this
+   session's branch policy forbids pushing there without explicit
+   permission, and dispatching against the feature branch it currently
+   lives on returns `404`. GitHub Actions itself is confirmed to work
+   fine on this repo otherwise (164 real runs of an existing scheduled
+   workflow). All validation is local: 37 unit tests
+   (`automation/tests/test_ci_helpers.py`) plus a full local dry-run of
+   all 4 PASS/BLOCKED/FAIL/ERROR scenarios, both passing. When asked, the
+   project owner chose to accept this as BLOCKED for now rather than
+   merge the workflow file to `main` or use a temporary push-trigger
+   workaround. **Needs an owner decision** (merge to `main` via a normal
+   PR, or formally accept local/static validation as sufficient) before
+   this can be marked resolved. See `Decision_Log.md`'s PM-AUTO-04 entry
+   and `automation/CI_INTEGRATION.md`.
+
+17. **PM-AUTO-04's FAIL-path validation used `status_override` rather
+   than a real failing quality check**, and its `target_root` input can
+   only ever point inside this single repo's own checkout (no cross-repo
+   checkout was added). Both are consequences of `vidcel-dashboard` having
+   no real Python tooling of its own — the same underlying gap PM-AUTO-02
+   solved locally by pointing at `ai-lead-os`, which this workflow cannot
+   currently replicate without adding a second, credentialed checkout
+   step (out of scope for PM-AUTO-04).

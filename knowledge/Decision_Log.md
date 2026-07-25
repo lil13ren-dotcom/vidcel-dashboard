@@ -618,3 +618,121 @@ pattern as PM-AUTO-01/02's self-referential smoke tests.
 that such a workflow could consume); `next_task_id` has no format
 validation. No business logic was touched anywhere — `ai-lead-os` remains
 read-only, nothing committed there; Stripe/Apps Script/Sheets untouched.
+
+## 2026-07-25 — PM-AUTO-04: GitHub Actions integration built and locally validated; **runtime validation BLOCKED**
+
+Built `.github/workflows/pm-pipeline.yml` (`workflow_dispatch` only — no
+`push`/`pull_request` trigger, since there's no per-PR `task_meta.json`
+convention yet and guessing one risks a misleading badge on unrelated
+changes), plus two new helper scripts and a test suite. Full design in
+`automation/CI_INTEGRATION.md`.
+
+**Two new helper scripts, both stdlib-only:**
+- `automation/validate_ci_inputs.py` — resolves the two free-text
+  `workflow_dispatch` path inputs (`task_meta_path`, `target_root`)
+  against `$GITHUB_WORKSPACE` and rejects anything that escapes it (`..`
+  traversal, an absolute path outside the workspace) or isn't the right
+  type on disk, before either value is used as an argument to anything
+  else. Inputs are passed as literal argv strings, never shell-interpolated
+  or `eval`'d.
+- `automation/ci_summary.py` — classifies each run into exactly one of
+  PASS/BLOCKED/FAIL/ERROR by cross-checking the pipeline's own exit code
+  against `review_decision.json`'s `status` field, rather than trusting
+  either alone. A missing/malformed decision file, or a mismatch between
+  exit code and recorded status, is **ERROR**, never a guess in either
+  direction. Writes the `$GITHUB_STEP_SUMMARY` table and structured
+  `$GITHUB_OUTPUT` values (`status`, `risk`, `next_task`).
+
+**Chosen policy, documented per the task's explicit request: BLOCKED must
+not appear as PASS.** GitHub Actions has no native "neutral" job
+conclusion, only success/failure — so PASS (exit 0) is the only status
+that makes the job succeed; BLOCKED (exit 2), FAIL (exit 3), and ERROR
+(exit 1 / any earlier infrastructure failure) all fail the job. The
+distinction between them lives entirely in the step summary and the
+uploaded `review_decision.json`, never in the job's green/red state. Only
+one step, "Enforce PASS-only success" (the last step, `if: always()`),
+can actually fail the job — every other step (including the pipeline run
+itself, via `continue-on-error: true`) is allowed to "fail" without
+failing the job, so summary generation and artifact upload always still
+run.
+
+**Real bug caught and fixed during this task's own local dry-run, before
+any workflow run was attempted:** on ERROR, `ci_summary.py` was displaying
+`review_decision.json`/`latest_report.json`/`quality_checks.json`'s
+*content* even though those files could be stale, unrelated, **committed**
+leftovers from a previous run (this repo tracks them in git, so a fresh
+checkout starts with old copies) rather than anything the current run
+produced — e.g. an ERROR caused by `validate_ci_inputs.py` rejecting a bad
+`target_root` happens *before* the pipeline ever touches those files.
+Fixed by only trusting `decision`/`report`/`quality` for display once
+`classify()` has actually confirmed they belong to this run (`status !=
+"ERROR"`); added a regression test
+(`TestMainSuppressesStaleDataOnError`) reproducing the exact scenario.
+This is exactly the kind of "no fabricated decision" failure mode the
+task's Scenario 4 requirement was written to catch, caught here without
+needing a live GitHub Actions run to find it.
+
+**Local validation performed (all of it — no live GitHub Actions run was
+obtained, see below):**
+- `automation/tests/test_ci_helpers.py`: 37 stdlib `unittest` cases —
+  exit-code classification (including the mismatch case and the stale-data
+  regression above), path validation (traversal, absolute escape, wrong
+  file/dir type, empty input), summary generation per status,
+  missing/malformed `review_decision.json`, missing `quality_checks.json`,
+  and a static shape check of the workflow YAML itself (only
+  `workflow_dispatch`, `permissions: contents: read`, `if: always()` on
+  the summary/upload/gate steps, no broad artifact globs, pinned Actions).
+  All 37 pass.
+- A full local dry-run replicating `pm-pipeline.yml`'s exact step sequence
+  (validate → run → summarize → gate) with temp files standing in for
+  `$GITHUB_OUTPUT`/`$GITHUB_STEP_SUMMARY`, for all 4 scenarios: **PASS**
+  (no flags, this repo's normal all-skipped quality checks, exit 0, job
+  would pass); **BLOCKED** (`flags: ["SECRET_REQUIRED"]`, exit 2, quality
+  checks and the freeform next-task generator both correctly skipped, job
+  would fail per the policy above); **FAIL** (`status_override: "FAIL"` —
+  used deliberately since this repo has no real tooling to fail for real,
+  see Limitations below — exit 3, `next_task` correctly became
+  `REWORK-<task_id>`, job would fail); **ERROR** (`target_root:
+  "../../../etc"`, correctly rejected by `validate_ci_inputs.py` before the
+  pipeline ran, exit 1, job would fail, no fabricated decision per the fix
+  above).
+
+**Real GitHub Actions execution could not be obtained, and the task's own
+explicit fallback was used.** Confirmed GitHub Actions genuinely works on
+this repo (`actions_list` shows 164 real completed runs of an existing
+scheduled workflow) — this is not an environment limitation. The specific
+blocker: `workflow_dispatch` only recognizes a workflow once its YAML file
+exists on the repository's **default branch**; dispatching
+`pm-pipeline.yml` against this feature branch
+(`claude/pm-os-spreadsheet-n5a4ga`) returned `404 Not Found`, and the
+workflow doesn't appear in `list_workflows` at all. This session's branch
+policy explicitly prohibits pushing to a different branch (including
+`main`) without explicit permission. Presented the user with three options
+— mark BLOCKED per the task's own pre-authorized fallback, a temporary
+push-trigger workaround scoped to this branch only, or grant permission to
+merge the workflow file to `main` — **the user chose to mark the runtime-
+validation requirement BLOCKED.** Per the task's explicit instruction ("If
+GitHub Actions cannot actually run in this environment, mark the task
+BLOCKED after implementing everything that can be statically verified. Do
+not claim runtime validation without GitHub Actions evidence"),
+`automation/reports/task_meta.json` for this task was written with
+`flags: ["EVIDENCE_MISSING"]`, and the real pipeline run against it
+correctly produced `status=BLOCKED`, exit code 2 — this task's own
+completion package honestly reflects the same gate it implements.
+
+**Not claimed:** no PASS/BLOCKED/FAIL/ERROR run of this workflow inside a
+real GitHub Actions runner exists. Everything above is unit-test and local
+simulation evidence only, clearly labeled as such throughout this entry
+and in `automation/CI_INTEGRATION.md`.
+
+**Limitations (also documented in `CI_INTEGRATION.md`):** `target_root`
+can only ever point inside this single repo's checkout (no cross-repo
+checkout was added, so this workflow can't replicate PM-AUTO-02's
+ai-lead-os validation); the FAIL fixture uses `status_override` rather
+than a real failing quality check for the same reason; no
+`push`/`pull_request` trigger yet; `risk` still doesn't gate anything.
+
+**To unblock:** either merge `.github/workflows/pm-pipeline.yml` to `main`
+(a normal PR, not a destructive operation) so `workflow_dispatch` can
+register and dispatch it for real, or formally accept local/static
+validation as sufficient for this workflow going forward.
