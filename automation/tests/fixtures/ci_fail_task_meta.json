@@ -1,0 +1,16 @@
+{
+  "task_id": "PM-AUTO-04-CI-FAIL",
+  "objective": "GitHub Actions validation fixture: forces status=FAIL via the explicit status_override field, used to exercise pm-pipeline.yml's FAIL path (job fails, artifacts still uploaded, next_task becomes REWORK-<task_id>).",
+  "category": "Tests",
+  "files_modified": [],
+  "tests_executed": ["pm-pipeline.yml workflow_dispatch, target_root=."],
+  "test_results": "status_override is used here deliberately, matching the documented, honest use of that field (see automation/DECISION_PACKAGE.md) -- this is NOT a real quality-check failure. A real Ruff/mypy/pytest failure was already exercised locally against ai-lead-os during PM-AUTO-02/03; reproducing that inside this workflow would require checking out a second repository with real Python tooling, which this workflow does not do (target_root is validated to stay inside the single checked-out workspace). Using status_override here tests the same downstream FAIL-handling logic (exit code 3, job fails, next_task=REWORK-<task_id>, artifacts still uploaded) honestly and without needing to break vidcel-dashboard's own tooling to get a real failing check.",
+  "risks": "None -- this is a CI validation fixture, not a real task.",
+  "remaining_blockers": "",
+  "evidence": "See the workflow run's GITHUB_STEP_SUMMARY and uploaded pm-pipeline-artifacts.",
+  "suggested_next_task": "This suggestion is intentionally ignored -- on FAIL, next_task always becomes REWORK-<task_id>, not this text.",
+  "next_task_id": null,
+  "risk": "MEDIUM",
+  "status_override": "FAIL",
+  "flags": []
+}

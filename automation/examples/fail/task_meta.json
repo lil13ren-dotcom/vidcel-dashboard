@@ -1,0 +1,16 @@
+{
+  "task_id": "PM-AUTO-03-EXAMPLE-FAIL",
+  "objective": "Example fixture demonstrating a FAIL decision package: no auto-stop flags, but a quality check (Ruff) failed.",
+  "category": "Tests",
+  "files_modified": [],
+  "tests_executed": ["automation/generate_review_package.py --root /workspace/ai-lead-os (with a deliberately-injected throwaway Ruff violation)"],
+  "test_results": "Ruff check FAILed (unused imports/variable in a throwaway scratch file); all other checks still PASSed.",
+  "risks": "None -- the failing file was a throwaway scratch fixture, reverted immediately after this example was captured.",
+  "remaining_blockers": "",
+  "evidence": "See review_decision.json, review_summary.md, and the referenced automation/reports/quality_checks.json for this run.",
+  "suggested_next_task": "This suggestion is intentionally ignored -- on FAIL, next_task always becomes REWORK-<task_id>, not this text.",
+  "next_task_id": "PM-AUTO-04",
+  "risk": "MEDIUM",
+  "status_override": null,
+  "flags": []
+}

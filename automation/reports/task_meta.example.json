@@ -1,0 +1,31 @@
+{
+  "task_id": "PM-EXAMPLE-01",
+  "objective": "One or two sentences describing what this task set out to do.",
+  "category": "Documentation",
+  "_category_options": [
+    "Documentation", "Tests", "Refactoring", "Lint", "Formatting",
+    "Knowledge updates", "PM OS updates", "Task generation", "Implementation"
+  ],
+  "files_modified": [],
+  "_files_modified_note": "Optional. If omitted, auto-derived from `git diff`/`git status` at generation time. Provide explicitly when the auto-detected file list would include unrelated local changes.",
+  "tests_executed": [],
+  "test_results": "",
+  "risks": "",
+  "remaining_blockers": "",
+  "evidence": "",
+  "suggested_next_task": "",
+  "next_task_id": null,
+  "_next_task_id_note": "Optional. A short label/ID for the next task (e.g. 'PM-AUTO-04'), used verbatim as review_decision.json's `next_task` field when status is PASS. Deliberately separate from the free-text `suggested_next_task` above -- the decision package never parses that prose to derive a next_task value. Leave null if no next task is assigned yet; review_decision.json will record `next_task: null` rather than guessing.",
+  "risk": "MEDIUM",
+  "_risk_options": ["LOW", "MEDIUM", "HIGH"],
+  "_risk_note": "Optional, defaults to MEDIUM if omitted (a deliberately conservative default, not a guess). This is a human/Claude judgment call -- the automation never infers risk from file counts, diff size, or prose.",
+  "status_override": null,
+  "_status_override_options": ["PASS", "FAIL", "BLOCKED", null],
+  "_status_override_note": "Optional. If set, review_decision.json's `status` uses this value directly instead of the automatically-derived one (flags present -> BLOCKED; any quality check FAIL -> FAIL; otherwise PASS). Use this only when the automatic derivation would be wrong for a reason the automation can't see (e.g. a manual review found the deliverable insufficient even though all checks passed).",
+  "flags": [],
+  "_flags_options": [
+    "BLOCKED", "EVIDENCE_MISSING", "PRODUCTION_CHANGE", "ARCHITECTURE_CHANGE",
+    "PAYMENT_CHANGE", "LEGAL_DECISION", "SECRET_REQUIRED", "DEPLOYMENT_REQUIRED"
+  ],
+  "_flags_note": "Any flag present here halts the automation pipeline before the review package or next-task draft are generated. Set explicitly and honestly -- do not omit a flag that applies just to keep the pipeline running."
+}

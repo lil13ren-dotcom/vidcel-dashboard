@@ -1,0 +1,16 @@
+{
+  "task_id": "PM-AUTO-03-EXAMPLE-PASS",
+  "objective": "Example fixture demonstrating a PASS decision package: no auto-stop flags, no failing quality checks.",
+  "category": "Tests",
+  "files_modified": ["automation/generate_decision_package.py"],
+  "tests_executed": ["automation/generate_review_package.py (against vidcel-dashboard, no Python tooling configured -- all checks correctly SKIPPED, none FAIL)"],
+  "test_results": "0 checks passed, 0 failed, N skipped (no ruff/mypy/pytest/alembic configured in this repo). Skips are not failures, so status derives to PASS.",
+  "risks": "None specific to this example.",
+  "remaining_blockers": "",
+  "evidence": "See review_decision.json and review_summary.md generated alongside this fixture.",
+  "suggested_next_task": "PM-AUTO-04: wire the decision package into a real GitHub Actions workflow.",
+  "next_task_id": "PM-AUTO-04",
+  "risk": "LOW",
+  "status_override": null,
+  "flags": []
+}

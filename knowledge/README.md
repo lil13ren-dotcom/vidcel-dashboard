@@ -1,0 +1,37 @@
+# knowledge/
+
+Tracks the PM OS project (店舗IT担当 PM管理体制の構築) that lives on the
+`claude/pm-os-spreadsheet-n5a4ga` branch of this repo. This repo itself
+(`vidcel-dashboard`) is unrelated to the 店舗IT担当 service — this folder
+exists here only because it is the branch the PM OS work is tracked on.
+
+- `Decision_Log.md` — append-only log of decisions made while building/
+  maintaining the PM OS.
+- `Architecture.md` — where things actually live: which repo/spreadsheet
+  contains which part of the 店舗IT担当 business, as verified by direct
+  inspection (not assumption).
+- `Backlog.md` — open questions and follow-up work surfaced during PM OS
+  tasks, not yet assigned a Task ID.
+- `ADD_*.md` — standalone Architecture Decision Documents for individual
+  design questions (e.g. `ADD_G1-06D_Onboarding_Data_Bridge.md`), referenced
+  from `Architecture.md` and `Decision_Log.md` rather than inlined there.
+- `SPEC_*.md` — standalone specifications (e.g.
+  `SPEC_G1-09_Onboarding_Data_Model.md` — field-level data model), same
+  referencing convention as `ADD_*.md`.
+- `CHECKLIST_*.md` — acquisition/unblocking checklists for tasks that are
+  BLOCKED on external input (e.g.
+  `CHECKLIST_G1-12_Source_Access.md` — what's needed before the Apps
+  Script Web App endpoint can be implemented), same referencing convention
+  as `ADD_*.md`/`SPEC_*.md`.
+- `production_readiness_report.md` (AI-OPS-01) — a standalone, read-only
+  production-readiness audit of `ai-lead-os`, a *different* repository
+  (a reused sales-intelligence tool, not part of the 店舗IT担当 product).
+  Placed here rather than in `ai-lead-os` itself because this session only
+  has read-only access to that repo — see `Decision_Log.md`'s AI-OPS-01
+  entry for the full placement reasoning, flagged there as a judgment
+  call in case it should eventually move.
+
+The repo also has `../automation/` (PM-AUTO-01) — a local tooling layer
+(completion report / review package / next-task draft generators) that
+*reads* this `knowledge/` folder for context (e.g. open Backlog items) but
+does not duplicate or replace it. See `../automation/README.md`.
