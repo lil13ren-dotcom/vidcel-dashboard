@@ -1,0 +1,136 @@
+name: PM Pipeline
+
+# Manual only, by design (PM-AUTO-04). No `push` or `pull_request` trigger:
+# there is not yet a per-PR convention for which task_meta.json a given PR
+# corresponds to, and defaulting that guess would risk a misleading PASS/
+# FAIL on unrelated changes. See automation/CI_INTEGRATION.md.
+on:
+  workflow_dispatch:
+    inputs:
+      task_meta_path:
+        description: >-
+          Path (relative to the repo root) to the task_meta.json to run.
+          Must resolve inside the checked-out workspace.
+        required: false
+        default: automation/reports/task_meta.json
+        type: string
+      target_root:
+        description: >-
+          Path (relative to the repo root) of the repo to run quality
+          checks against. Must resolve inside the checked-out workspace --
+          this workflow only checks out this repository, so it cannot
+          point at a different repository.
+        required: false
+        default: .
+        type: string
+      artifact_retention_days:
+        description: Days to retain uploaded artifacts (0-90).
+        required: false
+        default: '14'
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  pm-pipeline:
+    name: Run PM pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Never trust task_meta_path / target_root directly -- both are
+      # free-text workflow_dispatch inputs. This resolves each against
+      # $GITHUB_WORKSPACE and rejects anything that escapes it (`..`
+      # traversal, an absolute path outside the workspace) before either
+      # is used as an argument to anything else.
+      - name: Validate inputs
+        id: validate
+        run: |
+          python3 automation/validate_ci_inputs.py \
+            --workspace "$GITHUB_WORKSPACE" \
+            --task-meta-path "${{ inputs.task_meta_path }}" \
+            --target-root "${{ inputs.target_root }}" \
+            --github-output "$GITHUB_OUTPUT"
+
+      # continue-on-error: the pipeline's own exit code (0/2/3) is a
+      # meaningful result, not a workflow failure -- classification and
+      # the actual pass/fail decision for the job happen later, after
+      # artifacts are captured. This step never fails the job by itself.
+      - name: Run PM pipeline
+        id: run_pipeline
+        if: steps.validate.outcome == 'success'
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          python3 automation/run_pm_pipeline.py \
+            "${{ steps.validate.outputs.task_meta_path }}" \
+            --root "${{ steps.validate.outputs.target_root }}" \
+            2>&1 | tee automation/reports/pipeline_run.log
+          exit_code="${PIPESTATUS[0]}"
+          echo "exit_code=$exit_code" >> "$GITHUB_OUTPUT"
+          exit "$exit_code"
+
+      # Runs regardless of what happened above. Missing/malformed
+      # review_decision.json or quality_checks.json is reported as such,
+      # never silently treated as a passing result.
+      - name: Build CI summary
+        id: summary
+        if: always()
+        run: |
+          EXIT_CODE="${{ steps.run_pipeline.outputs.exit_code }}"
+          if [ -z "$EXIT_CODE" ]; then EXIT_CODE=1; fi
+          python3 automation/ci_summary.py \
+            --exit-code "$EXIT_CODE" \
+            --decision-path automation/review/review_decision.json \
+            --quality-path automation/reports/quality_checks.json \
+            --report-path automation/reports/latest_report.json \
+            --summary-out "$GITHUB_STEP_SUMMARY" \
+            --github-output "$GITHUB_OUTPUT"
+
+      # Fixed, explicit file list -- never a broad glob -- so nothing
+      # outside these named PM-pipeline outputs can be uploaded. Runs on
+      # every outcome (always()) so PASS, BLOCKED, FAIL, and ERROR runs
+      # all leave evidence behind, per PM-AUTO-04's requirement.
+      - name: Upload PM pipeline artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pm-pipeline-artifacts
+          retention-days: ${{ fromJSON(inputs.artifact_retention_days || '14') }}
+          if-no-files-found: ignore
+          path: |
+            automation/reports/latest_report.md
+            automation/reports/latest_report.json
+            automation/review/review_summary.md
+            automation/review/review_decision.json
+            automation/reports/quality_checks.json
+            automation/review/next_task_draft.md
+            automation/tasks/NEXT_TASK_DRAFT.md
+            automation/reports/git_diff.md
+            automation/reports/test_results.md
+            automation/reports/pipeline_run.log
+
+      # The only step whose failure fails the job. PASS is the only
+      # status that succeeds -- BLOCKED, FAIL, and ERROR must never look
+      # like a passing check, so all three fail the job here, with the
+      # specific status distinguished in the summary and logs above, not
+      # in the job's success/failure state (GitHub Actions has no
+      # separate "neutral" job conclusion to use instead).
+      - name: Enforce PASS-only success
+        if: always()
+        run: |
+          STATUS="${{ steps.summary.outputs.status }}"
+          echo "Final classification: $STATUS"
+          if [ "$STATUS" != "PASS" ]; then
+            echo "::error::PM pipeline result is $STATUS, not PASS -- failing the job so this cannot appear as a passing check."
+            exit 1
+          fi
+          echo "PASS -- job succeeds."

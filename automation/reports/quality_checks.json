@@ -1,0 +1,46 @@
+{
+  "root": "/home/user/vidcel-dashboard",
+  "use_uv": false,
+  "generated_at": "2026-07-25T07:35:06+00:00",
+  "overall": "PASS (with skips)",
+  "n_pass": 0,
+  "n_fail": 0,
+  "n_skip": 5,
+  "checks": [
+    {
+      "name": "Ruff check",
+      "command": "(not run)",
+      "status": "SKIPPED",
+      "exit_code": null,
+      "reason": "no [tool.ruff] in pyproject.toml"
+    },
+    {
+      "name": "Ruff format check",
+      "command": "(not run)",
+      "status": "SKIPPED",
+      "exit_code": null,
+      "reason": "no [tool.ruff] in pyproject.toml"
+    },
+    {
+      "name": "mypy",
+      "command": "(not run)",
+      "status": "SKIPPED",
+      "exit_code": null,
+      "reason": "no [tool.mypy] in pyproject.toml"
+    },
+    {
+      "name": "Alembic check",
+      "command": "(not run)",
+      "status": "SKIPPED",
+      "exit_code": null,
+      "reason": "no alembic.ini in this repo"
+    },
+    {
+      "name": "pytest",
+      "command": "(not run)",
+      "status": "SKIPPED",
+      "exit_code": null,
+      "reason": "no [tool.pytest.ini_options] in pyproject.toml"
+    }
+  ]
+}

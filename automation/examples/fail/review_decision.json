@@ -1,0 +1,10 @@
+{
+  "task_id": "PM-AUTO-03-EXAMPLE-FAIL",
+  "status": "FAIL",
+  "risk": "MEDIUM",
+  "blocked": false,
+  "next_task": "REWORK-PM-AUTO-03-EXAMPLE-FAIL",
+  "requires_human_approval": true,
+  "generated_at": "2026-07-25T06:41:07+00:00",
+  "reason": "1 quality check(s) failed: Ruff check"
+}
